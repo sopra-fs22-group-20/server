@@ -1,43 +1,60 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
-import ch.uzh.ifi.hase.soprafs22.constant.UserStatus;
 
 public class UserGetDTO {
 
-  private Long id;
-  private String name;
+  private Long user_id;
+  private String token;
   private String username;
-  private UserStatus status;
+  private String password;
+  private String email;
+  private String more_info;
 
-  public Long getId() {
-    return id;
-  }
+    public Long getUser_id() {
+        return user_id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getToken() {
+        return token;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-  public String getUsername() {
-    return username;
-  }
+    public String getUsername() {
+        return username;
+    }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-  public UserStatus getStatus() {
-    return status;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setStatus(UserStatus status) {
-    this.status = status;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMore_info() {
+        return more_info;
+    }
+
+    public void setMore_info(String more_info) {
+        this.more_info = more_info;
+    }
 }

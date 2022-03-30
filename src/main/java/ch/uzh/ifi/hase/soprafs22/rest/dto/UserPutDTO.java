@@ -1,6 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
-public class UserPostDTO {
+public class UserPutDTO {
 
     private Long user_id;
     private String token;
@@ -58,3 +58,4 @@ public class UserPostDTO {
         this.more_info = more_info;
     }
 }
+
