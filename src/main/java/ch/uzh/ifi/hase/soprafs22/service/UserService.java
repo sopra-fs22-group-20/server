@@ -66,7 +66,7 @@ public class UserService {
             return tempUser;
         }
         //if bug check for the exception
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("password does not match"));
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, String.format("password does not match with username"));
     }
 
 
@@ -85,8 +85,8 @@ public class UserService {
 
         String baseErrorMessage = "The %s provided %s not unique. Therefore, the user could not be created!";
         if (userByUsername != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    String.format(baseErrorMessage, "username and the name", "are"));
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    String.format(baseErrorMessage, "username", "is"));
         }
     }
 }
