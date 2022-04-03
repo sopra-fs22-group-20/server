@@ -1,6 +1,5 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
-import ch.uzh.ifi.hase.soprafs22.constant.UserStatus;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import org.slf4j.Logger;
@@ -42,7 +41,8 @@ public class UserService {
     public User createUser(User newUser) {
         newUser.setToken(UUID.randomUUID().toString());
 
-        checkIfUserExists(newUser);
+        checkIfUsernameExists(newUser);
+        checkIfEmailExists(newUser);
 
         // saves the given entity but data is only persisted in the database once
         // flush() is called
@@ -80,13 +80,23 @@ public class UserService {
      * @throws org.springframework.web.server.ResponseStatusException
      * @see User
      */
-    private void checkIfUserExists(User userToBeCreated) {
+    private void checkIfUsernameExists(User userToBeCreated) {
         User userByUsername = userRepository.findByUsername(userToBeCreated.getUsername());
 
         String baseErrorMessage = "The %s provided %s not unique. Therefore, the user could not be created!";
         if (userByUsername != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format(baseErrorMessage, "username", "is"));
+        }
+    }
+
+    private void checkIfEmailExists(User userToBeCreated) {
+        User userByEmail = userRepository.findByEmail(userToBeCreated.getEmail());
+
+        String baseErrorMessage = "The %s provided %s already taken. Therefore, the user could not be created!";
+        if (userByEmail != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    String.format(baseErrorMessage, "Email", "is"));
         }
     }
 }
