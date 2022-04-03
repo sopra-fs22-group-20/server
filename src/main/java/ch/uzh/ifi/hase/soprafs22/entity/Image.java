@@ -14,6 +14,7 @@ import java.util.Date;
  * - unique = true -> this value must be unqiue across the database -> composes
  * the primary key
  */
+
 @Entity
 @Table(name = "IMAGE")
 public class Image implements Serializable {
