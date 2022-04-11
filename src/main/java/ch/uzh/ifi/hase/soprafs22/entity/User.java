@@ -3,7 +3,7 @@ package ch.uzh.ifi.hase.soprafs22.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Internal User Representation
@@ -23,7 +23,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long user_id;
+    private Long userId;
 
     @Column(nullable = false, unique = true)
     private String token;
@@ -46,14 +46,23 @@ public class User implements Serializable {
     private String email;
 
     @Column(unique = true)
-    private String more_info;
+    private String moreInfo;
+
+    @Column(unique = false)
+    private int highlightCounter;
+
+    @Column(unique = false)
+    private Date creationDate;
+
+
 
     //Constructor
-    public User(String username, String password, String email, String more_info) {
+    public User(String username, String password, String email, String moreInfo) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.more_info = more_info;
+        this.moreInfo = moreInfo;
+        this.highlightCounter = 0;
     }
 
     //No Args Constructor
@@ -61,12 +70,12 @@ public class User implements Serializable {
     }
 
     //Getter & Setter
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long user_id) {
+        this.userId = user_id;
     }
 
     public String getToken() {
@@ -101,12 +110,28 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getMore_info() {
-        return more_info;
+    public String getMoreInfo() {
+        return moreInfo;
     }
 
-    public void setMore_info(String more_info) {
-        this.more_info = more_info;
+    public void setMoreInfo(String more_info) {
+        this.moreInfo = more_info;
+    }
+
+    public int getHighlightCounter() {
+        return highlightCounter;
+    }
+
+    public void setHighlightCounter(int highlight_counter) {
+        this.highlightCounter = highlight_counter;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creation_Date) {
+        this.creationDate = creation_Date;
     }
 
     /**

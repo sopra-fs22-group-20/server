@@ -1,7 +1,9 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Current_Date;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,11 +41,24 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
+    public User getUserByUserId(long userId) {
+        User tempUser = userRepository.findByUserId(userId);
+
+        //check if the user even exists -> extract later on
+        if (tempUser == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("The user with this id does not exist!"));
+        }
+        return tempUser;
+    }
+
     public User createUser(User newUser) {
         newUser.setToken(UUID.randomUUID().toString());
 
         checkIfUsernameExists(newUser);
         checkIfEmailExists(newUser);
+
+        newUser.setCreationDate(Current_Date.getDate());
 
         // saves the given entity but data is only persisted in the database once
         // flush() is called
@@ -51,6 +67,24 @@ public class UserService {
 
         log.debug("Created Information for User: {}", newUser);
         return newUser;
+    }
+
+    public User updateUser(User userToBeChanged, UserPutDTO userChanges) {
+        //Add check if Username is already taken
+        if (userToBeChanged == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("The user with this id does not exist!"));
+        }
+
+        //Parameter to update
+        userToBeChanged.setMoreInfo(userChanges.getMoreInfo());
+
+
+        userRepository.save(userToBeChanged);
+        userRepository.flush();
+
+        log.debug("Updated information for User: {}", userToBeChanged);
+        return userToBeChanged;
     }
 
     public User loginUser(User loginUser) {
@@ -99,4 +133,13 @@ public class UserService {
                     String.format(baseErrorMessage, "Email", "is"));
         }
     }
+
+    public void checkAccess(UserPutDTO userPutDTO, Long userId) {
+        if (userPutDTO.getUserId()!= userId) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+                    String.format("You dont have access to edit this user"));
+        }
+    }
+
+
 }

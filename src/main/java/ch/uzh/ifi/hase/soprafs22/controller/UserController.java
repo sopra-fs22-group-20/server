@@ -3,6 +3,7 @@ package ch.uzh.ifi.hase.soprafs22.controller;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserGetDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,10 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     * Returns all users
+     * Get Nr. 1
+     */
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -42,6 +47,23 @@ public class UserController {
         return userGetDTOs;
     }
 
+    /**
+     * Returns information of a specific user
+     * Get Nr. 2
+     */
+    @GetMapping("/users/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public UserGetDTO getUsers(@PathVariable long userId) {
+        User tempUser = userService.getUserByUserId(userId);
+        UserGetDTO user = DTOMapper.INSTANCE.convertEntityToUserGetDTO(tempUser);
+        return user;
+    }
+
+    /**
+     * Adds a new user to the Database and returns this user
+     * Post Nr. 1
+     */
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -56,6 +78,10 @@ public class UserController {
         return DTOMapper.INSTANCE.convertEntityToUserGetDTO(createdUser);
     }
 
+    /**
+     * Checks if the login credentials are correct
+     * Post Nr. 2
+     */
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -68,5 +94,24 @@ public class UserController {
 
         // convert internal representation of user back to API
         return DTOMapper.INSTANCE.convertEntityToUserGetDTO(loggedInUser);
+    }
+
+    /**
+     * Updates User Info
+     * Put Nr. 2
+     */
+    @PutMapping("/users/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public UserGetDTO updateUser(@RequestBody UserPutDTO userChanges, @PathVariable Long userId) {
+        //Check if the user that is edited is also the user that is logged in
+        userService.checkAccess(userChanges, userId);
+
+        //Sets the inputUser to the one accordingly to the pathvariable
+        User userToBeChanged = userService.getUserByUserId(userId);
+
+        User userUpdate = userService.updateUser(userToBeChanged, userChanges);
+
+        return DTOMapper.INSTANCE.convertEntityToUserGetDTO(userUpdate);
     }
 }

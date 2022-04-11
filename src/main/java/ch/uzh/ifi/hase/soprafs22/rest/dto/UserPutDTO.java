@@ -2,20 +2,24 @@ package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
 public class UserPutDTO {
 
-    private Long user_id;
+    private Long userId;
     private String token;
     private String username;
     private String password;
     private String email;
-    private String more_info;
+    private String moreInfo;
+    private String highlightCounter;
+    private String creationDate;
 
 
-    public Long getUser_id() {
-        return user_id;
+
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getToken() {
@@ -50,12 +54,28 @@ public class UserPutDTO {
         this.email = email;
     }
 
-    public String getMore_info() {
-        return more_info;
+    public String getMoreInfo() {
+        return moreInfo;
     }
 
-    public void setMore_info(String more_info) {
-        this.more_info = more_info;
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
+    }
+
+    public String getHighlightCounter() {
+        return highlightCounter;
+    }
+
+    public void setHighlightCounter(String highlightCounter) {
+        this.highlightCounter = highlightCounter;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 }
 
