@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import org.slf4j.Logger;
@@ -26,6 +27,12 @@ import java.util.UUID;
 public class CategoryService {
 
     private final Logger log = LoggerFactory.getLogger(CategoryService.class);
+
+
+    public Category createCategory(Category newCategory) {
+        // ToDO check functionality
+        return newCategory;
+    }
 
 
     }
