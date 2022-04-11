@@ -22,7 +22,7 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long category_id;
+    private Long categoryId;
 
     @Column(nullable = false)
     private String category;
@@ -34,11 +34,11 @@ public class Category implements Serializable {
     public Category() {
     }
 
-    public Long get_category_id() {
-        return category_id;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public String get_category() {
+    public String getCategory() {
         return category;
     }
 }
