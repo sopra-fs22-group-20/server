@@ -23,19 +23,24 @@ public class Image implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long image_id;
+    private Long imageID;
+
+    /**
+     * After Category is done
+     *
+     * @Column(nullable = false)
+     * private Category categoryID;
+     * <p>
+     * After User and dependency is done
+     * @Column(nullable = false)
+     * private User owner;
+     */
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
-    private Long category;
-
-    @Column(nullable = false)
-    private Long owner;
-
-    @Column(nullable = false)
-    private Long location;
+    private String location;
 
     @Column(nullable = false)
     private Date upload_date;
@@ -43,40 +48,58 @@ public class Image implements Serializable {
     @Column(nullable = false)
     private int rating;
 
-    public Image(String name, Long category, Long owner, Long location, Date upload_date, int rating) {
+    @Column(nullable = false)
+    private String storageLink;
+
+    //Change to enum later Maybe
+    @Column(nullable = false)
+    private String classification;
+
+    @Column(nullable = false)
+    private Boolean reachedHighlights;
+
+
+    public Image(String name, String location, String storageLink) {
         this.name = name;
-        this.category = category;
-        this.owner = owner;
         this.location = location;
-        this.upload_date = upload_date;
-        this.rating = rating;
+        this.storageLink = storageLink;
+        this.classification = "C";
+        this.reachedHighlights = false;
     }
 
     public Image() {
     }
 
-    public Long getImage_id() {
-        return image_id;
+    public Long getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(Long imageID) {
+        this.imageID = imageID;
     }
 
     public String getName() {
         return name;
     }
 
-    public Long getCategory() {
-        return category;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getOwner() {
-        return owner;
-    }
-
-    public Long getLocation() {
+    public String getLocation() {
         return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Date getUpload_date() {
         return upload_date;
+    }
+
+    public void setUpload_date(Date upload_date) {
+        this.upload_date = upload_date;
     }
 
     public int getRating() {
@@ -86,4 +109,32 @@ public class Image implements Serializable {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
+    public String getStorageLink() {
+        return storageLink;
+    }
+
+    public void setStorageLink(String storageLink) {
+        this.storageLink = storageLink;
+    }
+
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setClassification(String classification) {
+        this.classification = classification;
+    }
+
+    public Boolean getReachedHighlights() {
+        return reachedHighlights;
+    }
+
+    public void setReachedHighlights(Boolean reachedHighlights) {
+        this.reachedHighlights = reachedHighlights;
+    }
 }
+
+
+
+
