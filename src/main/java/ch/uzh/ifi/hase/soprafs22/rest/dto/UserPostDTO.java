@@ -1,5 +1,9 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Image;
+
+import java.util.Set;
+
 public class UserPostDTO {
 
     private Long userId;
@@ -10,7 +14,7 @@ public class UserPostDTO {
     private String moreInfo;
     private String highlightCounter;
     private String creationDate;
-
+    private Set<Image> images;
 
     public Long getUserId() {
         return userId;
@@ -74,5 +78,13 @@ public class UserPostDTO {
 
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
     }
 }

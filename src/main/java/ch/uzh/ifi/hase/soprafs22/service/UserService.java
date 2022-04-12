@@ -69,7 +69,7 @@ public class UserService {
         return newUser;
     }
 
-    public User updateUser(User userToBeChanged, UserPutDTO userChanges) {
+    public User updateUser(User userToBeChanged, User userChanges) {
         //Add check if Username is already taken
         if (userToBeChanged == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -134,8 +134,8 @@ public class UserService {
         }
     }
 
-    public void checkAccess(UserPutDTO userPutDTO, Long userId) {
-        if (userPutDTO.getUserId()!= userId) {
+    public void checkAccess(User pingingUser, Long userId) {
+        if (pingingUser.getUserId()!= userId) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     String.format("You dont have access to edit this user"));
         }

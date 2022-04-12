@@ -4,6 +4,8 @@ package ch.uzh.ifi.hase.soprafs22.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Internal User Representation
@@ -34,10 +36,11 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    /** After Images is done
-    @Column(unique = true)
-    private ArrayList<Long> images;
+    //Fix This
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Image> images;
 
+    /** After Images is done
      @Column(unique = true)
      private ArrayList<Long> image_seen;
      **/
@@ -132,6 +135,14 @@ public class User implements Serializable {
 
     public void setCreationDate(Date creation_Date) {
         this.creationDate = creation_Date;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
     }
 
     /**

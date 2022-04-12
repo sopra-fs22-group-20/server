@@ -1,9 +1,8 @@
 package ch.uzh.ifi.hase.soprafs22.rest.mapper;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.UserGetDTO;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -31,6 +30,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
+    //@Mapping(source = "images", target = "images")
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
     @Mapping(source = "userId", target = "userId")
@@ -41,6 +41,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
+    //@Mapping(source = "images", target = "images")
     UserGetDTO convertEntityToUserGetDTO(User user);
 
     @Mapping(source = "userId", target = "userId")
@@ -51,5 +52,33 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
+    //@Mapping(source = "images", target = "images")
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
+
+
+    @Mapping(source = "imageID", target = "imageID")
+    @Mapping(source = "owner", target = "owner")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "location", target = "location")
+    @Mapping(source = "uploadDate", target = "uploadDate")
+    @Mapping(source = "rating", target = "rating")
+    @Mapping(source = "storageLink", target = "storageLink")
+    @Mapping(source = "classification", target = "classification")
+    @Mapping(source = "reachedHighlights", target = "reachedHighlights")
+    Image convertImagePostDTOtoEntity(ImagePostDTO imagePostDTO);
+
+
+    @Mapping(source = "imageID", target = "imageID")
+    @Mapping(source = "owner", target = "owner")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "location", target = "location")
+    @Mapping(source = "uploadDate", target = "uploadDate")
+    @Mapping(source = "rating", target = "rating")
+    @Mapping(source = "storageLink", target = "storageLink")
+    @Mapping(source = "classification", target = "classification")
+    @Mapping(source = "reachedHighlights", target = "reachedHighlights")
+    ImageGetDTO convertEntityToImageGetDTO(Image image);
+
+
+
 }

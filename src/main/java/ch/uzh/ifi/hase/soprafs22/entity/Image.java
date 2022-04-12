@@ -36,35 +36,41 @@ public class Image implements Serializable {
      * private User owner;
      */
 
-    @Column(nullable = false)
+    //Fix This
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "userID", nullable = true)
+    private User owner;
+
+    @Column
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String location;
 
-    @Column(nullable = false)
-    private Date upload_date;
+    @Column
+    private Date uploadDate;
 
-    @Column(nullable = false)
+    @Column
     private int rating;
 
-    @Column(nullable = false)
+    @Column(unique = true)
     private String storageLink;
 
     //Change to enum later Maybe
-    @Column(nullable = false)
+    @Column(unique = false)
     private String classification;
 
-    @Column(nullable = false)
+    @Column
     private Boolean reachedHighlights;
 
 
-    public Image(String name, String location, String storageLink) {
+    public Image(String name, String location, String storageLink, User owner) {
         this.name = name;
         this.location = location;
         this.storageLink = storageLink;
         this.classification = "C";
         this.reachedHighlights = false;
+        this.owner = owner;
     }
 
     public Image() {
@@ -94,12 +100,12 @@ public class Image implements Serializable {
         this.location = location;
     }
 
-    public Date getUpload_date() {
-        return upload_date;
+    public Date getUploadDate() {
+        return uploadDate;
     }
 
-    public void setUpload_date(Date upload_date) {
-        this.upload_date = upload_date;
+    public void setUploadDate(Date upload_date) {
+        this.uploadDate = upload_date;
     }
 
     public int getRating() {
@@ -132,6 +138,14 @@ public class Image implements Serializable {
 
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
 

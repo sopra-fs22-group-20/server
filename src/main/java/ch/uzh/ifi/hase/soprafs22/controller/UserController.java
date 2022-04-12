@@ -103,12 +103,16 @@ public class UserController {
     @PutMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
-    public UserGetDTO updateUser(@RequestBody UserPutDTO userChanges, @PathVariable Long userId) {
+    public UserGetDTO updateUser(@RequestBody UserPutDTO changes, @PathVariable Long userId) {
+        User userChanges = DTOMapper.INSTANCE.convertUserPutDTOtoEntity(changes);
+
         //Check if the user that is edited is also the user that is logged in
         userService.checkAccess(userChanges, userId);
 
         //Sets the inputUser to the one accordingly to the pathvariable
         User userToBeChanged = userService.getUserByUserId(userId);
+
+
 
         User userUpdate = userService.updateUser(userToBeChanged, userChanges);
 
