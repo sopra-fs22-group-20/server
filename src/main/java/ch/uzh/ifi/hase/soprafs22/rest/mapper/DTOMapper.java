@@ -30,7 +30,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
-    //@Mapping(source = "images", target = "images")
+        //@Mapping(source = "images", target = "images")
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
     @Mapping(source = "userId", target = "userId")
@@ -41,7 +41,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
-    //@Mapping(source = "images", target = "images")
+        //@Mapping(source = "images", target = "images")
     UserGetDTO convertEntityToUserGetDTO(User user);
 
     @Mapping(source = "userId", target = "userId")
@@ -52,7 +52,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
-    //@Mapping(source = "images", target = "images")
+        //@Mapping(source = "images", target = "images")
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 
 
@@ -78,7 +78,6 @@ public interface DTOMapper {
     @Mapping(source = "classification", target = "classification")
     @Mapping(source = "reachedHighlights", target = "reachedHighlights")
     ImageGetDTO convertEntityToImageGetDTO(Image image);
-
 
 
 }

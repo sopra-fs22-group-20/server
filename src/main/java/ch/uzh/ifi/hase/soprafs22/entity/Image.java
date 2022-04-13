@@ -30,10 +30,6 @@ public class Image implements Serializable {
      *
      * @Column(nullable = false)
      * private Category categoryID;
-     * <p>
-     * After User and dependency is done
-     * @Column(nullable = false)
-     * private User owner;
      */
 
     //Check remove "save the orphants"

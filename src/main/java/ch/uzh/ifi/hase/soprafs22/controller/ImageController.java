@@ -26,16 +26,18 @@ public class ImageController {
     }
 
     /**
-     * Temp Post
+     * Adds a new image to the Database and returns this image entity
+     * Post Nr. 3
      */
     @PostMapping("/images")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     //@RequestHeader(name = "userId") Long userId,
-    public ImageGetDTO createPicture(@CookieValue (name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
+    public ImageGetDTO createPicture(@CookieValue(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
         Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
+        //Get the user from the cookies of the localstorage via userId
         User owner = userService.getUserByUserId(userId);
-
+        //Create the image entity
         Image createImage = imageService.createImage(imageInput, owner);
 
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(createImage);

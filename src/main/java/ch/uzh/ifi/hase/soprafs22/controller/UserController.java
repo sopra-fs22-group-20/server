@@ -113,7 +113,6 @@ public class UserController {
         User userToBeChanged = userService.getUserByUserId(userId);
 
 
-
         User userUpdate = userService.updateUser(userToBeChanged, userChanges);
 
         return DTOMapper.INSTANCE.convertEntityToUserGetDTO(userUpdate);

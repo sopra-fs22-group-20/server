@@ -28,8 +28,6 @@ public class ImageService {
         newImage.setUploadDate(Current_Date.getDate());
         newImage.setOwner(owner);
 
-
-
         newImage = imageRepository.save(newImage);
         imageRepository.flush();
 

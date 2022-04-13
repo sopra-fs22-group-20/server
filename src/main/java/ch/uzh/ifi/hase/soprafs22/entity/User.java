@@ -43,9 +43,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Image> images;
 
-    /** After Images is done
-     @Column(unique = true)
-     private ArrayList<Long> image_seen;
+    /**
+     * After Images is done
+     *Many to One
+     * @Column(unique = true)
+     * private ArrayList<Long> image_seen;
      **/
 
     @Column(unique = true)
@@ -59,7 +61,6 @@ public class User implements Serializable {
 
     @Column(unique = false)
     private Date creationDate;
-
 
 
     //Constructor
@@ -149,13 +150,6 @@ public class User implements Serializable {
     }
 
     /**
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images;
-    }
 
      public String getImage_seen() {
      return image_seen;
