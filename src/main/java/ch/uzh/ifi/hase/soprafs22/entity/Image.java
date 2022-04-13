@@ -36,9 +36,9 @@ public class Image implements Serializable {
      * private User owner;
      */
 
-    //Fix This
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "userID", nullable = true)
+    //Check remove "save the orphants"
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "userId", nullable = true)
     private User owner;
 
     @Column

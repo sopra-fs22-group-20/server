@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs22.service;
 
 import ch.uzh.ifi.hase.soprafs22.constant.Current_Date;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
+import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.repository.ImageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +24,11 @@ public class ImageService {
         this.imageRepository = imageRepository;
     }
 
-    public Image createImage(Image newImage) {
+    public Image createImage(Image newImage, User owner) {
         newImage.setUploadDate(Current_Date.getDate());
+        newImage.setOwner(owner);
+
+
 
         newImage = imageRepository.save(newImage);
         imageRepository.flush();
