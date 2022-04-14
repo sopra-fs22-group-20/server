@@ -4,6 +4,7 @@ import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.ImageGetDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePostDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.UserGetDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs22.service.ImageService;
@@ -22,7 +23,19 @@ public class ImageController {
 
         this.imageService = imageService;
         this.userService = userService;
+    }
 
+    /**
+     * Returns a specific image
+     * Get Nr. 3
+     */
+    @GetMapping("/images/{imageId}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ImageGetDTO getImage(@PathVariable long imageId) {
+        Image tempImage = imageService.getImageByImageId(imageId);
+        ImageGetDTO image = DTOMapper.INSTANCE.convertEntityToImageGetDTO(tempImage);
+        return image;
     }
 
     /**
@@ -34,6 +47,23 @@ public class ImageController {
     @ResponseBody
     //@RequestHeader(name = "userId") Long userId,
     public ImageGetDTO createPicture(@CookieValue(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
+        Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
+        //Get the user from the cookies of the localstorage via userId
+        User owner = userService.getUserByUserId(userId);
+        //Create the image entity
+        Image createImage = imageService.createImage(imageInput, owner);
+
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(createImage);
+    }
+
+    /**
+     * Temp Create Image with Request Header
+     */
+    @PostMapping("/imagesTemp")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    //@RequestHeader(name = "userId") Long userId,
+    public ImageGetDTO createPictureTemp(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
         Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
         //Get the user from the cookies of the localstorage via userId
         User owner = userService.getUserByUserId(userId);

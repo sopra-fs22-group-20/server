@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @Transactional
@@ -34,5 +36,16 @@ public class ImageService {
         log.debug("Created Information for Image: {}", newImage);
         return newImage;
 
+    }
+
+    public Image getImageByImageId(long imageId) {
+        Image tempImage = imageRepository.findImageByImageId(imageId);
+
+        //Check if Image exists -> extract later on
+        if (tempImage == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("The image with this id does not exist!"));
+        }
+        return tempImage;
     }
 }

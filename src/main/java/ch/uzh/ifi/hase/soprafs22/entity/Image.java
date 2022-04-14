@@ -23,7 +23,7 @@ public class Image implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long imageID;
+    private Long imageId;
 
     /**
      * After Category is done
@@ -70,14 +70,15 @@ public class Image implements Serializable {
     }
 
     public Image() {
+
     }
 
-    public Long getImageID() {
-        return imageID;
+    public Long getImageId() {
+        return imageId;
     }
 
-    public void setImageID(Long imageID) {
-        this.imageID = imageID;
+    public void setImageId(Long imageID) {
+        this.imageId = imageID;
     }
 
     public String getName() {

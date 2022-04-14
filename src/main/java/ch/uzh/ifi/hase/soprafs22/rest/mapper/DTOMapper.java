@@ -56,7 +56,7 @@ public interface DTOMapper {
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 
 
-    @Mapping(source = "imageID", target = "imageID")
+    @Mapping(source = "imageId", target = "imageId")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
@@ -68,7 +68,7 @@ public interface DTOMapper {
     Image convertImagePostDTOtoEntity(ImagePostDTO imagePostDTO);
 
 
-    @Mapping(source = "imageID", target = "imageID")
+    @Mapping(source = "imageId", target = "imageId")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")

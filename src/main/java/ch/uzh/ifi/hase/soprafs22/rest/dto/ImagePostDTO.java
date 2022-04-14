@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class ImagePostDTO {
 
-    private Long imageID;
+    private Long imageId;
     private User owner;
     private String name;
     private String location;
@@ -16,12 +16,12 @@ public class ImagePostDTO {
     private String classification;
     private Boolean reachedHighlights;
 
-    public Long getImageID() {
-        return imageID;
+    public Long getImageId() {
+        return imageId;
     }
 
-    public void setImageID(Long imageID) {
-        this.imageID = imageID;
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 
     public User getOwner() {
