@@ -98,7 +98,7 @@ public class UserController {
 
     /**
      * Updates User Info
-     * Put Nr. 2
+     * Put Nr. 1
      */
     @PutMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

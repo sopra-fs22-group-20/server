@@ -2,10 +2,7 @@ package ch.uzh.ifi.hase.soprafs22.controller;
 
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.ImageGetDTO;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePostDTO;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.UserGetDTO;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs22.service.ImageService;
 import ch.uzh.ifi.hase.soprafs22.service.UserService;
@@ -58,6 +55,7 @@ public class ImageController {
 
     /**
      * Temp Create Image with Request Header
+     * Post Nr. 3
      */
     @PostMapping("/imagesTemp")
     @ResponseStatus(HttpStatus.CREATED)
@@ -71,5 +69,28 @@ public class ImageController {
         Image createImage = imageService.createImage(imageInput, owner);
 
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(createImage);
+    }
+
+
+    /**
+     * Updates Image Info
+     * Put Nr. 2
+     */
+    @PutMapping("/images/{imageId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public ImageGetDTO updateImage(@RequestBody ImagePutDTO changes, @PathVariable Long imageId, @RequestHeader(name = "userId") Long userId) {
+        Image imageChanges = DTOMapper.INSTANCE.convertImagePutDTOtoEntity(changes);
+
+        Image imageToBeChanged = imageService.getImageByImageId(imageId);
+
+        //Create a check if change is allowed
+        imageService.checkAccess(userId, imageToBeChanged);
+
+
+        Image imageUpdate = imageService.updateImage(imageToBeChanged, imageChanges);
+
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(imageUpdate);
+
     }
 }

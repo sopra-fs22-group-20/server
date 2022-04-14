@@ -80,4 +80,16 @@ public interface DTOMapper {
     ImageGetDTO convertEntityToImageGetDTO(Image image);
 
 
+    @Mapping(source = "imageId", target = "imageId")
+    @Mapping(source = "owner", target = "owner")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "location", target = "location")
+    @Mapping(source = "uploadDate", target = "uploadDate")
+    @Mapping(source = "rating", target = "rating")
+    @Mapping(source = "storageLink", target = "storageLink")
+    @Mapping(source = "classification", target = "classification")
+    @Mapping(source = "reachedHighlights", target = "reachedHighlights")
+    Image convertImagePutDTOtoEntity(ImagePutDTO imagePutDTO);
+
+
 }

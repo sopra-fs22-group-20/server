@@ -42,10 +42,34 @@ public class ImageService {
         Image tempImage = imageRepository.findImageByImageId(imageId);
 
         //Check if Image exists -> extract later on
-        if (tempImage == null){
+        if (tempImage == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("The image with this id does not exist!"));
         }
         return tempImage;
+    }
+
+    public void checkAccess(Long userId, Image image) {
+        if (image.getOwner().getUserId() != userId) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+                    String.format("You dont have access to edit this user.... thissss workkksss"));
+        }
+
+    }
+
+    public Image updateImage(Image imageToBeChanged, Image imageChanges) {
+        //Checks if this image exists
+        if (imageToBeChanged == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("The image with this id does not exist!"));
+        }
+        //Parameter to update
+        imageToBeChanged.setName(imageChanges.getName());
+
+        imageRepository.save(imageToBeChanged);
+        imageRepository.flush();
+
+        log.debug("Updated information for image: {}", imageToBeChanged);
+        return imageToBeChanged;
     }
 }

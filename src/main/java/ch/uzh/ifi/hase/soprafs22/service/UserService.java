@@ -70,7 +70,7 @@ public class UserService {
     }
 
     public User updateUser(User userToBeChanged, User userChanges) {
-        //Add check if Username is already taken
+        //Checks if this user exists
         if (userToBeChanged == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("The user with this id does not exist!"));
@@ -78,7 +78,6 @@ public class UserService {
 
         //Parameter to update
         userToBeChanged.setMoreInfo(userChanges.getMoreInfo());
-
 
         userRepository.save(userToBeChanged);
         userRepository.flush();
