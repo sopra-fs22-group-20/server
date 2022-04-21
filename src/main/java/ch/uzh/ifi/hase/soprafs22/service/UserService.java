@@ -35,7 +35,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
     public List<User> getUsers() {
         return this.userRepository.findAll();
     }
@@ -50,7 +49,6 @@ public class UserService {
         }
         return tempUser;
     }
-
 
     public User createUser(User newUser) {
         newUser.setToken(UUID.randomUUID().toString());
@@ -102,7 +100,6 @@ public class UserService {
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, String.format("password does not match with username"));
     }
 
-
     /**
      * This is a helper method that will check the uniqueness criteria of the
      * username and the name
@@ -133,12 +130,23 @@ public class UserService {
         }
     }
 
-    public void checkAccess(User pingingUser, Long userId) {
-        if (pingingUser.getUserId()!= userId) {
+    public void checkAccess(Long pingingUserId, Long LoggedInUserId) {
+        if (pingingUserId != LoggedInUserId) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     String.format("You dont have access to edit this user"));
         }
     }
 
+    public void deleteUser(Long userId) {
+        //Checks if User exists
+        if (userRepository.findByUserId(userId) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("The User with this id does not exist!"));
+        }
 
+        userRepository.deleteUserByUserId(userId);
+        System.out.println(userRepository.count());
+        System.out.println("deleted User");
+        log.debug("User deleted");
+    }
 }

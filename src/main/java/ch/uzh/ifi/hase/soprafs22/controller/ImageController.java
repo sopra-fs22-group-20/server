@@ -35,32 +35,14 @@ public class ImageController {
         return image;
     }
 
-    /**
-     * Adds a new image to the Database and returns this image entity
-     * Post Nr. 3
-     */
-    @PostMapping("/images")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    //@RequestHeader(name = "userId") Long userId,
-    public ImageGetDTO createPicture(@CookieValue(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
-        Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
-        //Get the user from the cookies of the localstorage via userId
-        User owner = userService.getUserByUserId(userId);
-        //Create the image entity
-        Image createImage = imageService.createImage(imageInput, owner);
-
-        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(createImage);
-    }
 
     /**
      * Temp Create Image with Request Header
      * Post Nr. 3
      */
-    @PostMapping("/imagesTemp")
+    @PostMapping("/images")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    //@RequestHeader(name = "userId") Long userId,
     public ImageGetDTO createPictureTemp(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
         Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
         //Get the user from the cookies of the localstorage via userId
@@ -79,7 +61,7 @@ public class ImageController {
     @PutMapping("/images/{imageId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
-    public ImageGetDTO updateImage(@RequestBody ImagePutDTO changes, @PathVariable Long imageId, @RequestHeader(name = "userId") Long userId) {
+    public ImageGetDTO updateImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePutDTO changes, @PathVariable Long imageId) {
         Image imageChanges = DTOMapper.INSTANCE.convertImagePutDTOtoEntity(changes);
 
         Image imageToBeChanged = imageService.getImageByImageId(imageId);
@@ -87,10 +69,24 @@ public class ImageController {
         //Create a check if change is allowed
         imageService.checkAccess(userId, imageToBeChanged);
 
-
         Image imageUpdate = imageService.updateImage(imageToBeChanged, imageChanges);
 
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(imageUpdate);
+    }
 
+    /**
+     * Deletes an Image
+     * Delete Nr. 2
+     */
+    @DeleteMapping("/images/{imageId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseBody
+    public void deleteImage(@RequestHeader(name = "userId") Long userId, @PathVariable Long imageId) {
+        Image imageToBeDeleted = imageService.getImageByImageId(imageId);
+
+        //Create a deletion if change is allowed
+        imageService.checkAccess(userId, imageToBeDeleted);
+
+        imageService.deleteImage(imageId);
     }
 }

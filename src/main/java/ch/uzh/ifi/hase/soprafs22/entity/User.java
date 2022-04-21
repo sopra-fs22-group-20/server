@@ -40,12 +40,13 @@ public class User implements Serializable {
 
     //Fix This
     @JsonBackReference
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Image> images;
 
     /**
      * After Images is done
-     *Many to One
+     * Many to One
+     *
      * @Column(unique = true)
      * private ArrayList<Long> image_seen;
      **/
