@@ -33,11 +33,11 @@ public class ImageService {
         newImage.setUploadDate(Current_Date.getDate());
         newImage.setOwner(owner);
 
-        //Checks if this image exists
+        //Checks if the storageLink exists
         Image tempImage = imageRepository.findImageByStorageLink(newImage.getStorageLink());
         if (tempImage != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    String.format("The image with this firebase-stroageLink already exist!"));
+                    String.format("The image with this firebase-storageLink already exist!"));
         }
 
         newImage = imageRepository.save(newImage);

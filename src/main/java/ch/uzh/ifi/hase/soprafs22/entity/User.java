@@ -63,7 +63,6 @@ public class User implements Serializable {
     @Column(unique = false)
     private Date creationDate;
 
-
     //Constructor
     public User(String username, String password, String email, String moreInfo) {
         this.username = username;
@@ -149,15 +148,4 @@ public class User implements Serializable {
     public void setImages(Set<Image> images) {
         this.images = images;
     }
-
-    /**
-
-     public String getImage_seen() {
-     return image_seen;
-     }
-
-     public void setImage_seen(String image_seen) {
-     this.image_seen = image_seen;
-     }
-     **/
 }

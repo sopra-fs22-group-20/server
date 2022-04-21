@@ -32,7 +32,6 @@ public class Image implements Serializable {
      * private Category categoryID;
      */
 
-    //Check remove "save the orphants"
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "userId", nullable = true)
     private User owner;
@@ -59,7 +58,7 @@ public class Image implements Serializable {
     @Column
     private Boolean reachedHighlights;
 
-
+    //Constructor
     public Image(String name, String location, String storageLink, User owner) {
         this.name = name;
         this.location = location;
@@ -69,8 +68,8 @@ public class Image implements Serializable {
         this.owner = owner;
     }
 
+    //No Args Constructor
     public Image() {
-
     }
 
     public Long getImageId() {
