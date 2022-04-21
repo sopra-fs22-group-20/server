@@ -16,6 +16,7 @@ public class ImagePostDTO {
     private String classification;
     private Boolean reachedHighlights;
 
+
     public Long getImageId() {
         return imageId;
     }

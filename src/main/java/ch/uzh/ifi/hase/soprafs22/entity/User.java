@@ -74,6 +74,7 @@ public class User implements Serializable {
 
     //No Args Constructor
     public User() {
+        this.highlightCounter = 5;
     }
 
     //Getter & Setter

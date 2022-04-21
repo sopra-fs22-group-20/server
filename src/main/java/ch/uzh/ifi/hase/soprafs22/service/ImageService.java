@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ImageService {
@@ -45,6 +47,10 @@ public class ImageService {
 
         log.debug("Created Information for Image: {}", newImage);
         return newImage;
+    }
+
+    public List<Image> getAllImagesOfUser(long userId) {
+        return this.imageRepository.findImagesByOwnerUserId(userId);
     }
 
     public Image getImageByImageId(long imageId) {

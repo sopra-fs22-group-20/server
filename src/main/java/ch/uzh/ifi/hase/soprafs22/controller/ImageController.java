@@ -9,6 +9,9 @@ import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class ImageController {
 
@@ -35,6 +38,24 @@ public class ImageController {
         return image;
     }
 
+    /**
+     * Returns all images of a user
+     * Get Nr. 4
+     */
+    @GetMapping("/images/all/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<ImageGetDTO> getAllImagesOfUser(@PathVariable long userId) {
+        // fetch all images of a user in the internal representation
+        List<Image> images = imageService.getAllImagesOfUser(userId);
+        List<ImageGetDTO> imageGetDTOs = new ArrayList<>();
+
+        // convert each image to the API representation
+        for (Image image : images) {
+            imageGetDTOs.add(DTOMapper.INSTANCE.convertEntityToImageGetDTO(image));
+        }
+        return imageGetDTOs;
+    }
 
     /**
      * Temp Create Image with Request Header
@@ -43,7 +64,7 @@ public class ImageController {
     @PostMapping("/images")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public ImageGetDTO createPictureTemp(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
+    public ImageGetDTO createImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
         Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
         //Get the user from the cookies of the localstorage via userId
         User owner = userService.getUserByUserId(userId);
@@ -52,7 +73,6 @@ public class ImageController {
 
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(createImage);
     }
-
 
     /**
      * Updates Image Info

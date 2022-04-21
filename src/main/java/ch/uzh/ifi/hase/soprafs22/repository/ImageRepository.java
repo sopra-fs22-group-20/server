@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("imageRepository")
 public interface ImageRepository extends JpaRepository<Image, Long> {
 
-    Image findImageByImageId(long imageId);
+    Image findImageByImageId(Long imageId);
 
     Image findImageByStorageLink(String storageLink);
 
@@ -22,4 +24,5 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query("delete from Image b where b.imageId=:imageId")
     void deleteImageByImageId(@Param("imageId") Long imageId);
 
+    List<Image> findImagesByOwnerUserId(Long userId);
 }

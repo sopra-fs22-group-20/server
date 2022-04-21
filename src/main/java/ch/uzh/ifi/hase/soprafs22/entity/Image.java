@@ -59,17 +59,18 @@ public class Image implements Serializable {
     private Boolean reachedHighlights;
 
     //Constructor
-    public Image(String name, String location, String storageLink, User owner) {
+    public Image(String name, String location, String storageLink) {
         this.name = name;
         this.location = location;
         this.storageLink = storageLink;
         this.classification = "C";
         this.reachedHighlights = false;
-        this.owner = owner;
     }
 
     //No Args Constructor
     public Image() {
+        this.classification = "C";
+        this.reachedHighlights = false;
     }
 
     public Long getImageId() {
@@ -142,6 +143,21 @@ public class Image implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "imageId=" + imageId +
+                ", owner=" + owner +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", uploadDate=" + uploadDate +
+                ", rating=" + rating +
+                ", storageLink='" + storageLink + '\'' +
+                ", classification='" + classification + '\'' +
+                ", reachedHighlights=" + reachedHighlights +
+                '}';
     }
 }
 
