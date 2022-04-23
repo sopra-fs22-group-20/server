@@ -50,7 +50,7 @@ public interface DTOMapper {
     @Mapping(source = "category", target = "category")
     CategoryGetDTO convertEntityToCategoryGetDTO(Category category);
 
-    @Mapping(source = "categoryId", target = "categoryId")
+    //@Mapping(source = "categoryId", target = "categoryId")
     @Mapping(source = "category", target = "category")
     Category convertCategoryPostDTOtoEntity(CategoryPostDTO categoryPostDTO);
 

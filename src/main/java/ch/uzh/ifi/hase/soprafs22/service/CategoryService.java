@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs22.service;
 
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
+import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +29,25 @@ public class CategoryService {
 
     private final Logger log = LoggerFactory.getLogger(CategoryService.class);
 
+    private final CategoryRepository categoryRepository;
 
-    public Category createCategory(Category newCategory) {
-        // ToDO check functionality
-        return newCategory;
+    @Autowired
+    public CategoryService(@Qualifier("categoryRepository") CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
+
+
+    public Category addCategory(String categoryName) {
+        // ToDO check functionality
+        Category category = new Category(categoryName);
+        return this.categoryRepository.saveAndFlush(category);
+
+    }
+
+    public List<Category> getCategories() {
+        return this.categoryRepository.findAll();
+    }
+
 
 
     }

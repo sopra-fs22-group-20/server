@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22;
 
+import ch.uzh.ifi.hase.soprafs22.service.CategoryService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
