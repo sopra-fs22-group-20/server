@@ -117,20 +117,68 @@ public class UserControllerTest {
 
 
     @Test
-    void createUser() {
-        
+    void createUser() throws Exception {
+        // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
+        this.mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"username\",\"email\":\"email\", \"password\":\"password\" }"))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
     }
 
     @Test
-    void loginUser() {
+    void loginUser() throws Exception {
+        // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
+        this.mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"username\",\"email\":\"email\", \"password\":\"password\" }"))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // then try to log in with the credentials
+        this.mockMvc.perform(post("/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"username\", \"password\":\"password\" }"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
     }
 
     @Test
-    void updateUser() {
+    void updateUser() throws Exception {
+        // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
+        this.mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"username\",\"email\":\"email\", \"password\":\"password\" }"))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // then update user via put request, the header must include the userId
+        this.mockMvc.perform(put("/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("userId", "1")
+                        .content("{\"username\":\"username2\",\"email\":\"email2\", \"password\":\"password2\" }"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
     }
 
     @Test
-    void deleteUser() {
+    void deleteUser() throws Exception {
+        // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
+        this.mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"username\",\"email\":\"email\", \"password\":\"password\" }"))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // then delete user via delete request, the header must include the userId
+        this.mockMvc.perform(delete("/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("userId", "1"))
+                .andDo(print())
+                .andExpect(status().isAccepted());
     }
 }
 /**
