@@ -65,6 +65,7 @@ public class ImageController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public ImageGetDTO createImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
+        System.out.println(userId);
         Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
         //Get the user from the cookies of the localstorage via userId
         User owner = userService.getUserByUserId(userId);
