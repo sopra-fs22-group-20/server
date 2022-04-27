@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -65,7 +66,7 @@ public class ImageService {
     }
 
     public void checkAccess(Long userId, Image image) {
-        if (image.getOwner().getUserId() != userId) {
+        if (!Objects.equals(image.getOwner().getUserId(), userId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     String.format("You dont have access"));
         }

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -131,7 +132,7 @@ public class UserService {
     }
 
     public void checkAccess(Long pingingUserId, Long LoggedInUserId) {
-        if (pingingUserId != LoggedInUserId) {
+        if (!Objects.equals(pingingUserId, LoggedInUserId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     String.format("You dont have access to edit this user"));
         }
