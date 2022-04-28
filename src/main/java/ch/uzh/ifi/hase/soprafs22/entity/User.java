@@ -2,12 +2,11 @@ package ch.uzh.ifi.hase.soprafs22.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -39,18 +38,17 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    //Fix This
     @JsonBackReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Image> images;
 
-    /**
-     * After Images is done
-     * Many to One
-     *
-     * @Column(unique = true)
-     * private ArrayList<Long> image_seen;
-     **/
+    @JsonIgnoreProperties("owner")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "images_seen_by",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "imageId"))
+    private Set<Image> imagesRated;
 
     @Column(unique = true)
     private String email;
@@ -64,7 +62,7 @@ public class User implements Serializable {
     @Column(unique = false)
     private Date creationDate;
 
-    //Constructor
+    //Constructor for testing
     public User(String username, String password, String email, String moreInfo) {
         this.username = username;
         this.password = password;
@@ -75,7 +73,7 @@ public class User implements Serializable {
 
     //No Args Constructor
     public User() {
-        this.highlightCounter = 5;
+        this.highlightCounter = 0;
     }
 
     //Getter & Setter
@@ -83,8 +81,8 @@ public class User implements Serializable {
         return userId;
     }
 
-    public void setUserId(Long user_id) {
-        this.userId = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getToken() {
@@ -111,6 +109,22 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
+    public Set<Image> getImagesRated() {
+        return imagesRated;
+    }
+
+    public void setImagesRated(Set<Image> imagesRated) {
+        this.imagesRated = imagesRated;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -123,31 +137,23 @@ public class User implements Serializable {
         return moreInfo;
     }
 
-    public void setMoreInfo(String more_info) {
-        this.moreInfo = more_info;
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
     }
 
     public int getHighlightCounter() {
         return highlightCounter;
     }
 
-    public void setHighlightCounter(int highlight_counter) {
-        this.highlightCounter = highlight_counter;
+    public void setHighlightCounter(int highlightCounter) {
+        this.highlightCounter = highlightCounter;
     }
 
     public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creation_Date) {
-        this.creationDate = creation_Date;
-    }
-
-    public Set<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(Set<Image> images) {
-        this.images = images;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

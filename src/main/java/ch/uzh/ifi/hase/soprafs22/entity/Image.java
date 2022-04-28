@@ -1,8 +1,12 @@
 package ch.uzh.ifi.hase.soprafs22.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Internal Image Representation
@@ -32,9 +36,15 @@ public class Image implements Serializable {
      * private Category categoryID;
      */
 
+    @JsonIgnoreProperties("imagesRated")
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "userId", nullable = true)
     private User owner;
+
+    @JsonIgnoreProperties("imagesRated")
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "imagesRated")
+    private Set<User> ratedBy;
 
     @Column
     private String name;
@@ -46,7 +56,10 @@ public class Image implements Serializable {
     private Date uploadDate;
 
     @Column
-    private int rating;
+    private double rating;
+
+    @Column
+    private int ratingCounter;
 
     @Column(unique = true)
     private String storageLink;
@@ -58,7 +71,7 @@ public class Image implements Serializable {
     @Column
     private Boolean reachedHighlights;
 
-    //Constructor
+    //Constructor for testing
     public Image(String name, String location, String storageLink) {
         this.name = name;
         this.location = location;
@@ -71,14 +84,37 @@ public class Image implements Serializable {
     public Image() {
         this.classification = "C";
         this.reachedHighlights = false;
+        this.rating = 0;
+        this.ratingCounter = 0;
     }
 
+    //Getter & Setter
     public Long getImageId() {
         return imageId;
     }
 
-    public void setImageId(Long imageID) {
-        this.imageId = imageID;
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public void addRatedBy(User user) {
+        this.ratedBy.add(user);
+    }
+
+    public Set<User> getRatedBy() {
+        return ratedBy;
+    }
+
+    public void setRatedBy(Set<User> ratedBy) {
+        this.ratedBy = ratedBy;
     }
 
     public String getName() {
@@ -101,16 +137,24 @@ public class Image implements Serializable {
         return uploadDate;
     }
 
-    public void setUploadDate(Date upload_date) {
-        this.uploadDate = upload_date;
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public int getRatingCounter() {
+        return ratingCounter;
+    }
+
+    public void setRatingCounter(int ratingCounter) {
+        this.ratingCounter = ratingCounter;
     }
 
     public String getStorageLink() {
@@ -135,29 +179,6 @@ public class Image implements Serializable {
 
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "Image{" +
-                "imageId=" + imageId +
-                ", owner=" + owner +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", uploadDate=" + uploadDate +
-                ", rating=" + rating +
-                ", storageLink='" + storageLink + '\'' +
-                ", classification='" + classification + '\'' +
-                ", reachedHighlights=" + reachedHighlights +
-                '}';
     }
 }
 

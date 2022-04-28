@@ -20,7 +20,6 @@ public class ImageController {
     private final UserService userService;
 
     ImageController(ImageService imageService, UserService userService) {
-
         this.imageService = imageService;
         this.userService = userService;
     }
@@ -67,8 +66,10 @@ public class ImageController {
     public ImageGetDTO createImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
         System.out.println(userId);
         Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
+
         //Get the user from the cookies of the localstorage via userId
         User owner = userService.getUserByUserId(userId);
+
         //Create the image entity
         Image createImage = imageService.createImage(imageInput, owner);
 
@@ -93,6 +94,17 @@ public class ImageController {
         Image imageUpdate = imageService.updateImage(imageToBeChanged, imageChanges);
 
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(imageUpdate);
+    }
+
+    /**
+     * Updates rating of an image
+     * Put Nr. 3
+     */
+    @PutMapping("/rate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public void rateImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePutDTO rating){
+        imageService.rateImage(rating, userId);
     }
 
     /**

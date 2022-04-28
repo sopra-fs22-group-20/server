@@ -3,15 +3,18 @@ package ch.uzh.ifi.hase.soprafs22.rest.dto;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 
 import java.util.Date;
+import java.util.Set;
 
 public class ImagePostDTO {
 
     private Long imageId;
     private User owner;
+    private Set<User> ratedBy;
     private String name;
     private String location;
     private Date uploadDate;
-    private int rating;
+    private double rating;
+    private int ratingCounter;
     private String storageLink;
     private String classification;
     private Boolean reachedHighlights;
@@ -31,6 +34,14 @@ public class ImagePostDTO {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public Set<User> getRatedBy() {
+        return ratedBy;
+    }
+
+    public void setRatedBy(Set<User> ratedBy) {
+        this.ratedBy = ratedBy;
     }
 
     public String getName() {
@@ -57,12 +68,20 @@ public class ImagePostDTO {
         this.uploadDate = uploadDate;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public int getRatingCounter() {
+        return ratingCounter;
+    }
+
+    public void setRatingCounter(int ratingCounter) {
+        this.ratingCounter = ratingCounter;
     }
 
     public String getStorageLink() {

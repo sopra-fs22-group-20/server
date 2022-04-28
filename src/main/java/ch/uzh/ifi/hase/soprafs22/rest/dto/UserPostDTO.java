@@ -10,11 +10,12 @@ public class UserPostDTO {
     private String token;
     private String username;
     private String password;
+    private Set<Image> images;
+    //private Set<Image> imagesRated;
     private String email;
     private String moreInfo;
     private String highlightCounter;
     private String creationDate;
-    private Set<Image> images;
 
     public Long getUserId() {
         return userId;
@@ -48,6 +49,22 @@ public class UserPostDTO {
         this.password = password;
     }
 
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+/**
+    public Set<Image> getImagesRated() {
+        return imagesRated;
+    }
+
+    public void setImagesRated(Set<Image> imagesRated) {
+        this.imagesRated = imagesRated;
+    }
+*/
     public String getEmail() {
         return email;
     }
@@ -78,13 +95,5 @@ public class UserPostDTO {
 
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public Set<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(Set<Image> images) {
-        this.images = images;
     }
 }

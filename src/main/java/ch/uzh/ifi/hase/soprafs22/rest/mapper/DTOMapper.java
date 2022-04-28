@@ -30,7 +30,8 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(target = "highlightCounter", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
-    //@Mapping(source = "images", target = "images")
+    @Mapping(target = "imagesRated", ignore = true)
+        //@Mapping(target = "images", ignore = true)
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
     @Mapping(source = "userId", target = "userId")
@@ -41,7 +42,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
-    //@Mapping(source = "images", target = "images")
+        //@Mapping(source = "images", target = "images")
     UserGetDTO convertEntityToUserGetDTO(User user);
 
     @Mapping(source = "userId", target = "userId")
@@ -52,9 +53,9 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
-    //@Mapping(source = "images", target = "images")
+    @Mapping(target = "imagesRated", ignore = true)
+        //@Mapping(source = "images", target = "images")
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
-
 
     @Mapping(source = "imageId", target = "imageId")
     @Mapping(target = "owner", ignore = true)
@@ -65,9 +66,10 @@ public interface DTOMapper {
     @Mapping(source = "storageLink", target = "storageLink")
     @Mapping(target = "classification", ignore = true)
     @Mapping(target = "reachedHighlights", ignore = true)
+    @Mapping(target = "ratingCounter", ignore = true)
+    @Mapping(target = "ratedBy", ignore = true)
     Image convertImagePostDTOtoEntity(ImagePostDTO imagePostDTO);
 
-
     @Mapping(source = "imageId", target = "imageId")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
@@ -77,9 +79,10 @@ public interface DTOMapper {
     @Mapping(source = "storageLink", target = "storageLink")
     @Mapping(source = "classification", target = "classification")
     @Mapping(source = "reachedHighlights", target = "reachedHighlights")
+    @Mapping(source = "ratingCounter", target = "ratingCounter")
+    @Mapping(source = "ratedBy", target = "ratedBy")
     ImageGetDTO convertEntityToImageGetDTO(Image image);
 
-
     @Mapping(source = "imageId", target = "imageId")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
@@ -89,6 +92,8 @@ public interface DTOMapper {
     @Mapping(source = "storageLink", target = "storageLink")
     @Mapping(source = "classification", target = "classification")
     @Mapping(source = "reachedHighlights", target = "reachedHighlights")
+    @Mapping(source = "ratingCounter", target = "ratingCounter")
+    @Mapping(target = "ratedBy", ignore = true)
     Image convertImagePutDTOtoEntity(ImagePutDTO imagePutDTO);
 
 }
