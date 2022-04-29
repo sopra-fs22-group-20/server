@@ -65,6 +65,10 @@ public class ImageService {
         return tempImage;
     }
 
+    public Image getRandomImage() {
+        return imageRepository.findRandomImage();
+    }
+
     public Image updateImage(Image imageToBeChanged, Image imageChanges) {
         //Checks if this image exists
         checkIfImageExists(imageToBeChanged.getImageId());
@@ -141,7 +145,7 @@ public class ImageService {
         }
     }
 
-    public void checkIfImageExists(Long imageId){
+    public void checkIfImageExists(Long imageId) {
         //Checks if this image exists
         if (imageRepository.findImageByImageId(imageId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,

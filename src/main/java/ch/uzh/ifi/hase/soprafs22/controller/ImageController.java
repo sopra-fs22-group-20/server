@@ -57,14 +57,25 @@ public class ImageController {
     }
 
     /**
-     * Temp Create Image with Request Header
+     * Returns all images of a user
+     * Get Nr. 8
+     */
+    @GetMapping("/images")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ImageGetDTO getRandomImage() {
+        Image randomImage = imageService.getRandomImage();
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(randomImage);
+    }
+
+    /**
+     * Create Image with Request Header
      * Post Nr. 3
      */
     @PostMapping("/images")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public ImageGetDTO createImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePostDTO imagePostDTO) {
-        System.out.println(userId);
         Image imageInput = DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
 
         //Get the user from the cookies of the localstorage via userId
@@ -103,7 +114,7 @@ public class ImageController {
     @PutMapping("/rate")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
-    public void rateImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePutDTO rating){
+    public void rateImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePutDTO rating) {
         imageService.rateImage(rating, userId);
     }
 

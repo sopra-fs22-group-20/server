@@ -146,8 +146,6 @@ public class UserService {
         }
 
         userRepository.deleteUserByUserId(userId);
-        System.out.println(userRepository.count());
-        System.out.println("deleted User");
         log.debug("User deleted");
     }
 }
