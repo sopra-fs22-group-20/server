@@ -25,4 +25,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     void deleteImageByImageId(@Param("imageId") Long imageId);
 
     List<Image> findImagesByOwnerUserId(Long userId);
+
+    @Query(value = "SELECT * from Image ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
+    Image findRandomImage();
 }

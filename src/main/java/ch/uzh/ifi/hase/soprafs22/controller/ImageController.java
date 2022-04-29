@@ -57,6 +57,18 @@ public class ImageController {
     }
 
     /**
+     * Returns all images of a user
+     * Get Nr. 8
+     */
+    @GetMapping("/images")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ImageGetDTO getRandomImage(){
+        Image randomImage = imageService.getRandomImage();
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(randomImage);
+    }
+
+    /**
      * Temp Create Image with Request Header
      * Post Nr. 3
      */

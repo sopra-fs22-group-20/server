@@ -65,6 +65,10 @@ public class ImageService {
         return tempImage;
     }
 
+    public Image getRandomImage() {
+        return imageRepository.findRandomImage();
+    }
+
     public Image updateImage(Image imageToBeChanged, Image imageChanges) {
         //Checks if this image exists
         checkIfImageExists(imageToBeChanged.getImageId());
