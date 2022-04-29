@@ -145,7 +145,7 @@ public class ImageService {
         }
     }
 
-    public void checkIfImageExists(Long imageId){
+    public void checkIfImageExists(Long imageId) {
         //Checks if this image exists
         if (imageRepository.findImageByImageId(imageId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,

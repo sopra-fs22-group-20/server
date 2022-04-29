@@ -19,7 +19,6 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     //Somehow this does not work custom query below does the job but fix later
     //void deleteImageByImageId(Long imageId);
-
     @Modifying
     @Query("delete from Image b where b.imageId=:imageId")
     void deleteImageByImageId(@Param("imageId") Long imageId);
