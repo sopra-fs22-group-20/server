@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.entity;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -48,6 +49,10 @@ public class Image implements Serializable {
 
     @Column
     private String name;
+
+    /**
+    @Column
+    private Classification classification; */
 
     @Column
     private String location;
