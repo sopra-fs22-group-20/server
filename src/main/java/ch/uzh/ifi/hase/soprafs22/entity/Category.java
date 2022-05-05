@@ -21,19 +21,22 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
     @Column(nullable = false)
     private String category;
 
+    //Constructor
     public Category(String category) {
         this.category = category;
     }
 
+    //No-Args Constructor
     public Category() {
     }
 
+    //Getter and Setter
     public Long getCategoryId() {
         return categoryId;
     }
@@ -42,7 +45,16 @@ public class Category implements Serializable {
         return category;
     }
 
-    public void setCategory(String category){
+    public void setCategory(String category) {
         this.category = category;
+    }
+
+    //toString
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", category='" + category + '\'' +
+                '}';
     }
 }

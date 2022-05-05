@@ -1,4 +1,5 @@
 package ch.uzh.ifi.hase.soprafs22.controller;
+
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.CategoryGetDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.CategoryPostDTO;
@@ -22,30 +23,17 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-   CategoryController(CategoryService categoryService) {
-       this.categoryService = categoryService;
-   }
+    CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
 
     @GetMapping("/category")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public List<CategoryGetDTO> getCategory() {
-        /*CategoryGetDTO[] allCategories = {
-                DTOMapper.INSTANCE.convertEntityToCategoryGetDTO(new Category("Test1")),
-                DTOMapper.INSTANCE.convertEntityToCategoryGetDTO(new Category("Test2")),
-                DTOMapper.INSTANCE.convertEntityToCategoryGetDTO(new Category("Test3")),
-                DTOMapper.INSTANCE.convertEntityToCategoryGetDTO(new Category("Test4")),
-                DTOMapper.INSTANCE.convertEntityToCategoryGetDTO(new Category("Test5"))
-        };
-        return allCategories;*/
-
         // fetch all categories in the internal representation
-        List<Category> categories = null; // = categoryService.getCategories();
-        categories.add(new Category("Test1"));
-        categories.add(new Category("Test2"));
-        categories.add(new Category("Test3"));
-        categories.add(new Category("Test4"));
-        categories.add(new Category("Test5"));
+        List<Category> categories = categoryService.getCategories();
         List<CategoryGetDTO> categoryGetDTOs = new ArrayList<>();
 
         // convert each category to the API representation
@@ -63,11 +51,9 @@ public class CategoryController {
         Category categoryInput = DTOMapper.INSTANCE.convertCategoryPostDTOtoEntity(categoryPostDTO);
 
         // create category
-        Category createdCategory = categoryService.addCategory(categoryInput.getCategory());
+        Category createdCategory = categoryService.createCategory(categoryInput);
 
         // convert internal representation of user back to API
         return DTOMapper.INSTANCE.convertEntityToCategoryGetDTO(createdCategory);
     }
-
-
 }

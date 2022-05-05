@@ -37,10 +37,13 @@ public class CategoryService {
     }
 
 
-    public Category addCategory(String categoryName) {
-        // ToDO check functionality
-        Category category = new Category(categoryName);
-        return this.categoryRepository.saveAndFlush(category);
+    public Category createCategory(Category newCategory) {
+        checkIfCategoryExists(newCategory);
+
+        newCategory = categoryRepository.save(newCategory);
+        categoryRepository.flush();
+
+        return newCategory;
 
     }
 
@@ -48,6 +51,12 @@ public class CategoryService {
         return this.categoryRepository.findAll();
     }
 
+    public void checkIfCategoryExists(Category category) {
+        Category tempCategory = categoryRepository.findByCategory(category.getCategory());
 
-
+        if (tempCategory != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    String.format("This category already exists!"));
+        }
     }
+}
