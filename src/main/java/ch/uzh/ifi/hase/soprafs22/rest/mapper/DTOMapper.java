@@ -1,6 +1,7 @@
 package ch.uzh.ifi.hase.soprafs22.rest.mapper;
 
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
 import org.mapstruct.*;
@@ -95,5 +96,13 @@ public interface DTOMapper {
     @Mapping(source = "ratingCounter", target = "ratingCounter")
     @Mapping(target = "ratedBy", ignore = true)
     Image convertImagePutDTOtoEntity(ImagePutDTO imagePutDTO);
+
+    @Mapping(source = "categoryId", target = "categoryId")
+    @Mapping(source = "category", target = "category")
+    CategoryGetDTO convertEntityToCategoryGetDTO(Category category);
+
+    //@Mapping(source = "categoryId", target = "categoryId")
+    @Mapping(source = "category", target = "category")
+    Category convertCategoryPostDTOtoEntity(CategoryPostDTO categoryPostDTO);
 
 }
