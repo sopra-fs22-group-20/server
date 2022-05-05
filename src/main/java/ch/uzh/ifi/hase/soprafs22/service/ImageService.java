@@ -39,13 +39,11 @@ public class ImageService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Image createImage(Image newImage, User owner, Category category) {
+    public Image createImage(Image newImage, User owner) {
         newImage.setUploadDate(Current_Date.getDate());
         newImage.setOwner(owner);
 
-        Category tempCategory = categoryRepository.findByCategory(category.getCategory());
-        System.out.println(category);
-        System.out.println(tempCategory);
+        Category tempCategory = categoryRepository.findByCategory(newImage.getCategory().getCategory());
 
         if (tempCategory == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,

@@ -85,11 +85,9 @@ public class ImageController {
 
         //Get the user from the cookies of the localstorage via userId
         User owner = userService.getUserByUserId(userId);
-        //Get the category from the database
-        Category category = categoryService.getCategoryByCategory(imagePostDTO.getCategory().getCategory());
 
         //Create the image entity
-        Image createImage = imageService.createImage(imageInput, owner, category);
+        Image createImage = imageService.createImage(imageInput, owner);
 
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(createImage);
     }
