@@ -8,17 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-/**
- * Internal Image Representation
- * This class composes the internal representation of the image and defines how
- * the image is stored in the database.
- * Every variable will be mapped into a database field with the @Column
- * annotation
- * - nullable = false -> this cannot be left empty
- * - unique = true -> this value must be unqiue across the database -> composes
- * the primary key
- */
-
 @Entity
 @Table(name = "IMAGE")
 public class Image implements Serializable {
@@ -29,6 +18,7 @@ public class Image implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
+    //work out optional and nullable
     @JsonIgnoreProperties("Images")
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "category", nullable = true)

@@ -11,13 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Category Controller
- * This class is responsible for handling all REST request that are related to
- * the category.
- * The controller will receive the request and delegate the execution to the
- * CategoryService and finally return the result.
- */
 @RestController
 public class CategoryController {
 
@@ -27,7 +20,10 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-
+    /**
+     * Returns all existing categories
+     * Get Nr. 6
+     */
     @GetMapping("/category")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -43,6 +39,10 @@ public class CategoryController {
         return categoryGetDTOs;
     }
 
+    /**
+     * Create a new category
+     * Post Nr. 4
+     */
     @PostMapping("/category")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody

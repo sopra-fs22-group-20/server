@@ -1,6 +1,5 @@
 package ch.uzh.ifi.hase.soprafs22.controller;
 
-import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
@@ -18,9 +17,7 @@ import java.util.List;
 public class ImageController {
 
     private final ImageService imageService;
-
     private final UserService userService;
-
     private final CategoryService categoryService;
 
     ImageController(ImageService imageService, UserService userService, CategoryService categoryService) {
@@ -135,7 +132,6 @@ public class ImageController {
 
         //Create a deletion if change is allowed
         imageService.checkAccess(userId, imageToBeDeleted);
-
         imageService.deleteImage(imageId);
     }
 }

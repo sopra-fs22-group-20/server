@@ -16,13 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Category Service
- * This class is the "worker" and responsible for all functionality related to
- * the category
- * (e.g., it creates, modifies, deletes, finds). The result will be passed back
- * to the caller.
- */
 @Service
 @Transactional
 public class CategoryService {
@@ -42,16 +35,12 @@ public class CategoryService {
         newCategory = categoryRepository.save(newCategory);
         categoryRepository.flush();
 
+        log.debug("Created Information for Category: {}", newCategory);
         return newCategory;
     }
 
     public List<Category> getCategories() {
         return this.categoryRepository.findAll();
-    }
-
-    public Category getCategoryByCategory(String category){
-        Category tempCategory = categoryRepository.findByCategory(category);
-        return tempCategory;
     }
 
     public void checkIfCategoryExists(Category category) {

@@ -7,17 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-/**
- * Internal Image Representation
- * This class composes the internal representation of the category and defines how
- * the category is stored in the database.
- * Every variable will be mapped into a database field with the @Column
- * annotation
- * - nullable = false -> this cannot be left empty
- * - unique = true -> this value must be unqiue across the database -> composes
- * the primary key
- */
-
 @Entity
 @Table(name = "CATEGORY")
 public class Category implements Serializable {
@@ -57,13 +46,5 @@ public class Category implements Serializable {
 
     public void setImages(Set<Image> images) {
         this.images = images;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "category='" + category + '\'' +
-                ", images=" + images +
-                '}';
     }
 }
