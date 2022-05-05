@@ -45,7 +45,7 @@ public class User implements Serializable {
     @JsonIgnoreProperties("owner")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "images_seen_by",
+            name = "images_rated_by",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "imageId"))
     private Set<Image> imagesRated;

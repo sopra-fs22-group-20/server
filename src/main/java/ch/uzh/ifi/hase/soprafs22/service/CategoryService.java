@@ -36,7 +36,6 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-
     public Category createCategory(Category newCategory) {
         checkIfCategoryExists(newCategory);
 
@@ -44,11 +43,15 @@ public class CategoryService {
         categoryRepository.flush();
 
         return newCategory;
-
     }
 
     public List<Category> getCategories() {
         return this.categoryRepository.findAll();
+    }
+
+    public Category getCategoryByCategory(String category){
+        Category tempCategory = categoryRepository.findByCategory(category);
+        return tempCategory;
     }
 
     public void checkIfCategoryExists(Category category) {

@@ -1,8 +1,10 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
 import ch.uzh.ifi.hase.soprafs22.constant.Current_Date;
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
+import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.ImageRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePutDTO;
@@ -28,17 +30,27 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
     private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public ImageService(@Qualifier("imageRepository") ImageRepository imageRepository, UserRepository userRepository) {
+    public ImageService(@Qualifier("imageRepository") ImageRepository imageRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
         this.imageRepository = imageRepository;
         this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
 
-    public Image createImage(Image newImage, User owner) {
+    public Image createImage(Image newImage, User owner, Category category) {
         newImage.setUploadDate(Current_Date.getDate());
         newImage.setOwner(owner);
 
+        Category tempCategory = categoryRepository.findByCategory(category.getCategory());
+        System.out.println(category);
+        System.out.println(tempCategory);
+
+        if (tempCategory == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("This category does not exist"));
+        }
 
         //Checks if the storageLink exists
         Image tempImage = imageRepository.findImageByStorageLink(newImage.getStorageLink());
@@ -46,6 +58,7 @@ public class ImageService {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format("The image with this firebase-storageLink already exist!"));
         }
+        newImage.setCategory(tempCategory);
         newImage = imageRepository.save(newImage);
         imageRepository.flush();
 

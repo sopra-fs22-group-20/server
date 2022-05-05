@@ -1,9 +1,11 @@
 package ch.uzh.ifi.hase.soprafs22.controller;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
+import ch.uzh.ifi.hase.soprafs22.service.CategoryService;
 import ch.uzh.ifi.hase.soprafs22.service.ImageService;
 import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,12 @@ public class ImageController {
 
     private final UserService userService;
 
-    ImageController(ImageService imageService, UserService userService) {
+    private final CategoryService categoryService;
+
+    ImageController(ImageService imageService, UserService userService, CategoryService categoryService) {
         this.imageService = imageService;
         this.userService = userService;
+        this.categoryService = categoryService;
     }
 
     /**
@@ -80,9 +85,11 @@ public class ImageController {
 
         //Get the user from the cookies of the localstorage via userId
         User owner = userService.getUserByUserId(userId);
+        //Get the category from the database
+        Category category = categoryService.getCategoryByCategory(imagePostDTO.getCategory().getCategory());
 
         //Create the image entity
-        Image createImage = imageService.createImage(imageInput, owner);
+        Image createImage = imageService.createImage(imageInput, owner, category);
 
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(createImage);
     }

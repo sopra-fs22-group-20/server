@@ -1,24 +1,29 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Image;
+
+import java.util.Set;
+
 public class CategoryGetDTO {
 
-    private Long categoryId;
     private String category;
+    private Set<Image> images;
 
-    public Long getCategoryId() {
-        return categoryId;
-    }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
     }
 }
 

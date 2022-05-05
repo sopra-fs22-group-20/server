@@ -10,7 +10,7 @@ public class UserPostDTO {
     private String token;
     private String username;
     private String password;
-    private Set<Image> images;
+    //private Set<Image> images;
     //private Set<Image> imagesRated;
     private String email;
     private String moreInfo;
@@ -48,7 +48,7 @@ public class UserPostDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-
+/**
     public Set<Image> getImages() {
         return images;
     }

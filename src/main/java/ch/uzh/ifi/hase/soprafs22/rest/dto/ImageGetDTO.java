@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 
 
@@ -9,6 +10,7 @@ import java.util.Set;
 public class ImageGetDTO {
 
     private Long imageId;
+    private Category category;
     private User owner;
     private Set<User> ratedBy;
     private String name;
@@ -26,6 +28,14 @@ public class ImageGetDTO {
 
     public void setImageId(Long imageId) {
         this.imageId = imageId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public User getOwner() {

@@ -1,7 +1,11 @@
 package ch.uzh.ifi.hase.soprafs22.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Internal Image Representation
@@ -21,13 +25,15 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
-
     @Column(nullable = false)
     private String category;
 
-    //Constructor
+    @JsonBackReference
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Image> images;
+
+
+    //Constructor for testing
     public Category(String category) {
         this.category = category;
     }
@@ -37,10 +43,6 @@ public class Category implements Serializable {
     }
 
     //Getter and Setter
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -49,12 +51,19 @@ public class Category implements Serializable {
         this.category = category;
     }
 
-    //toString
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
-                "categoryId=" + categoryId +
-                ", category='" + category + '\'' +
+                "category='" + category + '\'' +
+                ", images=" + images +
                 '}';
     }
 }

@@ -32,7 +32,7 @@ public interface DTOMapper {
     @Mapping(target = "highlightCounter", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
     @Mapping(target = "imagesRated", ignore = true)
-        //@Mapping(target = "images", ignore = true)
+    @Mapping(target = "images", ignore = true)
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
     @Mapping(source = "userId", target = "userId")
@@ -59,6 +59,7 @@ public interface DTOMapper {
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 
     @Mapping(source = "imageId", target = "imageId")
+    @Mapping(source = "category", target = "category")
     @Mapping(target = "owner", ignore = true)
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
@@ -72,6 +73,7 @@ public interface DTOMapper {
     Image convertImagePostDTOtoEntity(ImagePostDTO imagePostDTO);
 
     @Mapping(source = "imageId", target = "imageId")
+    @Mapping(source = "category", target = "category")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
@@ -85,6 +87,7 @@ public interface DTOMapper {
     ImageGetDTO convertEntityToImageGetDTO(Image image);
 
     @Mapping(source = "imageId", target = "imageId")
+    @Mapping(source = "category", target = "category")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
@@ -97,12 +100,12 @@ public interface DTOMapper {
     @Mapping(target = "ratedBy", ignore = true)
     Image convertImagePutDTOtoEntity(ImagePutDTO imagePutDTO);
 
-    @Mapping(source = "categoryId", target = "categoryId")
     @Mapping(source = "category", target = "category")
+    @Mapping(source = "images", target = "images")
     CategoryGetDTO convertEntityToCategoryGetDTO(Category category);
 
-    //@Mapping(source = "categoryId", target = "categoryId")
     @Mapping(source = "category", target = "category")
+    @Mapping(target = "images", ignore = true)
     Category convertCategoryPostDTOtoEntity(CategoryPostDTO categoryPostDTO);
 
 }

@@ -29,12 +29,10 @@ public class Image implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
-    /**
-     * After Category is done
-     *
-     * @Column(nullable = false)
-     * private Category categoryID;
-     */
+    @JsonIgnoreProperties("Images")
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "category", nullable = true)
+    private Category category;
 
     @JsonIgnoreProperties("imagesRated")
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
@@ -95,6 +93,14 @@ public class Image implements Serializable {
 
     public void setImageId(Long imageId) {
         this.imageId = imageId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public User getOwner() {
