@@ -121,11 +121,11 @@ public class ImagePutDTO {
         this.reachedHighlights = reachedHighlights;
     }
     //new get and set for boostDate
-    public Date boostDate() {
+    public Date getBoostDate() {
         return boostDate;
     }
 
-    public void boostDate(Date boostDate) {
+    public void setBoostDate(Date boostDate) {
         this.boostDate = boostDate;
     }
 }
