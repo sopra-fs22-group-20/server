@@ -27,6 +27,9 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private int trophy = 0;
+
     @JsonBackReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Image> images;
@@ -128,6 +131,14 @@ public class User implements Serializable {
 
     public void setMoreInfo(String moreInfo) {
         this.moreInfo = moreInfo;
+    }
+
+    public int getTrophy() {
+        return trophy;
+    }
+
+    public void setTrophy(int trophy) {
+        this.trophy = this.trophy + trophy;
     }
 
     public int getHighlightCounter() {

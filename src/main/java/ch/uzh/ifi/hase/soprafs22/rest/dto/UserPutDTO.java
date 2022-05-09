@@ -14,6 +14,7 @@ public class UserPutDTO {
     //private Set<Image> imagesRated;
     private String email;
     private String moreInfo;
+    private int trophy;
     private String highlightCounter;
     private String creationDate;
 
@@ -79,6 +80,14 @@ public class UserPutDTO {
 
     public void setMoreInfo(String moreInfo) {
         this.moreInfo = moreInfo;
+    }
+
+    public int getTrophy() {
+        return trophy;
+    }
+
+    public void setTrophy(int trophy) {
+        this.trophy = trophy;
     }
 
     public String getHighlightCounter() {

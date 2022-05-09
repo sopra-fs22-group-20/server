@@ -1,6 +1,7 @@
 package ch.uzh.ifi.hase.soprafs22.controller;
 
 import ch.uzh.ifi.hase.soprafs22.entity.User;
+import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserGetDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
@@ -23,10 +24,14 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    UserController(UserService userService) {
+
+    UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
+
 
     /**
      * Returns all users
@@ -76,6 +81,18 @@ public class UserController {
 
         // convert internal representation of user back to API
         return DTOMapper.INSTANCE.convertEntityToUserGetDTO(createdUser);
+    }
+
+
+    @PutMapping("/users/trophies")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public UserGetDTO updateTrophies(@RequestBody long userId, int trophies) {
+        User userInput = userRepository.findByUserId(userId);
+        userInput.setTrophy(trophies);
+        userRepository.save(userInput);
+        userRepository.flush();
+        return DTOMapper.INSTANCE.convertEntityToUserGetDTO(userInput);
     }
 
     /**
