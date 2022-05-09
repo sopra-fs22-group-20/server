@@ -79,10 +79,11 @@ public class UserService {
     }
 
     public User loginUser(User loginUser) {
-        if (loginUser == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("username not found"));
-        }
         User tempUser = userRepository.findByUsername(loginUser.getUsername());
+
+        if (tempUser == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("username and found"));
+        }
 
         //Check if the input password equals the one matching with the username
         if (tempUser.getPassword().equals(loginUser.getPassword())) {
