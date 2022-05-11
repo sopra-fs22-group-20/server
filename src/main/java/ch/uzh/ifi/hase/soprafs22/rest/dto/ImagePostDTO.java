@@ -20,6 +20,8 @@ public class ImagePostDTO {
     private String storageLink;
     private String classification;
     private Boolean reachedHighlights;
+    //new
+    private Date boostDate;
 
 
     public Long getImageId() {
@@ -116,5 +118,13 @@ public class ImagePostDTO {
 
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
+    }
+    //new get and set for boostDate
+    public Date getBoostDate() {
+        return boostDate;
+    }
+
+    public void setBoostDate(Date boostDate) {
+        this.boostDate = boostDate;
     }
 }

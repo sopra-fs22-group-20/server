@@ -58,6 +58,9 @@ public class Image implements Serializable {
 
     @Column
     private Boolean reachedHighlights;
+    //added new
+    @Column (nullable = true)
+    private Date boostDate;
 
     //Constructor for testing
     public Image(String name, String location, String storageLink) {
@@ -176,6 +179,15 @@ public class Image implements Serializable {
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
     }
+
+    //new get and set for boostDate
+    public void setBoostDate(Date boostDate) {
+        this.boostDate = boostDate;
+    }
+    public Date getBoostDate() {
+        return boostDate;
+    }
+
 }
 
 
