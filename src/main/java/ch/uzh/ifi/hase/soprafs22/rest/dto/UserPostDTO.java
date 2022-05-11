@@ -1,9 +1,5 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
-import ch.uzh.ifi.hase.soprafs22.entity.Image;
-
-import java.util.Set;
-
 public class UserPostDTO {
 
     private Long userId;
@@ -14,7 +10,7 @@ public class UserPostDTO {
     //private Set<Image> imagesRated;
     private String email;
     private String moreInfo;
-    private int trophy;
+    private int trophies;
     private String highlightCounter;
     private String creationDate;
 
@@ -82,12 +78,12 @@ public class UserPostDTO {
         this.moreInfo = moreInfo;
     }
 
-    public int getTrophy() {
-        return trophy;
+    public int getTrophies() {
+        return trophies;
     }
 
-    public void setTrophy(int trophy) {
-        this.trophy = trophy;
+    public void setTrophies(int trophies) {
+        this.trophies = trophies;
     }
 
     public String getHighlightCounter() {

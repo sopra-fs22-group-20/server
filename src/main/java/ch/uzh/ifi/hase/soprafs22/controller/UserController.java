@@ -83,18 +83,6 @@ public class UserController {
         return DTOMapper.INSTANCE.convertEntityToUserGetDTO(createdUser);
     }
 
-
-    @PutMapping("/users/trophies")
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public UserGetDTO updateTrophies(@RequestBody long userId, int trophies) {
-        User userInput = userRepository.findByUserId(userId);
-        userInput.setTrophy(trophies);
-        userRepository.save(userInput);
-        userRepository.flush();
-        return DTOMapper.INSTANCE.convertEntityToUserGetDTO(userInput);
-    }
-
     /**
      * Checks if the login credentials are correct
      * Post Nr. 2
@@ -134,6 +122,23 @@ public class UserController {
 
         return DTOMapper.INSTANCE.convertEntityToUserGetDTO(userUpdate);
     }
+
+    /**
+     * Updates User trophies
+     * Put Nr. X
+     */
+    @PutMapping("/users/trophies")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public UserGetDTO updateTrophies(@RequestBody UserPutDTO user) {
+
+        User userToUpdate = DTOMapper.INSTANCE.convertUserPutDTOtoEntity(user);
+
+        User updatedUser = userService.updateTrophies(userToUpdate);
+
+        return DTOMapper.INSTANCE.convertEntityToUserGetDTO(updatedUser);
+    }
+
 
     /**
      * Deletes an User and all his Images
