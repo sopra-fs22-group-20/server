@@ -32,7 +32,7 @@ public interface DTOMapper {
     @Mapping(target = "highlightCounter", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
     @Mapping(target = "imagesRated", ignore = true)
-    @Mapping(source= "trophies", target = "trophies")
+    @Mapping(source = "trophies", target = "trophies")
     @Mapping(target = "images", ignore = true)
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
@@ -44,7 +44,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
-    @Mapping(source= "trophies", target = "trophies")
+    @Mapping(source = "trophies", target = "trophies")
         //@Mapping(source = "images", target = "images")
     UserGetDTO convertEntityToUserGetDTO(User user);
 
@@ -57,7 +57,7 @@ public interface DTOMapper {
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
     @Mapping(target = "imagesRated", ignore = true)
-    @Mapping(source= "trophies", target = "trophies")
+    @Mapping(source = "trophies", target = "trophies")
         //@Mapping(source = "images", target = "images")
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 

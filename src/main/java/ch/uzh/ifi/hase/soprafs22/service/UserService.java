@@ -118,7 +118,7 @@ public class UserService {
     }
 
     private void checkTrophies(User userInput) {
-        if (userInput.getTrophies()<=0) {
+        if (userInput.getTrophies() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     String.format("Number of Trophies is illegal"));
         }

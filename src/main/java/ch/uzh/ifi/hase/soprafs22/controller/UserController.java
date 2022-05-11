@@ -125,7 +125,7 @@ public class UserController {
 
     /**
      * Updates User trophies
-     * Put Nr. X
+     * Put Nr. 4
      */
     @PutMapping("/users/trophies")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -147,7 +147,7 @@ public class UserController {
     @DeleteMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ResponseBody
-    public void deleteUser(@RequestHeader(name = "userId") Long loggedInUserId, @PathVariable Long userId){
+    public void deleteUser(@RequestHeader(name = "userId") Long loggedInUserId, @PathVariable Long userId) {
         //Create a deletion if change is allowed
         userService.checkAccess(userId, loggedInUserId);
 
