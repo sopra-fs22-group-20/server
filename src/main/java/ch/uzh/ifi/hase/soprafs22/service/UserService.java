@@ -78,6 +78,19 @@ public class UserService {
         return userToBeChanged;
     }
 
+    public User updateTrophies(User userInput) {
+        checkTrophies(userInput);
+
+        User user = userRepository.findByUserId(userInput.getUserId());
+        user.setTrophies(userInput.getTrophies());
+
+        userRepository.save(user);
+        userRepository.flush();
+
+        log.debug("Updated trophies for User: {}", user);
+        return user;
+    }
+
     public User loginUser(User loginUser) {
         User tempUser = userRepository.findByUsername(loginUser.getUsername());
 
@@ -102,6 +115,13 @@ public class UserService {
         if (userByUsername != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format(baseErrorMessage, "username", "is"));
+        }
+    }
+
+    private void checkTrophies(User userInput) {
+        if (userInput.getTrophies() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("Number of Trophies is illegal"));
         }
     }
 
