@@ -24,10 +24,10 @@ public class CategoryController {
      * Returns all existing categories
      * Get Nr. 6
      */
-    @GetMapping("/category")
+    @GetMapping("/categories")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<CategoryGetDTO> getCategory() {
+    public List<CategoryGetDTO> getCategories() {
         // fetch all categories in the internal representation
         List<Category> categories = categoryService.getCategories();
         List<CategoryGetDTO> categoryGetDTOs = new ArrayList<>();
