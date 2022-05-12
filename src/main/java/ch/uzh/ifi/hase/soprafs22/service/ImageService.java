@@ -75,6 +75,15 @@ public class ImageService {
         return tempImage;
     }
 
+    public Image getRandomNonRatedImage(String category, Long userId) {
+
+        Image image = imageRepository.findRandomImageFromCategory(category);
+        System.out.print("Rated: ");
+        System.out.println(imageRepository.ratingCheck(userId, image.getImageId()));
+
+        return image;
+    }
+
     public Image getRandomImage() {
         return imageRepository.findRandomImage();
     }
@@ -186,4 +195,4 @@ public class ImageService {
         //Multiply rating by amount of ratings plus new rating divided by new amount of ratings
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
-}
+    }

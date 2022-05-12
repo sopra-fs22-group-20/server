@@ -78,6 +78,18 @@ public class ImageController {
     }
 
     /**
+     * Returns a random image the user has not seen yet
+     * Get Nr. 7
+     */
+    @GetMapping("/images/Random/{category}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ImageGetDTO getNonRatedImageFromCategory(@PathVariable String category, @RequestHeader(name = "userId") Long userId) {
+        Image randomNonRatedImage = imageService.getRandomNonRatedImage(category, userId);
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(randomNonRatedImage);
+    }
+
+    /**
      * Returns a random image
      * Get Nr. 8
      */

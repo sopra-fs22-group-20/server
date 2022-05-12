@@ -29,7 +29,14 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query(value = "SELECT * from Image ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Image findRandomImage();
 
+    @Query(value = "SELECT * from Image WHERE category=:categoryGiven ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
+    Image findRandomImageFromCategory(@Param("categoryGiven") String categoryGiven);
+
     // HAVING uploadDate  > now() - interval 7 day something like that add later
     @Query(value = "SELECT * FROM image WHERE category=:categoryGiven ORDER BY RATING DESC LIMIT 3", nativeQuery = true)
     List<Image> findHighlightsFromCategory(@Param("categoryGiven") String categoryGiven);
+
+    //Returns true or false depending on if the user already rated this picture
+    @Query(value = "SELECT CASE WHEN EXISTS (SELECT * FROM IMAGES_RATED_BY WHERE USER_ID =:userId AND IMAGE_ID=:imageId) THEN TRUE ELSE FALSE END AS bool", nativeQuery = true)
+    Boolean ratingCheck(@Param("userId") Long userId, @Param("imageId") Long imageId);
 }
