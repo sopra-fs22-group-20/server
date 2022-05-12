@@ -1,7 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +14,7 @@ public class Category implements Serializable {
 
     @Id
     @Column(nullable = false)
-    private String category;
+    private String name;
 
     @JsonBackReference
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -23,8 +22,8 @@ public class Category implements Serializable {
 
 
     //Constructor for testing
-    public Category(String category) {
-        this.category = category;
+    public Category(String name) {
+        this.name = name;
     }
 
     //No-Args Constructor
@@ -32,12 +31,12 @@ public class Category implements Serializable {
     }
 
     //Getter and Setter
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String category) {
+        this.name = category;
     }
 
     public Set<Image> getImages() {

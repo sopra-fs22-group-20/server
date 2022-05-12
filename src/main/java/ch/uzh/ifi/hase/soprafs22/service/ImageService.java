@@ -44,7 +44,7 @@ public class ImageService {
         newImage.setOwner(owner);
 
         //Check if the category passed on exists
-        Category tempCategory = categoryRepository.findByCategory(newImage.getCategory().getCategory());
+        Category tempCategory = categoryRepository.findByName(newImage.getCategory().getName());
         if (tempCategory == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("This category does not exist"));

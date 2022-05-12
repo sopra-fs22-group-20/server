@@ -106,11 +106,11 @@ public interface DTOMapper {
     @Mapping(source = "boostDate", target = "boostDate")
     Image convertImagePutDTOtoEntity(ImagePutDTO imagePutDTO);
 
-    @Mapping(source = "category", target = "category")
+    @Mapping(source = "name", target = "name")
     @Mapping(source = "images", target = "images")
     CategoryGetDTO convertEntityToCategoryGetDTO(Category category);
 
-    @Mapping(source = "category", target = "category")
+    @Mapping(source = "name", target = "name")
     @Mapping(target = "images", ignore = true)
     Category convertCategoryPostDTOtoEntity(CategoryPostDTO categoryPostDTO);
 

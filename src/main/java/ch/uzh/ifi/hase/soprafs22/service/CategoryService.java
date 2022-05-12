@@ -1,9 +1,7 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
-import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
-import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -44,7 +41,7 @@ public class CategoryService {
     }
 
     public void checkIfCategoryExists(Category category) {
-        Category tempCategory = categoryRepository.findByCategory(category.getCategory());
+        Category tempCategory = categoryRepository.findByName(category.getName());
 
         if (tempCategory != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,

@@ -1,21 +1,17 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
-import ch.uzh.ifi.hase.soprafs22.entity.Image;
-
-import java.util.Set;
-
 public class CategoryPostDTO {
 
-    private String category;
+    private String name;
     //private Set<Image> images;
 
 
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String name) {
+        this.name = name;
     }
 /**
  public Set<Image> getImages() {
