@@ -59,7 +59,26 @@ public class ImageController {
     }
 
     /**
-     * Returns all images of a user
+     * Returns the highlights from a category
+     * Get Nr. 5
+     */
+    @GetMapping("/images/highlights/{category}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<ImageGetDTO> getHighlightsFromCategory(@PathVariable String category) {
+        //Fetch highlights from a category
+        List<Image> highlights = imageService.getHighlights(category);
+        List<ImageGetDTO> imageGetDTOs = new ArrayList<>();
+
+        // convert each image to the API representation
+        for (Image image: highlights) {
+            imageGetDTOs.add(DTOMapper.INSTANCE.convertEntityToImageGetDTO(image));
+        }
+        return imageGetDTOs;
+    }
+
+    /**
+     * Returns a random image
      * Get Nr. 8
      */
     @GetMapping("/images")

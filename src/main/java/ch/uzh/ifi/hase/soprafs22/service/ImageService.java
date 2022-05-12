@@ -79,6 +79,10 @@ public class ImageService {
         return imageRepository.findRandomImage();
     }
 
+    public List<Image> getHighlights(String category) {
+        return this.imageRepository.findHighlightsFromCategory(category);
+    }
+
     public Image updateImage(Image imageToBeChanged, Image imageChanges) {
         //Checks if this image exists
         checkIfImageExists(imageToBeChanged.getImageId());
