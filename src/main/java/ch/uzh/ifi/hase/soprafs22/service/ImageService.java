@@ -80,6 +80,7 @@ public class ImageService {
     }
 
     public List<Image> getHighlights(String category) {
+        checkCategoriesExistence(category);
         return this.imageRepository.findHighlightsFromCategory(category);
     }
 
@@ -156,6 +157,13 @@ public class ImageService {
         if (!Objects.equals(image.getOwner().getUserId(), userId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     String.format("You dont have access"));
+        }
+    }
+
+    public void checkCategoriesExistence(String category) {
+        if (Objects.equals(categoryRepository.findByName(category), null)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("This category does not exist"));
         }
     }
 
