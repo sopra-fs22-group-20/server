@@ -29,6 +29,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query(value = "SELECT * from Image ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Image findRandomImage();
 
+    //Where 40 = False
     @Query(value = "SELECT * from Image WHERE category=:categoryGiven ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Image findRandomImageFromCategory(@Param("categoryGiven") String categoryGiven);
 
