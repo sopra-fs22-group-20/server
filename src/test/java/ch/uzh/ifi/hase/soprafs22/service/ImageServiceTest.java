@@ -44,6 +44,7 @@ class ImageServiceTest {
         // testImage
         Mockito.when(imageRepository.save(Mockito.any())).thenReturn(testImage);
     }
+    /**
     @Test
     void createImage() {
         // testUser
@@ -104,6 +105,7 @@ class ImageServiceTest {
         //assertEquals(testImage.getImageId(), imageService.getImageByImageId(createdImage.getImageId()));
     }
 **/
+/**
     @Test
     void checkAccess() {
         // testUser

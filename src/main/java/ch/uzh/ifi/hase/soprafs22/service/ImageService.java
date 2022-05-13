@@ -1,8 +1,10 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
 import ch.uzh.ifi.hase.soprafs22.constant.Current_Date;
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
+import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.ImageRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePutDTO;
@@ -28,17 +30,25 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
     private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public ImageService(@Qualifier("imageRepository") ImageRepository imageRepository, UserRepository userRepository) {
+    public ImageService(@Qualifier("imageRepository") ImageRepository imageRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
         this.imageRepository = imageRepository;
         this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public Image createImage(Image newImage, User owner) {
         newImage.setUploadDate(Current_Date.getDate());
         newImage.setOwner(owner);
 
+        //Check if the category passed on exists
+        Category tempCategory = categoryRepository.findByName(newImage.getCategory().getName());
+        if (tempCategory == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("This category does not exist"));
+        }
 
         //Checks if the storageLink exists
         Image tempImage = imageRepository.findImageByStorageLink(newImage.getStorageLink());
@@ -46,6 +56,7 @@ public class ImageService {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format("The image with this firebase-storageLink already exist!"));
         }
+        newImage.setCategory(tempCategory);
         newImage = imageRepository.save(newImage);
         imageRepository.flush();
 
@@ -61,12 +72,25 @@ public class ImageService {
         checkIfImageExists(imageId);
 
         Image tempImage = imageRepository.findImageByImageId(imageId);
-
         return tempImage;
+    }
+
+    public Image getRandomNonRatedImage(String category, Long userId) {
+
+        Image image = imageRepository.findRandomImageFromCategory(category);
+        System.out.print("Rated: ");
+        System.out.println(imageRepository.ratingCheck(userId, image.getImageId()));
+
+        return image;
     }
 
     public Image getRandomImage() {
         return imageRepository.findRandomImage();
+    }
+
+    public List<Image> getHighlights(String category) {
+        checkCategoriesExistence(category);
+        return this.imageRepository.findHighlightsFromCategory(category);
     }
 
     public Image updateImage(Image imageToBeChanged, Image imageChanges) {
@@ -145,6 +169,13 @@ public class ImageService {
         }
     }
 
+    public void checkCategoriesExistence(String category) {
+        if (Objects.equals(categoryRepository.findByName(category), null)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("This category does not exist"));
+        }
+    }
+
     public void checkIfImageExists(Long imageId) {
         //Checks if this image exists
         if (imageRepository.findImageByImageId(imageId) == null) {
@@ -164,4 +195,4 @@ public class ImageService {
         //Multiply rating by amount of ratings plus new rating divided by new amount of ratings
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
-}
+    }

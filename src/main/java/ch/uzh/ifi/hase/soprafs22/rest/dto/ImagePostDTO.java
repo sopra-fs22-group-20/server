@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 
 import java.util.Date;
@@ -8,8 +9,9 @@ import java.util.Set;
 public class ImagePostDTO {
 
     private Long imageId;
+    private Category category;
     private User owner;
-    private Set<User> ratedBy;
+    //private Set<User> ratedBy;
     private String name;
     private String location;
     private Date uploadDate;
@@ -18,6 +20,8 @@ public class ImagePostDTO {
     private String storageLink;
     private String classification;
     private Boolean reachedHighlights;
+    //new
+    private Date boostDate;
 
 
     public Long getImageId() {
@@ -28,6 +32,14 @@ public class ImagePostDTO {
         this.imageId = imageId;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public User getOwner() {
         return owner;
     }
@@ -35,7 +47,7 @@ public class ImagePostDTO {
     public void setOwner(User owner) {
         this.owner = owner;
     }
-
+/**
     public Set<User> getRatedBy() {
         return ratedBy;
     }
@@ -43,7 +55,7 @@ public class ImagePostDTO {
     public void setRatedBy(Set<User> ratedBy) {
         this.ratedBy = ratedBy;
     }
-
+*/
     public String getName() {
         return name;
     }
@@ -106,5 +118,13 @@ public class ImagePostDTO {
 
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
+    }
+    //new get and set for boostDate
+    public Date getBoostDate() {
+        return boostDate;
+    }
+
+    public void setBoostDate(Date boostDate) {
+        this.boostDate = boostDate;
     }
 }

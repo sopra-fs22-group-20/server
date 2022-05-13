@@ -4,6 +4,7 @@ import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
+import ch.uzh.ifi.hase.soprafs22.service.CategoryService;
 import ch.uzh.ifi.hase.soprafs22.service.ImageService;
 import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,13 @@ import java.util.List;
 public class ImageController {
 
     private final ImageService imageService;
-
     private final UserService userService;
+    private final CategoryService categoryService;
 
-    ImageController(ImageService imageService, UserService userService) {
+    ImageController(ImageService imageService, UserService userService, CategoryService categoryService) {
         this.imageService = imageService;
         this.userService = userService;
+        this.categoryService = categoryService;
     }
 
     /**
@@ -57,7 +59,38 @@ public class ImageController {
     }
 
     /**
-     * Returns all images of a user
+     * Returns the highlights from a category
+     * Get Nr. 5
+     */
+    @GetMapping("/images/highlights/{category}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<ImageGetDTO> getHighlightsFromCategory(@PathVariable String category) {
+        //Fetch highlights from a category
+        List<Image> highlights = imageService.getHighlights(category);
+        List<ImageGetDTO> imageGetDTOs = new ArrayList<>();
+
+        // convert each image to the API representation
+        for (Image image: highlights) {
+            imageGetDTOs.add(DTOMapper.INSTANCE.convertEntityToImageGetDTO(image));
+        }
+        return imageGetDTOs;
+    }
+
+    /**
+     * Returns a random image the user has not seen yet
+     * Get Nr. 7
+     */
+    @GetMapping("/images/Random/{category}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ImageGetDTO getNonRatedImageFromCategory(@PathVariable String category, @RequestHeader(name = "userId") Long userId) {
+        Image randomNonRatedImage = imageService.getRandomNonRatedImage(category, userId);
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(randomNonRatedImage);
+    }
+
+    /**
+     * Returns a random image
      * Get Nr. 8
      */
     @GetMapping("/images")
@@ -130,7 +163,6 @@ public class ImageController {
 
         //Create a deletion if change is allowed
         imageService.checkAccess(userId, imageToBeDeleted);
-
         imageService.deleteImage(imageId);
     }
 }

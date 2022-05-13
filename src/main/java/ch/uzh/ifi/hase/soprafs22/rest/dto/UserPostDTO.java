@@ -1,19 +1,16 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
-import ch.uzh.ifi.hase.soprafs22.entity.Image;
-
-import java.util.Set;
-
 public class UserPostDTO {
 
     private Long userId;
     private String token;
     private String username;
     private String password;
-    private Set<Image> images;
+    //private Set<Image> images;
     //private Set<Image> imagesRated;
     private String email;
     private String moreInfo;
+    private int trophies;
     private String highlightCounter;
     private String creationDate;
 
@@ -48,7 +45,7 @@ public class UserPostDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-
+/**
     public Set<Image> getImages() {
         return images;
     }
@@ -79,6 +76,14 @@ public class UserPostDTO {
 
     public void setMoreInfo(String moreInfo) {
         this.moreInfo = moreInfo;
+    }
+
+    public int getTrophies() {
+        return trophies;
+    }
+
+    public void setTrophies(int trophies) {
+        this.trophies = trophies;
     }
 
     public String getHighlightCounter() {
