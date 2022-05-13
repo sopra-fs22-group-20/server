@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Set;
 public class ImagePutDTO {
 
     private Long imageId;
+    private Category category;
     private User owner;
     //private Set<User> ratedBy;
     private String name;
@@ -18,6 +20,9 @@ public class ImagePutDTO {
     private String storageLink;
     private String classification;
     private Boolean reachedHighlights;
+    //new
+    private Date boostDate;
+
 
 
     public Long getImageId() {
@@ -26,6 +31,14 @@ public class ImagePutDTO {
 
     public void setImageId(Long imageId) {
         this.imageId = imageId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public User getOwner() {
@@ -106,5 +119,13 @@ public class ImagePutDTO {
 
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
+    }
+    //new get and set for boostDate
+    public Date getBoostDate() {
+        return boostDate;
+    }
+
+    public void setBoostDate(Date boostDate) {
+        this.boostDate = boostDate;
     }
 }

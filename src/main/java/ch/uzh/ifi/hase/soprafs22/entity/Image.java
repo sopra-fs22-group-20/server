@@ -8,17 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-/**
- * Internal Image Representation
- * This class composes the internal representation of the image and defines how
- * the image is stored in the database.
- * Every variable will be mapped into a database field with the @Column
- * annotation
- * - nullable = false -> this cannot be left empty
- * - unique = true -> this value must be unqiue across the database -> composes
- * the primary key
- */
-
 @Entity
 @Table(name = "IMAGE")
 public class Image implements Serializable {
@@ -29,12 +18,11 @@ public class Image implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
-    /**
-     * After Category is done
-     *
-     * @Column(nullable = false)
-     * private Category categoryID;
-     */
+    //work out optional and nullable
+    @JsonIgnoreProperties("Images")
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "category", nullable = true)
+    private Category category;
 
     @JsonIgnoreProperties("imagesRated")
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
@@ -70,6 +58,9 @@ public class Image implements Serializable {
 
     @Column
     private Boolean reachedHighlights;
+    //added new
+    @Column (nullable = true)
+    private Date boostDate;
 
     //Constructor for testing
     public Image(String name, String location, String storageLink) {
@@ -95,6 +86,14 @@ public class Image implements Serializable {
 
     public void setImageId(Long imageId) {
         this.imageId = imageId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public User getOwner() {
@@ -180,6 +179,15 @@ public class Image implements Serializable {
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
     }
+
+    //new get and set for boostDate
+    public void setBoostDate(Date boostDate) {
+        this.boostDate = boostDate;
+    }
+    public Date getBoostDate() {
+        return boostDate;
+    }
+
 }
 
 

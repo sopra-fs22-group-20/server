@@ -5,6 +5,7 @@ import ch.uzh.ifi.hase.soprafs22.entity.Image;
 
 import ch.uzh.ifi.hase.soprafs22.repository.ImageRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -43,6 +44,7 @@ class ImageServiceTest {
         // testImage
         Mockito.when(imageRepository.save(Mockito.any())).thenReturn(testImage);
     }
+    /**
     @Test
     void createImage() {
         // testUser
@@ -103,6 +105,7 @@ class ImageServiceTest {
         //assertEquals(testImage.getImageId(), imageService.getImageByImageId(createdImage.getImageId()));
     }
 **/
+/**
     @Test
     void checkAccess() {
         // testUser
@@ -122,7 +125,7 @@ class ImageServiceTest {
     }
 /**
     @Test
-    void updateImage() {
+    void updateImageDoesNotExist() throws Exception {
         // testUser
         User testUser = new User();
         testUser.setUsername("testUsername");
@@ -139,7 +142,6 @@ class ImageServiceTest {
         // then -> update image
         Image testImageUpdate  = createdImage;
         testImageUpdate.setName("UpdateImageName");
-        imageService.updateImage(testImage,testImageUpdate);
 
     }
 /**

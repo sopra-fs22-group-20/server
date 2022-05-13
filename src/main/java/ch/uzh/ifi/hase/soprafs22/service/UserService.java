@@ -16,13 +16,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-/**
- * User Service
- * This class is the "worker" and responsible for all functionality related to
- * the user
- * (e.g., it creates, modifies, deletes, finds). The result will be passed back
- * to the caller.
- */
 @Service
 @Transactional
 public class UserService {
@@ -85,11 +78,25 @@ public class UserService {
         return userToBeChanged;
     }
 
+    public User updateTrophies(User userInput) {
+        checkTrophies(userInput);
+
+        User user = userRepository.findByUserId(userInput.getUserId());
+        user.setTrophies(userInput.getTrophies());
+
+        userRepository.save(user);
+        userRepository.flush();
+
+        log.debug("Updated trophies for User: {}", user);
+        return user;
+    }
+
     public User loginUser(User loginUser) {
-        if (loginUser == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("username not found"));
-        }
         User tempUser = userRepository.findByUsername(loginUser.getUsername());
+
+        if (tempUser == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("username and found"));
+        }
 
         //Check if the input password equals the one matching with the username
         if (tempUser.getPassword().equals(loginUser.getPassword())) {
@@ -101,16 +108,6 @@ public class UserService {
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, String.format("password does not match with username"));
     }
 
-    /**
-     * This is a helper method that will check the uniqueness criteria of the
-     * username and the name
-     * defined in the User entity. The method will do nothing if the input is unique
-     * and throw an error otherwise.
-     *
-     * @param userToBeCreated
-     * @throws org.springframework.web.server.ResponseStatusException
-     * @see User
-     */
     private void checkIfUsernameExists(User userToBeCreated) {
         User userByUsername = userRepository.findByUsername(userToBeCreated.getUsername());
 
@@ -118,6 +115,13 @@ public class UserService {
         if (userByUsername != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format(baseErrorMessage, "username", "is"));
+        }
+    }
+
+    private void checkTrophies(User userInput) {
+        if (userInput.getTrophies() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("Number of Trophies is illegal"));
         }
     }
 

@@ -1,6 +1,7 @@
 package ch.uzh.ifi.hase.soprafs22.controller;
 
 import ch.uzh.ifi.hase.soprafs22.entity.User;
+import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserGetDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
@@ -23,10 +24,14 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    UserController(UserService userService) {
+
+    UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
+
 
     /**
      * Returns all users
@@ -119,13 +124,30 @@ public class UserController {
     }
 
     /**
+     * Updates User trophies
+     * Put Nr. 4
+     */
+    @PutMapping("/users/trophies")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public UserGetDTO updateTrophies(@RequestBody UserPutDTO user) {
+
+        User userToUpdate = DTOMapper.INSTANCE.convertUserPutDTOtoEntity(user);
+
+        User updatedUser = userService.updateTrophies(userToUpdate);
+
+        return DTOMapper.INSTANCE.convertEntityToUserGetDTO(updatedUser);
+    }
+
+
+    /**
      * Deletes an User and all his Images
      * Delete Nr. 1
      */
     @DeleteMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ResponseBody
-    public void deleteUser(@RequestHeader(name = "userId") Long loggedInUserId, @PathVariable Long userId){
+    public void deleteUser(@RequestHeader(name = "userId") Long loggedInUserId, @PathVariable Long userId) {
         //Create a deletion if change is allowed
         userService.checkAccess(userId, loggedInUserId);
 

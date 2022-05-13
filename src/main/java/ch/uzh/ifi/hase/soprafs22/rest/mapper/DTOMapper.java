@@ -1,6 +1,7 @@
 package ch.uzh.ifi.hase.soprafs22.rest.mapper;
 
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
+import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
 import org.mapstruct.*;
@@ -31,7 +32,8 @@ public interface DTOMapper {
     @Mapping(target = "highlightCounter", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
     @Mapping(target = "imagesRated", ignore = true)
-        //@Mapping(target = "images", ignore = true)
+    @Mapping(source = "trophies", target = "trophies")
+    @Mapping(target = "images", ignore = true)
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
     @Mapping(source = "userId", target = "userId")
@@ -42,6 +44,7 @@ public interface DTOMapper {
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
+    @Mapping(source = "trophies", target = "trophies")
         //@Mapping(source = "images", target = "images")
     UserGetDTO convertEntityToUserGetDTO(User user);
 
@@ -54,10 +57,12 @@ public interface DTOMapper {
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
     @Mapping(target = "imagesRated", ignore = true)
+    @Mapping(source = "trophies", target = "trophies")
         //@Mapping(source = "images", target = "images")
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 
     @Mapping(source = "imageId", target = "imageId")
+    @Mapping(source = "category", target = "category")
     @Mapping(target = "owner", ignore = true)
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
@@ -68,9 +73,11 @@ public interface DTOMapper {
     @Mapping(target = "reachedHighlights", ignore = true)
     @Mapping(target = "ratingCounter", ignore = true)
     @Mapping(target = "ratedBy", ignore = true)
+    @Mapping (target = "boostDate", ignore = true)
     Image convertImagePostDTOtoEntity(ImagePostDTO imagePostDTO);
 
     @Mapping(source = "imageId", target = "imageId")
+    @Mapping(source = "category", target = "category")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
@@ -81,9 +88,11 @@ public interface DTOMapper {
     @Mapping(source = "reachedHighlights", target = "reachedHighlights")
     @Mapping(source = "ratingCounter", target = "ratingCounter")
     @Mapping(source = "ratedBy", target = "ratedBy")
+    @Mapping(source = "boostDate", target = "boostDate")
     ImageGetDTO convertEntityToImageGetDTO(Image image);
 
     @Mapping(source = "imageId", target = "imageId")
+    @Mapping(source = "category", target = "category")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
@@ -94,6 +103,15 @@ public interface DTOMapper {
     @Mapping(source = "reachedHighlights", target = "reachedHighlights")
     @Mapping(source = "ratingCounter", target = "ratingCounter")
     @Mapping(target = "ratedBy", ignore = true)
+    @Mapping(source = "boostDate", target = "boostDate")
     Image convertImagePutDTOtoEntity(ImagePutDTO imagePutDTO);
+
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "images", target = "images")
+    CategoryGetDTO convertEntityToCategoryGetDTO(Category category);
+
+    @Mapping(source = "name", target = "name")
+    @Mapping(target = "images", ignore = true)
+    Category convertCategoryPostDTOtoEntity(CategoryPostDTO categoryPostDTO);
 
 }
