@@ -116,6 +116,7 @@ public class ImageService {
         imageRepository.flush();
         log.debug("Updated information for image: {}", imageTemp);
         return imageTemp;
+    }
 
     public Image rateImage(ImagePutDTO rating, Long userId) {
         checkIfImageExists(rating.getImageId());
@@ -205,4 +206,5 @@ public class ImageService {
         //Multiply rating by amount of ratings plus new rating divided by new amount of ratings
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
-    }
+}
+
