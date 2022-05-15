@@ -2,7 +2,9 @@ package ch.uzh.ifi.hase.soprafs22.controller;
 
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.*;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.ImageGetDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePostDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePutDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs22.service.CategoryService;
 import ch.uzh.ifi.hase.soprafs22.service.ImageService;
@@ -150,6 +152,22 @@ public class ImageController {
     public void rateImage(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePutDTO rating) {
         imageService.rateImage(rating, userId);
     }
+
+
+    /**
+     * Update Classification
+     * Put Nr. X
+     */
+    @PutMapping("/classification")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public ImageGetDTO updateClassification(@RequestBody ImagePutDTO imageClassification, @RequestHeader(name = "userId") Long userId) {
+        Image image = DTOMapper.INSTANCE.convertImagePutDTOtoEntity(imageClassification);
+        //imageService.checkAccess(userId, image);
+        Image imageUpdate = imageService.updateClassification(image);
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(imageUpdate);
+    }
+
 
     /**
      * Deletes an Image
