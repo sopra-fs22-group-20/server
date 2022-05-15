@@ -81,7 +81,7 @@ public class ImageController {
      * Returns a random image the user has not seen yet
      * Get Nr. 7
      */
-    @GetMapping("/images/Random/{category}")
+    @GetMapping("/images/random/{category}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ImageGetDTO getNonRatedImageFromCategory(@PathVariable String category, @RequestHeader(name = "userId") Long userId) {
@@ -93,7 +93,7 @@ public class ImageController {
      * Returns a random image
      * Get Nr. 8
      */
-    @GetMapping("/images")
+    @GetMapping("/images/random")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ImageGetDTO getRandomImage() {
