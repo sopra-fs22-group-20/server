@@ -17,7 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -72,33 +75,13 @@ public class ImageService {
         return tempImage;
     }
 
-    public Image getRandomNonRatedImageFromCategory(String category, Long userId) {
+    public Image getRandomNonRatedImage(String category, Long userId) {
 
-        for (int i = 25; i > 0; i--) {
-            Image image = imageRepository.findRandomImageFromCategory(category);
-            if (imageRepository.ratingCheck(userId, image.getImageId())) {
-                continue;
-            }
-            else {
-                return image;
-            }
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                String.format("You already have rated all pictures from this category"));
-    }
+        Image image = imageRepository.findRandomImageFromCategory(category);
+        System.out.print("Rated: ");
+        System.out.println(imageRepository.ratingCheck(userId, image.getImageId()));
 
-    public Image getRandomNonRatedImage(Long userId) {
-        for (int i = 25; i > 0; i--) {
-            Image image = imageRepository.findRandomImage();
-            if (imageRepository.ratingCheck(userId, image.getImageId())) {
-                continue;
-            }
-            else {
-                return image;
-            }
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                String.format("You already have rated all pictures"));
+        return image;
     }
 
     public Image getRandomImage() {
@@ -133,6 +116,7 @@ public class ImageService {
         imageRepository.flush();
         log.debug("Updated information for image: {}", imageTemp);
         return imageTemp;
+    }
 
     public Image rateImage(ImagePutDTO rating, Long userId) {
         checkIfImageExists(rating.getImageId());
@@ -222,14 +206,5 @@ public class ImageService {
         //Multiply rating by amount of ratings plus new rating divided by new amount of ratings
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
-
-    private String getWeightedClassification() {
-        Random random = new Random();
-        int randomInt = random.nextInt(4);
-        //44,4% A, 33.3% B, 22.2% C
-        String [] x  = {"A", "A", "A", "C", "C"};
-
-        return x[randomInt];
-
-    }
 }
+
