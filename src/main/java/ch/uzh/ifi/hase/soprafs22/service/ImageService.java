@@ -124,6 +124,16 @@ public class ImageService {
         return imageToBeChanged;
     }
 
+    public Image updateClassification(Image image) {
+        //Checks if this image exists
+        checkIfImageExists(image.getImageId());
+        Image imageTemp = imageRepository.findImageByImageId(image.getImageId());
+        imageTemp.setClassification(image.getClassification());
+        imageRepository.save(imageTemp);
+        imageRepository.flush();
+        log.debug("Updated information for image: {}", imageTemp);
+        return imageTemp;
+
     public Image rateImage(ImagePutDTO rating, Long userId) {
         checkIfImageExists(rating.getImageId());
         checkIfRatingInputIsLegal(rating.getRating());
