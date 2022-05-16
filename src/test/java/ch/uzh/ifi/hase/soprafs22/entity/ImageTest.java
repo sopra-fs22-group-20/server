@@ -1,3 +1,4 @@
+/**
 package ch.uzh.ifi.hase.soprafs22.entity;
 
 import org.junit.jupiter.api.Test;
@@ -99,4 +100,4 @@ class ImageTest {
 
 
 
-}
+} **/
