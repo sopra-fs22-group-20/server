@@ -85,13 +85,25 @@ public class ImageController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ImageGetDTO getNonRatedImageFromCategory(@PathVariable String category, @RequestHeader(name = "userId") Long userId) {
-        Image randomNonRatedImage = imageService.getRandomNonRatedImage(category, userId);
+        Image randomNonRatedImage = imageService.getRandomNonRatedImageFromCategory(category, userId);
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(randomNonRatedImage);
     }
 
     /**
      * Returns a random image
      * Get Nr. 8
+     */
+    @GetMapping("/images/random/c")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ImageGetDTO getNonRatedRandomImage(@RequestHeader(name = "userId") Long userId) {
+        Image randomNonRatedImage = imageService.getRandomNonRatedImage(userId);
+        return DTOMapper.INSTANCE.convertEntityToImageGetDTO(randomNonRatedImage);
+    }
+
+    /**
+     * Returns a random image
+     * Get Nr. 9
      */
     @GetMapping("/images/random")
     @ResponseStatus(HttpStatus.OK)
