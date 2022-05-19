@@ -17,7 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -122,6 +125,17 @@ public class ImageService {
 
         log.debug("Updated information for image: {}", imageToBeChanged);
         return imageToBeChanged;
+    }
+
+    public Image updateClassification(Image image) {
+        //Checks if this image exists
+        checkIfImageExists(image.getImageId());
+        Image imageTemp = imageRepository.findImageByImageId(image.getImageId());
+        imageTemp.setClassification(image.getClassification());
+        imageRepository.save(imageTemp);
+        imageRepository.flush();
+        log.debug("Updated information for image: {}", imageTemp);
+        return imageTemp;
     }
 
     public Image rateImage(ImagePutDTO rating, Long userId) {
