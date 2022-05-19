@@ -1,5 +1,7 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import java.sql.Timestamp;
+
 public class UserPostDTO {
 
     private Long userId;
@@ -12,7 +14,7 @@ public class UserPostDTO {
     private String moreInfo;
     private int trophies;
     private String highlightCounter;
-    private String creationDate;
+    private Timestamp creationDate;
 
     public Long getUserId() {
         return userId;
@@ -94,11 +96,11 @@ public class UserPostDTO {
         this.highlightCounter = highlightCounter;
     }
 
-    public String getCreationDate() {
+    public Timestamp getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
     }
 }

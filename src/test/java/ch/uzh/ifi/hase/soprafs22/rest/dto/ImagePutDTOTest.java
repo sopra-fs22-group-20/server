@@ -5,6 +5,7 @@ import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,7 @@ class ImagePutDTOTest {
     @Test
 void setGetImagePutDTO() {
     // create test Date
-    Date date = new Date();
+    Timestamp date = new Timestamp(System.currentTimeMillis());
     // create test User
     User testUser = new User();
 

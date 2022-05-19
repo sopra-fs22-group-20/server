@@ -4,6 +4,7 @@ import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,14 +16,14 @@ public class ImageGetDTO {
     private Set<User> ratedBy;
     private String name;
     private String location;
-    private Date uploadDate;
+    private Timestamp uploadDate;
     private double rating;
     private int ratingCounter;
     private String storageLink;
     private String classification;
     private Boolean reachedHighlights;
     // new
-    private Date boostDate;
+    private Timestamp boostDate;
 
     public Long getImageId() {
         return imageId;
@@ -72,11 +73,11 @@ public class ImageGetDTO {
         this.location = location;
     }
 
-    public Date getUploadDate() {
+    public Timestamp getUploadDate() {
         return uploadDate;
     }
 
-    public void setUploadDate(Date uploadDate) {
+    public void setUploadDate(Timestamp uploadDate) {
         this.uploadDate = uploadDate;
     }
 
@@ -120,11 +121,11 @@ public class ImageGetDTO {
         this.reachedHighlights = reachedHighlights;
     }
     //new get and set for boostDate
-    public Date getBoostDate() {
+    public Timestamp getBoostDate() {
         return boostDate;
     }
 
-    public void setBoostDate(Date boostDate) {
+    public void setBoostDate(Timestamp boostDate) {
         this.boostDate = boostDate;
     }
 }

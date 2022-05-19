@@ -165,10 +165,22 @@ public class ImageController {
         imageService.rateImage(rating, userId);
     }
 
+    /**
+     * Apply boost
+     * Put Nr. 5
+     */
+    @PutMapping("/images/boost")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public void boost(@RequestHeader(name = "userId") Long userId, @RequestBody ImagePutDTO image) {
+        imageService.checkTrophies(userId);
+        Image imageToBoost = DTOMapper.INSTANCE.convertImagePutDTOtoEntity(image);
+        imageService.applyBoost(userId, imageToBoost);
+    }
 
     /**
      * Update Classification
-     * Put Nr. X
+     * Put Nr. 6
      */
     @PutMapping("/classification")
     @ResponseStatus(HttpStatus.NO_CONTENT)

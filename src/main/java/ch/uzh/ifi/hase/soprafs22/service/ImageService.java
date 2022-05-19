@@ -17,10 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
@@ -40,7 +37,7 @@ public class ImageService {
     }
 
     public Image createImage(Image newImage, User owner) {
-        newImage.setUploadDate(Current_Date.getDate());
+        newImage.setUploadDate(Current_Date.getSQLDate());
         newImage.setOwner(owner);
 
         //Check if the category passed on exists
@@ -70,22 +67,55 @@ public class ImageService {
 
     public Image getImageByImageId(long imageId) {
         checkIfImageExists(imageId);
+        resetAllExpiredBoosts();
 
         Image tempImage = imageRepository.findImageByImageId(imageId);
         return tempImage;
     }
 
-    public Image getRandomNonRatedImage(String category, Long userId) {
+    public Image getRandomNonRatedImageFromCategory(String category, Long userId) {
+        resetAllExpiredBoosts();
 
-        Image image = imageRepository.findRandomImageFromCategory(category);
-        System.out.print("Rated: ");
-        System.out.println(imageRepository.ratingCheck(userId, image.getImageId()));
+        for (int i = 25; i > 0; i--) {
+            String classification = getWeightedClassification();
+            System.out.println("Classification = "+classification);
 
-        return image;
+            Image image = imageRepository.findRandomImageFromCategory(category, classification);
+            if (imageRepository.ratingCheck(userId, image.getImageId())) {
+                continue;
+            }
+            else {
+                return image;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                String.format("You already have rated all pictures from this category"));
+    }
+
+    public Image getRandomNonRatedImage(Long userId) {
+        resetAllExpiredBoosts();
+
+        for (int i = 25; i > 0; i--) {
+            String classification = getWeightedClassification();
+            System.out.println("Classification = "+classification);
+            Image image = imageRepository.findRandomImage(classification);
+
+            if (imageRepository.ratingCheck(userId, image.getImageId())) {
+                continue;
+            }
+            else {
+                return image;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                String.format("You already have rated all pictures"));
     }
 
     public Image getRandomImage() {
-        return imageRepository.findRandomImage();
+        String classification = getWeightedClassification();
+        System.out.println("Classification = "+classification);
+
+        return imageRepository.findRandomImage(classification);
     }
 
     public List<Image> getHighlights(String category) {
@@ -164,6 +194,18 @@ public class ImageService {
         userRepository.flush();
     }
 
+    public void applyBoost(Long userId, Image image) {
+        User user = userRepository.findByUserId(userId);
+        Image imageToBoost = imageRepository.findImageByImageId(image.getImageId());
+
+        user.setTrophies(-10);
+        imageToBoost.setClassification("A");
+        imageToBoost.setBoostDate(Current_Date.getSQLDate());
+
+        userRepository.saveAndFlush(user);
+        imageRepository.saveAndFlush(imageToBoost);
+    }
+
     public void deleteImage(Long imageId) {
         //Checks if this image exists
         checkIfImageExists(imageId);
@@ -173,6 +215,15 @@ public class ImageService {
     }
 
     //Helpers
+    private void resetAllExpiredBoosts() {
+        //Return all images with a boost that is older than 24 hours
+        List<Image> images = imageRepository.checkClassifications();
+        //Sets all of them back to C classification
+        for (Image image : images) {
+            image.setClassification("C");
+        }
+    }
+
     public void checkAccess(Long userId, Image image) {
         if (!Objects.equals(image.getOwner().getUserId(), userId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
@@ -202,9 +253,25 @@ public class ImageService {
         }
     }
 
+    public void checkTrophies(Long userId) {
+        User user = userRepository.findByUserId(userId);
+        if (user.getTrophies() < 10) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("The user does not have enough trophies to apply booster"));
+        }
+    }
+
     private double calculateNewRatingScore(double currentRating, double newRating, int ratingCount) {
         //Multiply rating by amount of ratings plus new rating divided by new amount of ratings
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
-}
 
+    private String getWeightedClassification() {
+        Random random = new Random();
+        int randomInt = random.nextInt(4);
+        //60% A, 40% C
+        String[] x = {"A", "A", "A", "C", "C"};
+
+        return x[randomInt];
+    }
+}
