@@ -215,9 +215,9 @@ public class ImageService {
 
     private String getWeightedClassification() {
         Random random = new Random();
-        int randomInt = random.nextInt(9);
+        int randomInt = random.nextInt(4);
         //44,4% A, 33.3% B, 22.2% C
-        String [] x  = { "A", "A", "A", "A", "B", "B", "B", "C", "C" };
+        String [] x  = {"A", "A", "A", "C", "C"};
 
         return x[randomInt];
 
