@@ -50,7 +50,7 @@ public class UserService {
         checkIfUsernameExists(newUser);
         checkIfEmailExists(newUser);
 
-        newUser.setCreationDate(Current_Date.getDate());
+        newUser.setCreationDate(Current_Date.getSQLDate());
 
         // saves the given entity but data is only persisted in the database once
         // flush() is called

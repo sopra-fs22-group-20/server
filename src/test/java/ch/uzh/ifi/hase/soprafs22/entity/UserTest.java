@@ -3,6 +3,8 @@ package ch.uzh.ifi.hase.soprafs22.entity;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -94,7 +96,7 @@ class UserTest {
     void setGetCreationDate() {
         //setter
         User user = new User();
-        Date date = new Date();
+        Timestamp date = new Timestamp(System.currentTimeMillis());
         user.setCreationDate(date);
 
         //getter

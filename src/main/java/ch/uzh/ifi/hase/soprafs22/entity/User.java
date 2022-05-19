@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -52,7 +53,7 @@ public class User implements Serializable {
     private int highlightCounter;
 
     @Column(unique = false)
-    private Date creationDate;
+    private Timestamp creationDate;
 
     //Constructor for testing
     public User(String username, String password, String email, String moreInfo) {
@@ -149,11 +150,11 @@ public class User implements Serializable {
         this.highlightCounter = highlightCounter;
     }
 
-    public Date getCreationDate() {
+    public Timestamp getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
     }
 }

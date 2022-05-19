@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 public class UserPutDTO {
@@ -16,7 +17,7 @@ public class UserPutDTO {
     private String moreInfo;
     private int trophies;
     private String highlightCounter;
-    private String creationDate;
+    private Timestamp creationDate;
 
     public Long getUserId() {
         return userId;
@@ -98,11 +99,11 @@ public class UserPutDTO {
         this.highlightCounter = highlightCounter;
     }
 
-    public String getCreationDate() {
+    public Timestamp getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
     }
 }

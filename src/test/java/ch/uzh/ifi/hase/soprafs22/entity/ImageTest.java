@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs22.entity;
 
 import org.junit.jupiter.api.Test;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,7 +47,7 @@ class ImageTest {
     void setGetUploadDate() {
         //setter
         Image image = new Image();
-        Date date = new Date();
+        Timestamp date = new Timestamp(System.currentTimeMillis());
         image.setUploadDate(date);
 
         //getter

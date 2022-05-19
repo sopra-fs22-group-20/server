@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class Image implements Serializable {
     private String location;
 
     @Column
-    private Date uploadDate;
+    private Timestamp uploadDate;
 
     @Column
     private double rating;
@@ -60,7 +61,7 @@ public class Image implements Serializable {
     private Boolean reachedHighlights;
     //added new
     @Column (nullable = true)
-    private Date boostDate;
+    private Timestamp boostDate;
 
     //Constructor for testing
     public Image(String name, String location, String storageLink) {
@@ -132,11 +133,11 @@ public class Image implements Serializable {
         this.location = location;
     }
 
-    public Date getUploadDate() {
+    public Timestamp getUploadDate() {
         return uploadDate;
     }
 
-    public void setUploadDate(Date uploadDate) {
+    public void setUploadDate(Timestamp uploadDate) {
         this.uploadDate = uploadDate;
     }
 
@@ -181,11 +182,30 @@ public class Image implements Serializable {
     }
 
     //new get and set for boostDate
-    public void setBoostDate(Date boostDate) {
+    public void setBoostDate(Timestamp boostDate) {
         this.boostDate = boostDate;
     }
-    public Date getBoostDate() {
+    public Timestamp getBoostDate() {
         return boostDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "imageId=" + imageId +
+                ", category=" + category +
+                ", owner=" + owner +
+                ", ratedBy=" + ratedBy +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", uploadDate=" + uploadDate +
+                ", rating=" + rating +
+                ", ratingCounter=" + ratingCounter +
+                ", storageLink='" + storageLink + '\'' +
+                ", classification='" + classification + '\'' +
+                ", reachedHighlights=" + reachedHighlights +
+                ", boostDate=" + boostDate +
+                '}';
     }
 }
 
