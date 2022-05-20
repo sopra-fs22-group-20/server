@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.rest.mapper.DTOMapper;
@@ -26,7 +27,7 @@ class UserGetDTOTest {
         image.setUploadDate(date);
         image.setRating(0);
         image.setStorageLink("storageLink");
-        image.setClassification("C");
+        image.setClassification(Classification.C);
         image.setReachedHighlights(false);
 
         // create UserPostDTO
@@ -37,7 +38,7 @@ class UserGetDTOTest {
         imageGetDTO.setUploadDate(date);
         imageGetDTO.setRating(0);
         imageGetDTO.setStorageLink("storageLink");
-        imageGetDTO.setClassification("C");
+        imageGetDTO.setClassification(Classification.C);
         imageGetDTO.setReachedHighlights(false);
 
         // create image Entity via mapper

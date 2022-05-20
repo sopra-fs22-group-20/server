@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import ch.uzh.ifi.hase.soprafs22.constant.Current_Date;
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
@@ -77,8 +78,8 @@ public class ImageService {
         resetAllExpiredBoosts();
 
         for (int i = 25; i > 0; i--) {
-            String classification = getWeightedClassification();
-            System.out.println("Classification = "+classification);
+            Classification classification = getWeightedClassification();
+            System.out.println("Classification = " + classification);
 
             Image image = imageRepository.findRandomImageFromCategory(category, classification);
             if (imageRepository.ratingCheck(userId, image.getImageId())) {
@@ -96,8 +97,8 @@ public class ImageService {
         resetAllExpiredBoosts();
 
         for (int i = 25; i > 0; i--) {
-            String classification = getWeightedClassification();
-            System.out.println("Classification = "+classification);
+            Classification classification = getWeightedClassification();
+            System.out.println("Classification = " + classification);
             Image image = imageRepository.findRandomImage(classification);
 
             if (imageRepository.ratingCheck(userId, image.getImageId())) {
@@ -112,8 +113,8 @@ public class ImageService {
     }
 
     public Image getRandomImage() {
-        String classification = getWeightedClassification();
-        System.out.println("Classification = "+classification);
+        Classification classification = getWeightedClassification();
+        System.out.println("Classification = " + classification);
 
         return imageRepository.findRandomImage(classification);
     }
@@ -199,7 +200,7 @@ public class ImageService {
         Image imageToBoost = imageRepository.findImageByImageId(image.getImageId());
 
         user.setTrophies(-10);
-        imageToBoost.setClassification("A");
+        imageToBoost.setClassification(Classification.A);
         imageToBoost.setBoostDate(Current_Date.getSQLDate());
 
         userRepository.saveAndFlush(user);
@@ -220,7 +221,7 @@ public class ImageService {
         List<Image> images = imageRepository.checkClassifications();
         //Sets all of them back to C classification
         for (Image image : images) {
-            image.setClassification("C");
+            image.setClassification(Classification.C);
         }
     }
 
@@ -266,11 +267,11 @@ public class ImageService {
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
 
-    private String getWeightedClassification() {
+    private Classification getWeightedClassification() {
         Random random = new Random();
         int randomInt = random.nextInt(4);
         //60% A, 40% C
-        String[] x = {"A", "A", "A", "C", "C"};
+        Classification[] x = {Classification.A, Classification.A, Classification.A, Classification.C, Classification.C};
 
         return x[randomInt];
     }

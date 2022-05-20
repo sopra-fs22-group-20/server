@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 
@@ -19,9 +20,8 @@ public class ImagePostDTO {
     private double rating;
     private int ratingCounter;
     private String storageLink;
-    private String classification;
+    private Classification classification;
     private Boolean reachedHighlights;
-    //new
     private Timestamp boostDate;
 
 
@@ -105,11 +105,11 @@ public class ImagePostDTO {
         this.storageLink = storageLink;
     }
 
-    public String getClassification() {
+    public Classification getClassification() {
         return classification;
     }
 
-    public void setClassification(String classification) {
+    public void setClassification(Classification classification) {
         this.classification = classification;
     }
 
@@ -120,7 +120,7 @@ public class ImagePostDTO {
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
     }
-    //new get and set for boostDate
+
     public Timestamp getBoostDate() {
         return boostDate;
     }
