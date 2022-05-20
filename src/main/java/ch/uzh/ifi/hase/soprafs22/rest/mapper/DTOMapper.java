@@ -23,42 +23,31 @@ public interface DTOMapper {
 
     DTOMapper INSTANCE = Mappers.getMapper(DTOMapper.class);
 
-    @Mapping(target = "userId", ignore = true)
-    @Mapping(target = "token", ignore = true)
+
     @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "email", target = "email")
-    @Mapping(source = "moreInfo", target = "moreInfo")
-    @Mapping(target = "highlightCounter", ignore = true)
-    @Mapping(target = "creationDate", ignore = true)
-    @Mapping(target = "imagesRated", ignore = true)
-    @Mapping(source = "trophies", target = "trophies")
-    @Mapping(target = "images", ignore = true)
+
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
     @Mapping(source = "userId", target = "userId")
-    @Mapping(source = "token", target = "token")
     @Mapping(source = "username", target = "username")
-    @Mapping(source = "password", target = "password")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
     @Mapping(source = "trophies", target = "trophies")
-        //@Mapping(source = "images", target = "images")
+
     UserGetDTO convertEntityToUserGetDTO(User user);
 
     @Mapping(source = "userId", target = "userId")
-    @Mapping(source = "token", target = "token")
+
     @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "moreInfo", target = "moreInfo")
-    @Mapping(source = "highlightCounter", target = "highlightCounter")
-    @Mapping(source = "creationDate", target = "creationDate")
-    @Mapping(target = "imagesRated", ignore = true)
     @Mapping(source = "trophies", target = "trophies")
-        //@Mapping(source = "images", target = "images")
+
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 
     @Mapping(source = "imageId", target = "imageId")
@@ -73,7 +62,7 @@ public interface DTOMapper {
     @Mapping(target = "reachedHighlights", ignore = true)
     @Mapping(target = "ratingCounter", ignore = true)
     @Mapping(target = "ratedBy", ignore = true)
-    @Mapping (target = "boostDate", ignore = true)
+    @Mapping(target = "boostDate", ignore = true)
     Image convertImagePostDTOtoEntity(ImagePostDTO imagePostDTO);
 
     @Mapping(source = "imageId", target = "imageId")

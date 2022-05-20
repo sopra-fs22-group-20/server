@@ -59,7 +59,7 @@ public class Image implements Serializable {
 
     @Column
     private Boolean reachedHighlights;
-    //added new
+
     @Column(nullable = true)
     private Timestamp boostDate;
 
