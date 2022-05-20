@@ -78,10 +78,12 @@ public class ImageService {
         resetAllExpiredBoosts();
 
         for (int i = 25; i > 0; i--) {
-            Classification classification = getWeightedClassification();
-            System.out.println("Classification = " + classification);
+            int classification = getWeightedClassification();
 
             Image image = imageRepository.findRandomImageFromCategory(category, classification);
+
+            checkForNull(image);
+
             if (imageRepository.ratingCheck(userId, image.getImageId())) {
                 continue;
             }
@@ -97,9 +99,10 @@ public class ImageService {
         resetAllExpiredBoosts();
 
         for (int i = 25; i > 0; i--) {
-            Classification classification = getWeightedClassification();
-            System.out.println("Classification = " + classification);
+            int classification = getWeightedClassification();
             Image image = imageRepository.findRandomImage(classification);
+
+            checkForNull(image);
 
             if (imageRepository.ratingCheck(userId, image.getImageId())) {
                 continue;
@@ -113,10 +116,11 @@ public class ImageService {
     }
 
     public Image getRandomImage() {
-        Classification classification = getWeightedClassification();
-        System.out.println("Classification = " + classification);
+        int classification = getWeightedClassification();
+        Image image = imageRepository.findRandomImage(classification);
+        checkForNull(image);
 
-        return imageRepository.findRandomImage(classification);
+        return image;
     }
 
     public List<Image> getHighlights(String category) {
@@ -247,6 +251,13 @@ public class ImageService {
         }
     }
 
+    private void checkForNull(Image image) {
+        if (Objects.equals(image, null) ) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("There is no image in this Classification"));
+        }
+    }
+
     public void checkIfRatingInputIsLegal(double rating) {
         if (1 > rating || rating > 5) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
@@ -274,12 +285,17 @@ public class ImageService {
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
 
-    private Classification getWeightedClassification() {
+    private int getWeightedClassification() {
         Random random = new Random();
         int randomInt = random.nextInt(4);
         //60% A, 40% C
         Classification[] x = {Classification.A, Classification.A, Classification.A, Classification.C, Classification.C};
 
-        return x[randomInt];
-    }
+        if (x[randomInt] == Classification.A) {
+            System.out.println("Classification = A");
+            return 0;
+        }
+        System.out.println("Classification = C");
+        return 1;
+        }
 }

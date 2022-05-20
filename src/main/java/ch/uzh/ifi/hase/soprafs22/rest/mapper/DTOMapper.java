@@ -27,7 +27,6 @@ public interface DTOMapper {
     @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "email", target = "email")
-
     User convertUserPostDTOtoEntity(UserPostDTO userPostDTO);
 
     @Mapping(source = "userId", target = "userId")
@@ -37,32 +36,20 @@ public interface DTOMapper {
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
     @Mapping(source = "trophies", target = "trophies")
-
     UserGetDTO convertEntityToUserGetDTO(User user);
 
     @Mapping(source = "userId", target = "userId")
-
     @Mapping(source = "username", target = "username")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "moreInfo", target = "moreInfo")
     @Mapping(source = "trophies", target = "trophies")
-
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 
-    @Mapping(source = "imageId", target = "imageId")
     @Mapping(source = "category", target = "category")
-    @Mapping(target = "owner", ignore = true)
     @Mapping(source = "name", target = "name")
     @Mapping(source = "location", target = "location")
-    @Mapping(target = "uploadDate", ignore = true)
-    @Mapping(target = "rating", ignore = true)
     @Mapping(source = "storageLink", target = "storageLink")
-    @Mapping(target = "classification", ignore = true)
-    @Mapping(target = "reachedHighlights", ignore = true)
-    @Mapping(target = "ratingCounter", ignore = true)
-    @Mapping(target = "ratedBy", ignore = true)
-    @Mapping(target = "boostDate", ignore = true)
     Image convertImagePostDTOtoEntity(ImagePostDTO imagePostDTO);
 
     @Mapping(source = "imageId", target = "imageId")
@@ -76,23 +63,12 @@ public interface DTOMapper {
     @Mapping(source = "classification", target = "classification")
     @Mapping(source = "reachedHighlights", target = "reachedHighlights")
     @Mapping(source = "ratingCounter", target = "ratingCounter")
-    @Mapping(source = "ratedBy", target = "ratedBy")
-    @Mapping(source = "boostDate", target = "boostDate")
     ImageGetDTO convertEntityToImageGetDTO(Image image);
 
     @Mapping(source = "imageId", target = "imageId")
-    @Mapping(source = "category", target = "category")
-    @Mapping(source = "owner", target = "owner")
     @Mapping(source = "name", target = "name")
-    @Mapping(source = "location", target = "location")
-    @Mapping(source = "uploadDate", target = "uploadDate")
     @Mapping(source = "rating", target = "rating")
-    @Mapping(source = "storageLink", target = "storageLink")
     @Mapping(source = "classification", target = "classification")
-    @Mapping(source = "reachedHighlights", target = "reachedHighlights")
-    @Mapping(source = "ratingCounter", target = "ratingCounter")
-    @Mapping(target = "ratedBy", ignore = true)
-    @Mapping(source = "boostDate", target = "boostDate")
     Image convertImagePutDTOtoEntity(ImagePutDTO imagePutDTO);
 
     @Mapping(source = "name", target = "name")

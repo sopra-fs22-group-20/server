@@ -4,17 +4,13 @@ import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 
-
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.Set;
 
 public class ImageGetDTO {
 
     private Long imageId;
     private Category category;
     private User owner;
-    private Set<User> ratedBy;
     private String name;
     private String location;
     private Timestamp uploadDate;
@@ -23,7 +19,6 @@ public class ImageGetDTO {
     private String storageLink;
     private Classification classification;
     private Boolean reachedHighlights;
-    private Timestamp boostDate;
 
 
     public Long getImageId() {
@@ -48,14 +43,6 @@ public class ImageGetDTO {
 
     public void setOwner(User owner) {
         this.owner = owner;
-    }
-
-    public Set<User> getRatedBy() {
-        return ratedBy;
-    }
-
-    public void setRatedBy(Set<User> ratedBy) {
-        this.ratedBy = ratedBy;
     }
 
     public String getName() {
@@ -120,13 +107,5 @@ public class ImageGetDTO {
 
     public void setReachedHighlights(Boolean reachedHighlights) {
         this.reachedHighlights = reachedHighlights;
-    }
-
-    public Timestamp getBoostDate() {
-        return boostDate;
-    }
-
-    public void setBoostDate(Timestamp boostDate) {
-        this.boostDate = boostDate;
     }
 }

@@ -157,4 +157,21 @@ public class User implements Serializable {
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", token='" + token + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", trophies=" + trophies +
+                ", images=" + images +
+                ", imagesRated=" + imagesRated +
+                ", email='" + email + '\'' +
+                ", moreInfo='" + moreInfo + '\'' +
+                ", highlightCounter=" + highlightCounter +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }
