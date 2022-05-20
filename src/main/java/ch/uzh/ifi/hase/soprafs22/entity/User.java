@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -78,6 +77,7 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
+    //Getter & Setter
     public String getToken() {
         return token;
     }
