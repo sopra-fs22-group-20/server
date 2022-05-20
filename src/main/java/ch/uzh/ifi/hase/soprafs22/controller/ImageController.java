@@ -73,7 +73,7 @@ public class ImageController {
         List<ImageGetDTO> imageGetDTOs = new ArrayList<>();
 
         // convert each image to the API representation
-        for (Image image: highlights) {
+        for (Image image : highlights) {
             imageGetDTOs.add(DTOMapper.INSTANCE.convertEntityToImageGetDTO(image));
         }
         return imageGetDTOs;
@@ -113,6 +113,17 @@ public class ImageController {
     public ImageGetDTO getRandomImage() {
         Image randomImage = imageService.getRandomImage();
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(randomImage);
+    }
+
+    /**
+     * Checks if a user has seen a specific image
+     * Get Nr. 10
+     */
+    @GetMapping("/images/check/{imageId}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public void checkIfRated(@RequestHeader(name = "userId") Long userId, @PathVariable Long imageId) {
+        imageService.checkIfRated(userId, imageId);
     }
 
     /**
