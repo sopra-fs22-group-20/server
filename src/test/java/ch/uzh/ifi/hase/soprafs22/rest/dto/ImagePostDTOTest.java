@@ -27,27 +27,17 @@ class ImagePostDTOTest {
 
         // create UserPostDTO
         ImagePostDTO imagePostDTO = new ImagePostDTO();
-        imagePostDTO.setOwner(testUser);
         imagePostDTO.setName("name");
         imagePostDTO.setLocation("location");
-        imagePostDTO.setUploadDate(date);
-        imagePostDTO.setRating(0);
         imagePostDTO.setStorageLink("storageLink");
-        imagePostDTO.setClassification(Classification.C);
-        imagePostDTO.setReachedHighlights(false);
 
         // create image Entity via mapper
         Image image =DTOMapper.INSTANCE.convertImagePostDTOtoEntity(imagePostDTO);
 
         // check getters
-        assertEquals(testUser, imagePostDTO.getOwner());
         assertEquals(image.getName(), imagePostDTO.getName());
         assertEquals(image.getLocation(), imagePostDTO.getLocation());
-        assertEquals(date, imagePostDTO.getUploadDate());
-        assertEquals(image.getRating(), imagePostDTO.getRating());
         assertEquals(image.getStorageLink(), imagePostDTO.getStorageLink());
-        assertEquals(image.getClassification(), imagePostDTO.getClassification());
-        assertEquals(image.getReachedHighlights(), imagePostDTO.getReachedHighlights());
 
     }
 

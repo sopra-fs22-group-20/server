@@ -1,28 +1,14 @@
 package ch.uzh.ifi.hase.soprafs22.rest.dto;
 
 import ch.uzh.ifi.hase.soprafs22.constant.Classification;
-import ch.uzh.ifi.hase.soprafs22.entity.Category;
-import ch.uzh.ifi.hase.soprafs22.entity.User;
-
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.Set;
 
 public class ImagePutDTO {
 
     private Long imageId;
-    private Category category;
-    private User owner;
-    //private Set<User> ratedBy;
     private String name;
-    private String location;
-    private Timestamp uploadDate;
     private double rating;
-    private int ratingCounter;
-    private String storageLink;
     private Classification classification;
-    private Boolean reachedHighlights;
-    private Timestamp boostDate;
+
 
 
     public Long getImageId() {
@@ -32,7 +18,7 @@ public class ImagePutDTO {
     public void setImageId(Long imageId) {
         this.imageId = imageId;
     }
-
+/**
     public Category getCategory() {
         return category;
     }
@@ -64,7 +50,7 @@ public class ImagePutDTO {
     public void setName(String name) {
         this.name = name;
     }
-
+/**
     public String getLocation() {
         return location;
     }
@@ -80,7 +66,7 @@ public class ImagePutDTO {
     public void setUploadDate(Timestamp uploadDate) {
         this.uploadDate = uploadDate;
     }
-
+*/
     public double getRating() {
         return rating;
     }
@@ -88,7 +74,7 @@ public class ImagePutDTO {
     public void setRating(double rating) {
         this.rating = rating;
     }
-
+/**
     public int getRatingCounter() {
         return ratingCounter;
     }
@@ -104,7 +90,7 @@ public class ImagePutDTO {
     public void setStorageLink(String storageLink) {
         this.storageLink = storageLink;
     }
-
+*/
     public Classification getClassification() {
         return classification;
     }
@@ -112,7 +98,7 @@ public class ImagePutDTO {
     public void setClassification(Classification classification) {
         this.classification = classification;
     }
-
+/**
     public Boolean getReachedHighlights() {
         return reachedHighlights;
     }
@@ -128,4 +114,5 @@ public class ImagePutDTO {
     public void setBoostDate(Timestamp boostDate) {
         this.boostDate = boostDate;
     }
+    */
 }
