@@ -254,6 +254,13 @@ public class ImageService {
         }
     }
 
+    public void checkIfRated(Long userId, Long imageId) {
+        if (imageRepository.ratingCheck(userId, imageId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    String.format("User has already rated this picture"));
+        }
+    }
+
     public void checkTrophies(Long userId) {
         User user = userRepository.findByUserId(userId);
         if (user.getTrophies() < 10) {
