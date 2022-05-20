@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 
@@ -36,7 +37,7 @@ class ImageServiceTest {
         testImage.setName("image");
         testImage.setLocation("location");
         testImage.setStorageLink("storage");
-        testImage.setClassification("C");
+        testImage.setClassification(Classification.C);
 
 
 

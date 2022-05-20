@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -39,10 +38,6 @@ public class Image implements Serializable {
     @Column
     private String name;
 
-    /**
-    @Column
-    private Classification classification; */
-
     @Column
     private String location;
 
@@ -60,12 +55,12 @@ public class Image implements Serializable {
 
     //Change to enum later Maybe
     @Column(unique = false)
-    private String classification;
+    private Classification classification;
 
     @Column
     private Boolean reachedHighlights;
     //added new
-    @Column (nullable = true)
+    @Column(nullable = true)
     private Timestamp boostDate;
 
     //Constructor for testing
@@ -73,13 +68,13 @@ public class Image implements Serializable {
         this.name = name;
         this.location = location;
         this.storageLink = storageLink;
-        this.classification = "C";
+        this.classification = Classification.C;
         this.reachedHighlights = false;
     }
 
     //No Args Constructor
     public Image() {
-        this.classification = "C";
+        this.classification = Classification.C;
         this.reachedHighlights = false;
         this.rating = 0;
         this.ratingCounter = 0;
@@ -170,11 +165,11 @@ public class Image implements Serializable {
         this.storageLink = storageLink;
     }
 
-    public String getClassification() {
+    public Classification getClassification() {
         return classification;
     }
 
-    public void setClassification(String classification) {
+    public void setClassification(Classification classification) {
         this.classification = classification;
     }
 
@@ -190,27 +185,9 @@ public class Image implements Serializable {
     public void setBoostDate(Timestamp boostDate) {
         this.boostDate = boostDate;
     }
+
     public Timestamp getBoostDate() {
         return boostDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Image{" +
-                "imageId=" + imageId +
-                ", category=" + category +
-                ", owner=" + owner +
-                ", ratedBy=" + ratedBy +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", uploadDate=" + uploadDate +
-                ", rating=" + rating +
-                ", ratingCounter=" + ratingCounter +
-                ", storageLink='" + storageLink + '\'' +
-                ", classification='" + classification + '\'' +
-                ", reachedHighlights=" + reachedHighlights +
-                ", boostDate=" + boostDate +
-                '}';
     }
 }
 

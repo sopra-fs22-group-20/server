@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.entity;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
@@ -81,7 +82,7 @@ class ImageTest {
     void setGetClassification() {
         //setter
         Image image = new Image();
-        image.setClassification("A");
+        image.setClassification(Classification.A);
 
         //getter
         assertEquals("A", image.getClassification());
