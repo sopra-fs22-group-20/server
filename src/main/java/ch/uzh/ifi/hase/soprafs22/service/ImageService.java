@@ -252,7 +252,7 @@ public class ImageService {
     }
 
     private void checkForNull(Image image) {
-        if (Objects.equals(image, null) ) {
+        if (Objects.equals(image, null)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("There is no image in this Classification"));
         }
@@ -297,5 +297,5 @@ public class ImageService {
         }
         System.out.println("Classification = C");
         return 1;
-        }
+    }
 }
