@@ -88,7 +88,7 @@ class ImageControllerTest {
         given(imageService.getAllImagesOfUser(1l)).willReturn(allImages);
 
         // when
-        MockHttpServletRequestBuilder getRequest = get("/images").contentType(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder getRequest = get("/images/all/1").contentType(MediaType.APPLICATION_JSON);
 
         // then
         mockMvc.perform(getRequest).andDo(print()).andExpect(status().isOk());

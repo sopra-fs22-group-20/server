@@ -13,7 +13,7 @@ public class UserGetDTO {
     private String email;
     private String moreInfo;
     private int trophies;
-    private String highlightCounter;
+    private int highlightCounter;
     private Timestamp creationDate;
 
 
@@ -65,11 +65,11 @@ public class UserGetDTO {
         this.trophies = trophies;
     }
 
-    public String getHighlightCounter() {
+    public int getHighlightCounter() {
         return highlightCounter;
     }
 
-    public void setHighlightCounter(String highlightCounter) {
+    public void setHighlightCounter(int highlightCounter) {
         this.highlightCounter = highlightCounter;
     }
 
