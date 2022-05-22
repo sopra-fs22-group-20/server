@@ -85,7 +85,7 @@ class ImageTest {
         image.setClassification(Classification.A);
 
         //getter
-        assertEquals("A", image.getClassification());
+        assertEquals(Classification.A, image.getClassification());
     }
 
 
