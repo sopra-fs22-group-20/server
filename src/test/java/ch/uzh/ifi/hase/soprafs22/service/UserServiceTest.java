@@ -1,6 +1,5 @@
 package ch.uzh.ifi.hase.soprafs22.service;
 
-import ch.uzh.ifi.hase.soprafs22.constant.UserStatus;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +11,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.web.server.ResponseStatusException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.given;
+
+import java.util.Collections;
+import java.util.List;
 
 
 public class UserServiceTest {
@@ -43,6 +46,41 @@ public class UserServiceTest {
     }
 
     @Test
+    void getUsers() {
+
+        List<User> allUsers = Collections.singletonList(testUser);
+
+        // this mocks the UserService -> we define above what the userService should
+        // return when getUsers() is called
+        given(userRepository.findAll()).willReturn(allUsers);
+
+        //assertions
+        assertEquals(testUser.getUserId(), allUsers.get(0).getUserId());
+        assertEquals(testUser.getUsername(), allUsers.get(0).getUsername());
+        assertEquals(testUser.getPassword(), allUsers.get(0).getPassword());
+        assertEquals(testUser.getEmail(), allUsers.get(0).getEmail());
+        assertEquals(testUser.getMoreInfo(), allUsers.get(0).getMoreInfo());
+        assertEquals(testUser.getHighlightCounter(), allUsers.get(0).getHighlightCounter());
+    }
+
+    @Test
+    void getUsersByUserId_found() {
+
+        given(userRepository.findByUserId(Mockito.anyLong())).willReturn(testUser);
+
+        assertEquals(userRepository.findByUserId(1L), testUser);
+    }
+
+    @Test
+    void getUsersByUserId_not_found() {
+
+        given(userRepository.findByUserId(Mockito.anyLong())).willReturn(null);
+
+        assertThrows(ResponseStatusException.class, () -> userService.getUserByUserId(1L));
+    }
+
+
+    @Test
     public void createUser_validInputs_success() {
         // when -> any object is being save in the userRepository -> return the dummy
         // testUser
@@ -60,18 +98,20 @@ public class UserServiceTest {
     }
 
 
-  @Test
-  public void createUser_duplicateInputs_throwsException() {
-    // given -> a first user has already been created
-    userService.createUser(testUser);
+    @Test
+    public void createUser_duplicateInputs_throwsException() {
+        // given -> a first user has already been created
+        userService.createUser(testUser);
 
-    // when -> setup additional mocks for UserRepository
-    Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(testUser);
+        // when -> setup additional mocks for UserRepository
+        Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(testUser);
 
-    // then -> attempt to create second user with same user -> check that an error
-    // is thrown
-    assertThrows(ResponseStatusException.class, () -> userService.createUser(testUser));
-  }
+        // then -> attempt to create second user with same user -> check that an error
+        // is thrown
+        assertThrows(ResponseStatusException.class, () -> userService.createUser(testUser));
+    }
+
+
     @Test
     public void updateUser() {
         // given -> a first user has already been created
@@ -81,13 +121,33 @@ public class UserServiceTest {
         Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(testUser);
 
         // then -> update User
-        User testUserUpdate  = testUser;
+        User testUserUpdate = testUser;
         testUserUpdate.setMoreInfo("updatedUserInfo");
-        userService.updateUser(testUser,testUserUpdate);
+        userService.updateUser(testUser, testUserUpdate);
 
         //assert, that the MoreInfo is now updated of testUser
         assertEquals(testUser.getMoreInfo(), testUserUpdate.getMoreInfo());
     }
+
+
+    @Test
+    public void updateTrophies() {
+        User userInput = new User();
+        userInput.setUserId(1L);
+        userInput.setTrophies(10);
+
+        // given -> a first user has already been created
+        userService.createUser(testUser);
+
+        // when -> setup additional mocks for UserRepository
+        Mockito.when(userRepository.findByUserId(Mockito.anyLong())).thenReturn(testUser);
+
+        //Does it
+        userService.updateTrophies(userInput);
+
+        assertEquals(testUser.getTrophies(), 10);
+    }
+
     @Test
     public void loginUser() {
         // given -> a first user has already been created
@@ -101,8 +161,45 @@ public class UserServiceTest {
         //assert, that the login was successfully and the user is returned
         assertEquals(userService.loginUser(testUser), testUser);
     }
-    @Test
 
+    @Test
+    public void checkIfUsernameExists_does_exist() {
+        User userToBeCreated = new User();
+        userToBeCreated.setUsername("testUsername");
+
+        // given -> a first user has already been created
+        userService.createUser(testUser);
+
+        // when -> setup additional mocks for UserRepository
+        Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(testUser);
+
+        assertThrows(ResponseStatusException.class, () -> userService.checkIfUsernameExists(userToBeCreated));
+
+    }
+
+    @Test
+    public void checkTrophies_invalid_input() {
+        User userInput = new User();
+        userInput.setTrophies(-10);
+
+        assertThrows(ResponseStatusException.class, () -> userService.checkTrophies(userInput));
+    }
+
+    @Test
+    public void checkIfEmailExists_true() {
+        User userInput = new User();
+        userInput.setEmail("test@mail.com");
+
+        // given -> a first user has already been created
+        userService.createUser(testUser);
+
+        Mockito.when(userRepository.findByEmail(Mockito.any())).thenReturn(testUser);
+
+        assertThrows(ResponseStatusException.class, () -> userService.checkIfEmailExists(userInput));
+
+    }
+
+    @Test
     public void checkAccess() {
         // given -> a first user has already been created
         userService.createUser(testUser);
@@ -114,6 +211,16 @@ public class UserServiceTest {
         userService.checkAccess(testUser.getUserId(), testUser.getUserId());
     }
 
+    @Test
+    public void checkIfUserIdExists() {
+        User userInput = new User();
+        userInput.setUserId(2L);
 
+        // given -> a first user has already been created
+        userService.createUser(testUser);
 
+        Mockito.when(userRepository.findByEmail(Mockito.any())).thenReturn(null);
+
+        assertThrows(ResponseStatusException.class, () -> userService.checkIfUserIdExists(userInput.getUserId()));
+    }
 }

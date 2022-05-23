@@ -108,7 +108,7 @@ public class UserService {
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, String.format("password does not match with username"));
     }
 
-    private void checkIfUsernameExists(User userToBeCreated) {
+    public void checkIfUsernameExists(User userToBeCreated) {
         User userByUsername = userRepository.findByUsername(userToBeCreated.getUsername());
 
         String baseErrorMessage = "The %s provided %s not unique. Therefore, the user could not be created!";
@@ -118,14 +118,14 @@ public class UserService {
         }
     }
 
-    private void checkTrophies(User userInput) {
+    public void checkTrophies(User userInput) {
         if (userInput.getTrophies() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     String.format("Number of Trophies is illegal"));
         }
     }
 
-    private void checkIfEmailExists(User userToBeCreated) {
+    public void checkIfEmailExists(User userToBeCreated) {
         User userByEmail = userRepository.findByEmail(userToBeCreated.getEmail());
 
         String baseErrorMessage = "The %s provided %s already taken. Therefore, the user could not be created!";
@@ -142,14 +142,19 @@ public class UserService {
         }
     }
 
+
     public void deleteUser(Long userId) {
+        checkIfUserIdExists(userId);
+
+        userRepository.deleteUserByUserId(userId);
+        log.debug("User deleted");
+    }
+
+    public void checkIfUserIdExists(Long userId) {
         //Checks if User exists
         if (userRepository.findByUserId(userId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("The User with this id does not exist!"));
         }
-
-        userRepository.deleteUserByUserId(userId);
-        log.debug("User deleted");
     }
 }
