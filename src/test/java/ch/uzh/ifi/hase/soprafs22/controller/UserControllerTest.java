@@ -170,6 +170,7 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
+
     @Test
     void updateUserResponse() throws Exception {
         // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
@@ -244,6 +245,5 @@ class UserControllerTest {
                     String.format("The request body could not be created.%s", e.toString()));
         }
     }
-
 
 }
