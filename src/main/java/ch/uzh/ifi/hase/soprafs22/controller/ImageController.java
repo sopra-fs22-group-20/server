@@ -198,7 +198,7 @@ public class ImageController {
     @ResponseBody
     public ImageGetDTO updateClassification(@RequestBody ImagePutDTO imageClassification, @RequestHeader(name = "userId") Long userId) {
         Image image = DTOMapper.INSTANCE.convertImagePutDTOtoEntity(imageClassification);
-        //imageService.checkAccess(userId, image);
+
         Image imageUpdate = imageService.updateClassification(image);
         return DTOMapper.INSTANCE.convertEntityToImageGetDTO(imageUpdate);
     }
