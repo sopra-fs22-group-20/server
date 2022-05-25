@@ -212,6 +212,11 @@ public class UserServiceTest {
     }
 
     @Test
+    public void deleteUser() {
+        //Nothing to be tested here
+    }
+
+    @Test
     public void checkIfUserIdExists() {
         User userInput = new User();
         userInput.setUserId(2L);

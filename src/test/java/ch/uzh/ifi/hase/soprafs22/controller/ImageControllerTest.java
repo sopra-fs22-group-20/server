@@ -312,6 +312,11 @@ class ImageControllerTest {
     }
 
     @Test
+    void updateClassification() throws Exception {
+        //This function is not used in the final version only helper to make coding easier
+    }
+
+    @Test
     void deleteImage() throws Exception {
         // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
         this.mockMvc.perform(post("/users")

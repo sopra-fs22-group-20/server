@@ -145,10 +145,13 @@ public class ImageService {
     public Image updateClassification(Image image) {
         //Checks if this image exists
         checkIfImageExists(image.getImageId());
+
         Image imageTemp = imageRepository.findImageByImageId(image.getImageId());
         imageTemp.setClassification(image.getClassification());
+
         imageRepository.save(imageTemp);
         imageRepository.flush();
+
         log.debug("Updated information for image: {}", imageTemp);
         return imageTemp;
     }
@@ -280,7 +283,7 @@ public class ImageService {
         }
     }
 
-    private double calculateNewRatingScore(double currentRating, double newRating, int ratingCount) {
+    public double calculateNewRatingScore(double currentRating, double newRating, int ratingCount) {
         //Multiply rating by amount of ratings plus new rating divided by new amount of ratings
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
