@@ -299,21 +299,30 @@ class ImageControllerTest {
     }
 
     @Test
-    void boost_image_not_found() throws Exception {
-
+    void boost() throws Exception {
+        //Setup
         ImagePutDTO imagePutDTO = new ImagePutDTO();
         imagePutDTO.setImageId(1L);
 
-        MockHttpServletRequestBuilder getRequest = put("/boost").contentType(MediaType.APPLICATION_JSON)
+        User user = new User("username", "password", "email", "moreInfo");
+        user.setUserId(1L);
+        user.setTrophies(20);
+
+        //Mock
+        given(userRepository.findByUserId(Mockito.anyLong())).willReturn(user);
+
+        //apply
+        MockHttpServletRequestBuilder getRequest = put("/images/boost").contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(imagePutDTO))
                 .header("userId", 1);
 
-        mockMvc.perform(getRequest).andDo(print()).andExpect(status().isNotFound());
+        //assertions
+        mockMvc.perform(getRequest).andDo(print()).andExpect(status().isNoContent());
     }
 
     @Test
     void updateClassification() throws Exception {
-        //This function is not used in the final version only helper to make coding easier
+        //Test endpoint was only for development will not be in the final version
     }
 
     @Test
