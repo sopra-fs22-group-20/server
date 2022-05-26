@@ -212,6 +212,14 @@ public class UserServiceTest {
     }
 
     @Test
+    public void checkAccess_denied() {
+        // when -> setup additional mocks for UserRepository
+        Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(null);
+
+        assertThrows(ResponseStatusException.class, () -> userService.checkAccess(testUser.getUserId(), 2L));
+    }
+
+    @Test
     public void checkIfUserIdExists() {
         User userInput = new User();
         userInput.setUserId(2L);
