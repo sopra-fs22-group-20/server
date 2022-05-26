@@ -28,6 +28,7 @@ public class UserRepositoryIntegrationTest {
         user.setPassword("1234");
         user.setToken("1");
 
+
         entityManager.persist(user);
         entityManager.flush();
 
@@ -49,13 +50,40 @@ public class UserRepositoryIntegrationTest {
         user.setUsername("username");
         user.setEmail("email@gmail.com");
         user.setPassword("1234");
-        user.setToken("1");
+        user.setToken("2");
 
         entityManager.persist(user);
         entityManager.flush();
 
         // when
         User found = userRepository.findByEmail(user.getEmail());
+
+        // then
+        assertNotNull(found.getUserId());
+        assertEquals(found.getUsername(), user.getUsername());
+        assertEquals(found.getEmail(), user.getEmail());
+        assertEquals(found.getPassword(), user.getPassword());
+        assertEquals(found.getToken(), user.getToken());
+    }
+
+
+
+    @Test
+    void findByUserId() {
+        // given
+        User user = new User();
+        user.setUsername("username");
+        user.setEmail("email@gmail.com");
+        user.setPassword("1234");
+        user.setToken("3");
+
+        entityManager.persist(user);
+        entityManager.flush();
+
+        //Get userId
+        Long id = userRepository.findByUsername("username").getUserId();
+        // when
+        User found = userRepository.findByUserId(id);
 
         // then
         assertNotNull(found.getUserId());
@@ -72,40 +100,20 @@ public class UserRepositoryIntegrationTest {
         user.setUsername("username");
         user.setEmail("email@gmail.com");
         user.setPassword("1234");
-        user.setToken("1");
+        user.setToken("4");
 
         entityManager.persist(user);
         entityManager.flush();
 
-        // when
-        userRepository.deleteUserByUserId(3L);
+        //Get userId
+        Long id = userRepository.findByUsername("username").getUserId();
 
-        User found = userRepository.findByUserId(3L);
+        // when
+        userRepository.deleteUserByUserId(id);
+
+        User found = userRepository.findByUserId(id);
 
         // then
         assertNull(found);
-    }
-
-    @Test
-    void findByUserId() {
-        // given
-        User user = new User();
-        user.setUsername("username");
-        user.setEmail("email@gmail.com");
-        user.setPassword("1234");
-        user.setToken("1");
-
-        entityManager.persist(user);
-        entityManager.flush();
-
-        // when
-        User found = userRepository.findByUserId(4L);
-
-        // then
-        assertNotNull(found.getUserId());
-        assertEquals(found.getUsername(), user.getUsername());
-        assertEquals(found.getEmail(), user.getEmail());
-        assertEquals(found.getPassword(), user.getPassword());
-        assertEquals(found.getToken(), user.getToken());
     }
 }

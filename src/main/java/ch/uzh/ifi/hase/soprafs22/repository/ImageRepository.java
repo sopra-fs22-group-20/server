@@ -16,13 +16,11 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     Image findImageByStorageLink(String storageLink);
 
-    //Somehow this does not work custom query below does the job but fix later
-    //void deleteImageByImageId(Long imageId);
+    List<Image> findImagesByOwnerUserId(Long userId);
+
     @Modifying
     @Query("DELETE FROM Image b WHERE b.imageId=:imageId")
     void deleteImageByImageId(@Param("imageId") Long imageId);
-
-    List<Image> findImagesByOwnerUserId(Long userId);
 
     @Query(value = "SELECT * FROM IMAGE WHERE IMAGE.CLASSIFICATION=:classificationGiven ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Image findRandomImage(@Param("classificationGiven") int classificationGiven);
