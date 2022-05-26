@@ -46,4 +46,12 @@ public class Category implements Serializable {
     public void setImages(Set<Image> images) {
         this.images = images;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", images=" + images +
+                '}';
+    }
 }

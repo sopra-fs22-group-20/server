@@ -42,7 +42,7 @@ class UserControllerTest {
 
     @Test
     void getAllUsers() throws Exception {
-        // given
+        //given
         User user = new User();
         user.setUsername("Username");
         user.setPassword("Password");
@@ -56,10 +56,10 @@ class UserControllerTest {
         // return when getUsers() is called
         given(userService.getUsers()).willReturn(allUsers);
 
-        // when
+        //when
         MockHttpServletRequestBuilder getRequest = get("/users").contentType(MediaType.APPLICATION_JSON);
 
-        // then
+        //then
         mockMvc.perform(getRequest).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].username", is(user.getUsername())))

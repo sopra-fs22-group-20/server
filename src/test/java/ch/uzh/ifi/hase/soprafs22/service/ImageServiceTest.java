@@ -41,14 +41,14 @@ class ImageServiceTest {
 
     private Image testImage;
 
-    private Category testcategory;
+    private Category testCategory;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
 
-        testcategory = new Category();
-        testcategory.setName("Fish");
+        testCategory = new Category();
+        testCategory.setName("Fish");
 
         // given
         testImage = new Image();
@@ -57,7 +57,7 @@ class ImageServiceTest {
         testImage.setLocation("location");
         testImage.setStorageLink("storage");
         testImage.setClassification(Classification.C);
-        testImage.setCategory(testcategory);
+        testImage.setCategory(testCategory);
 
 
         // when -> any object is being save in the userRepository -> return the dummy
@@ -75,7 +75,7 @@ class ImageServiceTest {
         testUser.setPassword("password");
 
         // when -> any object is being save in the userRepository -> return the dummy
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
 
         Image createdImage = imageService.createImage(testImage, testUser);
 
@@ -97,7 +97,7 @@ class ImageServiceTest {
         testUser.setPassword("password");
 
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -123,7 +123,7 @@ class ImageServiceTest {
 
         // when -> any object is being save in the userRepository -> return the dummy
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -146,7 +146,7 @@ class ImageServiceTest {
 
         // when -> any object is being save in the userRepository -> return the dummy
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -172,7 +172,7 @@ class ImageServiceTest {
 
         // when -> any object is being save in the userRepository -> return the dummy
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -194,7 +194,7 @@ class ImageServiceTest {
 
         // when -> any object is being save in the userRepository -> return the dummy
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -219,7 +219,7 @@ class ImageServiceTest {
 
         // when -> any object is being save in the userRepository -> return the dummy
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -241,7 +241,7 @@ class ImageServiceTest {
 
         // when -> any object is being save in the userRepository -> return the dummy
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -262,7 +262,7 @@ class ImageServiceTest {
         testUser.setPassword("password");
 
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 
@@ -358,7 +358,7 @@ class ImageServiceTest {
         testUser.setPassword("password");
 
         //Setup of the image and category
-        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testcategory);
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(testCategory);
         imageService.createImage(testImage, testUser);
         Mockito.verify(imageRepository, Mockito.times(1)).save(Mockito.any());
 

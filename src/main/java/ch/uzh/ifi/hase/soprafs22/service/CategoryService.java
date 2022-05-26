@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -43,7 +44,7 @@ public class CategoryService {
     public void checkIfCategoryExists(Category category) {
         Category tempCategory = categoryRepository.findByName(category.getName());
 
-        if (tempCategory != null) {
+        if (!Objects.equals(tempCategory, null)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format("This category already exists!"));
         }
