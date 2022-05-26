@@ -70,6 +70,7 @@ public class UserService {
 
         //Parameter to update
         userToBeChanged.setMoreInfo(userChanges.getMoreInfo());
+        userToBeChanged.setPassword(userChanges.getPassword());
 
         userRepository.save(userToBeChanged);
         userRepository.flush();

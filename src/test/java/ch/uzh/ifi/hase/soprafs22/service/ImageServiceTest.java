@@ -9,27 +9,22 @@ import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.ImageRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePutDTO;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 
 class ImageServiceTest {
     @Mock
@@ -382,5 +377,114 @@ class ImageServiceTest {
     void deleteImage() {
         //Nothing to be tested here
 
+    }
+
+    @Test
+    void resetAllExpiredBoosts() {
+        //setup
+        testImage.setClassification(Classification.A);
+        List<Image> expiredBoostImages = Collections.singletonList(testImage);
+
+        //Mock
+        given(imageRepository.checkClassifications()).willReturn(expiredBoostImages);
+
+        //apply
+        imageService.resetAllExpiredBoosts();
+
+        //assertions
+        assertEquals(testImage.getClassification(), Classification.C);
+    }
+
+    @Test
+    void checkAccess() {
+        //testUser
+        User testUser = new User();
+        testUser.setUsername("testUsername");
+        testUser.setUserId(1l);
+        testUser.setEmail("test@mail.com");
+        testUser.setPassword("password");
+
+        //setup
+        testImage.setOwner(testUser);
+
+        //call and IDs do not match and assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkAccess(2L, testImage));
+    }
+
+    @Test
+    void checkCategoriesExistence_does_not_exist() {
+        //Mock
+        given(categoryRepository.findByName(Mockito.anyString())).willReturn(null);
+
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkCategoriesExistence(Mockito.anyString()));
+    }
+
+    @Test
+    void checkIfImageExists() {
+        //Mock
+        given(imageRepository.findImageByImageId(Mockito.anyLong())).willReturn(null);
+
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkIfImageExists(Mockito.anyLong()));
+    }
+
+    @Test
+    void checkForNull() {
+        //Setup
+        Image image = null;
+
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkForNull(image));
+    }
+
+    @Test
+    void checkIfRatingInputIsLegal_to_small() {
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkIfRatingInputIsLegal(0));
+    }
+
+    @Test
+    void checkIfRatingInputIsLegal_to_large() {
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkIfRatingInputIsLegal(6));
+    }
+
+    @Test
+    void checkIfRated_true() {
+        //Mock
+        given(imageRepository.ratingCheck(Mockito.anyLong(), Mockito.anyLong())).willReturn(true);
+
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkIfRated(Mockito.anyLong(), Mockito.anyLong()));
+    }
+
+    @Test
+    void checkTrophies_insufficient() {
+        //Setup
+        User testUser = new User();
+        testUser.setUsername("testUsername");
+        testUser.setUserId(1l);
+        testUser.setEmail("test@mail.com");
+        testUser.setPassword("password");
+        testUser.setTrophies(9);
+
+        //Mock
+        given(userRepository.findByUserId(Mockito.anyLong())).willReturn(testUser);
+
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkTrophies(Mockito.anyLong()));
+    }
+
+    @Test
+    void calculateNewRatingScore() {
+        //assertion
+        assertEquals(imageService.calculateNewRatingScore(4.0, 1.0,1), 2.5);
+    }
+
+    @Test
+    void getWeightedClassification() {
+        //assertion
+        assertThat(imageService.getWeightedClassification(), Matchers.either(Matchers.is(0)).or(Matchers.is(1)));
     }
 }

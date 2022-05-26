@@ -223,7 +223,7 @@ public class ImageService {
     }
 
     //Helpers
-    private void resetAllExpiredBoosts() {
+    public void resetAllExpiredBoosts() {
         //Return all images with a boost that is older than 24 hours
         List<Image> images = imageRepository.checkClassifications();
         //Sets all of them back to C classification
@@ -254,7 +254,7 @@ public class ImageService {
         }
     }
 
-    private void checkForNull(Image image) {
+    public void checkForNull(Image image) {
         if (Objects.equals(image, null)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("There is no image in this Classification"));
@@ -288,7 +288,7 @@ public class ImageService {
         return ((currentRating * ratingCount + newRating) / (ratingCount + 1));
     }
 
-    private int getWeightedClassification() {
+    public int getWeightedClassification() {
         Random random = new Random();
         int randomInt = random.nextInt(4);
         //60% A, 40% C
