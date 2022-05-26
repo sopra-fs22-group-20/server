@@ -4,12 +4,11 @@ import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ImageTest {
 
+class ImageTest {
 
     @Test
     void setGetImageId() {

@@ -5,12 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashSet;
 
 
 class UserTest {
-
 
     @Test
     void setGetUserId() {
@@ -20,22 +17,16 @@ class UserTest {
 
         //getter
         assertEquals(1l, user.getUserId());
-
     }
-
-
 
     @Test
     void GetToken() {
         //setter
         User user = new User();
 
-
         //getter as the user is not created, the token has to be null
         assertEquals(null, user.getToken());
-
     }
-
 
     @Test
     void setGetUsername() {
@@ -47,7 +38,6 @@ class UserTest {
         assertEquals("username", user.getUsername());
     }
 
-
     @Test
     void setGetPassword() {
         //setter
@@ -58,8 +48,6 @@ class UserTest {
         assertEquals("password", user.getPassword());
     }
 
-
-
     @Test
     void setGetEmail() {
         //setter
@@ -69,7 +57,6 @@ class UserTest {
         //getter
         assertEquals("email@email.com", user.getEmail());
     }
-
 
     @Test
     void setGetMoreInfo() {
@@ -91,7 +78,6 @@ class UserTest {
         assertEquals(0, user.getHighlightCounter());
     }
 
-
     @Test
     void setGetCreationDate() {
         //setter
@@ -102,7 +88,4 @@ class UserTest {
         //getter
         assertEquals(date, user.getCreationDate());
     }
-
-
-
 }

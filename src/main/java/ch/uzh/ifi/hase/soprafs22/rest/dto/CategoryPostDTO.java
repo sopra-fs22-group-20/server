@@ -13,13 +13,4 @@ public class CategoryPostDTO {
     public void setName(String name) {
         this.name = name;
     }
-/**
- public Set<Image> getImages() {
- return images;
- }
-
- public void setImages(Set<Image> images) {
- this.images = images;
- }
- */
 }
