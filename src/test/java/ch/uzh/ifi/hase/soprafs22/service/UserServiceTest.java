@@ -39,7 +39,6 @@ public class UserServiceTest {
         testUser.setEmail("test@mail.com");
         testUser.setPassword("password");
 
-
         // when -> any object is being save in the userRepository -> return the dummy
         // testUser
         Mockito.when(userRepository.save(Mockito.any())).thenReturn(testUser);
@@ -79,7 +78,6 @@ public class UserServiceTest {
         assertThrows(ResponseStatusException.class, () -> userService.getUserByUserId(1L));
     }
 
-
     @Test
     public void createUser_validInputs_success() {
         // when -> any object is being save in the userRepository -> return the dummy
@@ -97,7 +95,6 @@ public class UserServiceTest {
         assertNotNull(createdUser.getToken());
     }
 
-
     @Test
     public void createUser_duplicateInputs_throwsException() {
         // given -> a first user has already been created
@@ -110,7 +107,6 @@ public class UserServiceTest {
         // is thrown
         assertThrows(ResponseStatusException.class, () -> userService.createUser(testUser));
     }
-
 
     @Test
     public void updateUser() {
@@ -128,7 +124,6 @@ public class UserServiceTest {
         //assert, that the MoreInfo is now updated of testUser
         assertEquals(testUser.getMoreInfo(), testUserUpdate.getMoreInfo());
     }
-
 
     @Test
     public void updateTrophies() {
@@ -174,7 +169,6 @@ public class UserServiceTest {
         Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(testUser);
 
         assertThrows(ResponseStatusException.class, () -> userService.checkIfUsernameExists(userToBeCreated));
-
     }
 
     @Test
