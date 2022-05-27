@@ -25,11 +25,9 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query(value = "SELECT * FROM IMAGE WHERE IMAGE.CLASSIFICATION=:classificationGiven ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Image findRandomImage(@Param("classificationGiven") int classificationGiven);
 
-    //Where 40 = False
     @Query(value = "SELECT * FROM IMAGE WHERE category=:categoryGiven AND IMAGE.CLASSIFICATION=:classificationGiven ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Image findRandomImageFromCategory(@Param("categoryGiven") String categoryGiven, @Param("classificationGiven") int classificationGiven);
 
-    // HAVING uploadDate  > now() - interval 7 day something like that add later
     @Query(value = "SELECT * FROM IMAGE WHERE category=:categoryGiven AND IMAGE.UPLOAD_DATE >= NOW() - INTERVAL 7 DAY ORDER BY RATING DESC LIMIT 3", nativeQuery = true)
     List<Image> findHighlightsFromCategory(@Param("categoryGiven") String categoryGiven);
 
@@ -42,5 +40,4 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     @Query(value = "SELECT CASE WHEN EXISTS (SELECT * FROM IMAGE WHERE IMAGE_ID=:imageId AND IMAGE.BOOST_DATE >= NOW() - INTERVAL 1 DAY)THEN TRUE ELSE FALSE END AS bool ", nativeQuery = true)
     boolean checkForBoost(@Param("imageId") Long imageId);
-    //SELECT * FROM IMAGE WHERE IMAGE.BOOST_DATE <= NOW() - INTERVAL 1 DAY
 }

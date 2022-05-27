@@ -226,7 +226,6 @@ public class ImageService {
     //Helpers
     public void checkForBoost(Long imageId){
         if (imageRepository.checkForBoost(imageId)) {
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa fuck");
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format("This image is already boosted"));
         }
