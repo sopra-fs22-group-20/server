@@ -46,12 +46,14 @@ public class Application {
 
     @Bean
     public void setUpCategory() {
-        Category all [] = new Category[5];
+        Category all [] = new Category[6];
         all[0] = new Category("Fish");
         all[1] = new Category("Car");
         all[2] = new Category("Cat");
         all[3] = new Category("Dog");
         all[4] = new Category("Motorcycle");
+        all[5] = new Category("Random");
+
 
         for (Category category : all) {
             Category y = this.categoryRepository.save(category);
