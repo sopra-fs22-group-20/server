@@ -12,6 +12,7 @@ public class UserGetDTO {
     private Set<Image> images;
     private String email;
     private String moreInfo;
+    private String instagram;
     private int trophies;
     private int highlightCounter;
     private Timestamp creationDate;
@@ -55,6 +56,14 @@ public class UserGetDTO {
 
     public void setMoreInfo(String moreInfo) {
         this.moreInfo = moreInfo;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
     }
 
     public int getTrophies() {

@@ -61,7 +61,7 @@ public class UserService {
         return newUser;
     }
 
-    public User updateUser(User userToBeChanged, User userChanges) {
+    public User updateUserInfo(User userToBeChanged, User userChanges) {
         //Checks if this user exists
         if (userToBeChanged == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -70,6 +70,23 @@ public class UserService {
 
         //Parameter to update
         userToBeChanged.setMoreInfo(userChanges.getMoreInfo());
+        userToBeChanged.setInstagram(userChanges.getInstagram());
+
+        userRepository.save(userToBeChanged);
+        userRepository.flush();
+
+        log.debug("Updated information for User: {}", userToBeChanged);
+        return userToBeChanged;
+    }
+
+    public User updateUserPassword(User userToBeChanged, User userChanges) {
+        //Checks if this user exists
+        if (userToBeChanged == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("The user with this id does not exist!"));
+        }
+
+        //Parameter to update
         userToBeChanged.setPassword(userChanges.getPassword());
 
         userRepository.save(userToBeChanged);

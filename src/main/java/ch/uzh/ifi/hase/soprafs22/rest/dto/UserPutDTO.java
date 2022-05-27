@@ -7,6 +7,8 @@ public class UserPutDTO {
     private String password;
     private String email;
     private String moreInfo;
+    private String instagram;
+
     private int trophies;
 
 
@@ -48,6 +50,14 @@ public class UserPutDTO {
 
     public void setMoreInfo(String moreInfo) {
         this.moreInfo = moreInfo;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
     }
 
     public int getTrophies() {

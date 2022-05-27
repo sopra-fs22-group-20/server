@@ -33,6 +33,7 @@ public interface DTOMapper {
     @Mapping(source = "username", target = "username")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "moreInfo", target = "moreInfo")
+    @Mapping(source = "instagram", target = "instagram")
     @Mapping(source = "highlightCounter", target = "highlightCounter")
     @Mapping(source = "creationDate", target = "creationDate")
     @Mapping(source = "trophies", target = "trophies")
@@ -43,6 +44,7 @@ public interface DTOMapper {
     @Mapping(source = "password", target = "password")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "moreInfo", target = "moreInfo")
+    @Mapping(source = "instagram", target = "instagram")
     @Mapping(source = "trophies", target = "trophies")
     User convertUserPutDTOtoEntity(UserPutDTO userPutDTO);
 
