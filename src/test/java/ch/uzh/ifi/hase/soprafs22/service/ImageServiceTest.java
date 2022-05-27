@@ -376,7 +376,15 @@ class ImageServiceTest {
     @Test
     void deleteImage() {
         //Nothing to be tested here
+    }
 
+    @Test
+    void checkForBoost() {
+        //Mock
+        given(imageRepository.checkForBoost(Mockito.anyLong())).willReturn(true);
+
+        //assertion
+        assertThrows(ResponseStatusException.class, () -> imageService.checkForBoost(Mockito.anyLong()));
     }
 
     @Test

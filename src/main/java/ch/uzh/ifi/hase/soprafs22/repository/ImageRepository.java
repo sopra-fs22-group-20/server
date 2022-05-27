@@ -39,5 +39,8 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     @Query(value = "SELECT * FROM IMAGE WHERE IMAGE.BOOST_DATE <= NOW() - INTERVAL 1 DAY ", nativeQuery = true)
     List<Image> checkClassifications();
+
+    @Query(value = "SELECT CASE WHEN EXISTS (SELECT * FROM IMAGE WHERE IMAGE_ID=:imageId AND IMAGE.BOOST_DATE >= NOW() - INTERVAL 1 DAY)THEN TRUE ELSE FALSE END AS bool ", nativeQuery = true)
+    boolean checkForBoost(@Param("imageId") Long imageId);
     //SELECT * FROM IMAGE WHERE IMAGE.BOOST_DATE <= NOW() - INTERVAL 1 DAY
 }

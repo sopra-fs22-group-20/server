@@ -291,7 +291,33 @@ class ImageRepositoryIntegrationTest {
     }
 
     @Test
-    public void checkClassifications() {
+    public void checkForBoost() {
+        //setup
+        User owner = new User("username", "password", "email", "moreInfo");
+        owner.setToken("13");
+
+        Category category = new Category("Fish");
+
+        //given
+        Image image = new Image();
+        image.setName("imageName");
+        image.setOwner(owner);
+        image.setLocation("location");
+        image.setStorageLink("storageLink");
+        image.setClassification(Classification.A);
+        image.setCategory(category);
+        image.setBoostDate(Current_Date.getSQLDate());
+
+        entityManager.persist(owner);
+        entityManager.flush();
+        entityManager.persist(image);
+        entityManager.flush();
+
+        //when
+        Boolean answer = imageRepository.checkForBoost(image.getImageId());
+
+        //assertion
+        assertEquals(true, answer);
 
     }
 }
