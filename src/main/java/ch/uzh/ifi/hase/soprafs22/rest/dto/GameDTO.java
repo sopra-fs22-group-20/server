@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class GameDTO {
     private Long userId; //who is updating the score his id will be here
-    private UUID gameCode; // perticular iteration o fgame
+    private UUID gameCode; // particular iteration of game
     private Long score1;//user 1 score
     private Long score2;//user 2 score
 
