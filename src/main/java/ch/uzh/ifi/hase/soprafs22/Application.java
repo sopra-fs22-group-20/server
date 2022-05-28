@@ -1,7 +1,11 @@
 package ch.uzh.ifi.hase.soprafs22;
 
+import ch.uzh.ifi.hase.soprafs22.controller.UserController;
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
+import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
+import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +21,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class Application {
     private final CategoryRepository categoryRepository;
 
+    private final UserRepository userRepository;
 
-    public Application(CategoryRepository categoryRepository) {
+    private final UserService userService;
+
+    private final UserController userController;
+
+
+
+    public Application(CategoryRepository categoryRepository, UserRepository userRepository, UserController userController, UserService userService) {
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
+        this.userService = userService;
+        this.userController = userController;
     }
 
     public static void main(String[] args) {
@@ -59,5 +73,15 @@ public class Application {
             Category y = this.categoryRepository.save(category);
             this.categoryRepository.flush();
         }
+
+        UserPostDTO userPostDTO = new UserPostDTO();
+        userPostDTO.setUsername("SetupUser");
+        userPostDTO.setEmail("email@gmail.com");
+        userPostDTO.setPassword("1234");
+
+        userController.createUser(userPostDTO);
+
+
+
     }
 }
