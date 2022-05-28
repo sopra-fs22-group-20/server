@@ -103,12 +103,12 @@ public class UserController {
 
     /**
      * Updates User Info
-     * Put Nr. 1
+     * Put Nr. 1a
      */
-    @PutMapping("/users/{userId}")
+    @PutMapping("/users/info/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
-    public UserGetDTO updateUser(@RequestHeader(name = "userId") Long loggedInUserId, @RequestBody UserPutDTO changes, @PathVariable Long userId) {
+    public UserGetDTO updateUserInfo(@RequestHeader(name = "userId") Long loggedInUserId, @RequestBody UserPutDTO changes, @PathVariable Long userId) {
         User userChanges = DTOMapper.INSTANCE.convertUserPutDTOtoEntity(changes);
 
         //Check if the user that is edited is also the user that is logged in
@@ -118,7 +118,29 @@ public class UserController {
         User userToBeChanged = userService.getUserByUserId(userId);
 
 
-        User userUpdate = userService.updateUser(userToBeChanged, userChanges);
+        User userUpdate = userService.updateUserInfo(userToBeChanged, userChanges);
+
+        return DTOMapper.INSTANCE.convertEntityToUserGetDTO(userUpdate);
+    }
+
+    /**
+     * Updates User Info
+     * Put Nr. 1b
+     */
+    @PutMapping("/users/credentials/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public UserGetDTO updateUserPassword(@RequestHeader(name = "userId") Long loggedInUserId, @RequestBody UserPutDTO changes, @PathVariable Long userId) {
+        User userChanges = DTOMapper.INSTANCE.convertUserPutDTOtoEntity(changes);
+
+        //Check if the user that is edited is also the user that is logged in
+        userService.checkAccess(userId, loggedInUserId);
+
+        //Sets the inputUser to the one accordingly to the PathVariable
+        User userToBeChanged = userService.getUserByUserId(userId);
+
+
+        User userUpdate = userService.updateUserPassword(userToBeChanged, userChanges);
 
         return DTOMapper.INSTANCE.convertEntityToUserGetDTO(userUpdate);
     }

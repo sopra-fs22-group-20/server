@@ -59,10 +59,9 @@ public class GameService {
     @Transactional
     public Game exitGame(UUID gameCode) throws Exception {
         Game findGame = gameRepository.findByGameCode(gameCode).orElseThrow(()-> new Exception("Game not found for Game code = "+gameCode));
-        findGame.setActive(false);
-        return gameRepository.save(findGame);
+        gameRepository.delete(findGame);
+        return findGame;
     }
-
 
     public Game quit(UUID gameCode, Long userId) throws Exception {
         if (gameCode==null) {
@@ -72,13 +71,8 @@ public class GameService {
         if (userId==null) {
             throw new Exception("Please mention user id to quit the game");
         }
-        if (existingGame.getUser1Id()!= userId)
-            existingGame.setWinner(existingGame.getUser1Id());
-        if (existingGame.getUser2Id()!= userId)
-            existingGame.setWinner(existingGame.getUser2Id());
-        existingGame.setActive(false);
-        setUserNames(existingGame);
-        return gameRepository.save(existingGame);
+        gameRepository.delete(existingGame);
+        return existingGame;
     }
 
     public Game findGameByGameCode(UUID gameCode) throws Exception {
@@ -140,8 +134,7 @@ public class GameService {
     }
     public Game saveWinner(Long id, UUID gameCode) throws Exception {
         Game game= gameRepository.findByGameCode(gameCode).orElseThrow(()-> new Exception("Game not found with  game code: "+gameCode));
-        game.setWinner(id);
-        game.setActive(false);
+        gameRepository.delete(game);
         return game;
     }
     public List<Game> checkEmptyLobby() throws Exception {

@@ -205,6 +205,7 @@ public class ImageService {
     public void applyBoost(Long userId, Image image) {
         User user = userRepository.findByUserId(userId);
         Image imageToBoost = imageRepository.findImageByImageId(image.getImageId());
+        checkForBoost(image.getImageId());
 
         user.setTrophies(-10);
         imageToBoost.setClassification(Classification.A);
@@ -223,6 +224,14 @@ public class ImageService {
     }
 
     //Helpers
+    public void checkForBoost(Long imageId){
+        if (imageRepository.checkForBoost(imageId)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    String.format("This image is already boosted"));
+        }
+
+    }
+
     public void resetAllExpiredBoosts() {
         //Return all images with a boost that is older than 24 hours
         List<Image> images = imageRepository.checkClassifications();

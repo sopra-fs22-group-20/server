@@ -109,7 +109,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateUser() {
+    public void updateUserInfo() {
         // given -> a first user has already been created
         userService.createUser(testUser);
 
@@ -119,10 +119,29 @@ public class UserServiceTest {
         // then -> update User
         User testUserUpdate = testUser;
         testUserUpdate.setMoreInfo("updatedUserInfo");
-        userService.updateUser(testUser, testUserUpdate);
+        testUserUpdate.setInstagram("instagram");
+        userService.updateUserInfo(testUser, testUserUpdate);
 
         //assert, that the MoreInfo is now updated of testUser
         assertEquals(testUser.getMoreInfo(), testUserUpdate.getMoreInfo());
+        assertEquals(testUser.getInstagram(), testUserUpdate.getInstagram());
+    }
+
+    @Test
+    public void updateUserPassword() {
+        // given -> a first user has already been created
+        userService.createUser(testUser);
+
+        // when -> setup additional mocks for UserRepository
+        Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(testUser);
+
+        // then -> update User
+        User testUserUpdate = testUser;
+        testUserUpdate.setPassword("newPassword");
+        userService.updateUserInfo(testUser, testUserUpdate);
+
+        //assert, that the MoreInfo is now updated of testUser
+        assertEquals(testUser.getPassword(), testUserUpdate.getPassword());
     }
 
     @Test

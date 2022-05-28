@@ -30,6 +30,9 @@ public class User implements Serializable {
     @Column(nullable = false)
     private int trophies = 0;
 
+    @Column
+    private String instagram;
+
     @JsonBackReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Image> images;
@@ -134,6 +137,14 @@ public class User implements Serializable {
         this.moreInfo = moreInfo;
     }
 
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
     public int getTrophies() {
         return trophies;
     }
@@ -156,22 +167,5 @@ public class User implements Serializable {
 
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", token='" + token + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", trophies=" + trophies +
-                ", images=" + images +
-                ", imagesRated=" + imagesRated +
-                ", email='" + email + '\'' +
-                ", moreInfo='" + moreInfo + '\'' +
-                ", highlightCounter=" + highlightCounter +
-                ", creationDate=" + creationDate +
-                '}';
     }
 }

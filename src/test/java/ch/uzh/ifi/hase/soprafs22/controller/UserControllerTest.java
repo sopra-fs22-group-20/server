@@ -172,7 +172,7 @@ class UserControllerTest {
 
 
     @Test
-    void updateUserResponse() throws Exception {
+    void updateUserInfoResponse() throws Exception {
         // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
         this.mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -181,13 +181,30 @@ class UserControllerTest {
                 .andExpect(status().isCreated());
 
         // then update user via put request, the header must include the userId
-        this.mockMvc.perform(put("/users/1")
+        this.mockMvc.perform(put("/users/info/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("userId", "1")
-                        .content("{\"username\":\"username2\",\"email\":\"email2\", \"password\":\"password2\" }"))
+                        .content("{\"moreInfo\":\"moreInfo\",\"instagram\":\"instagram\" }"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
+    }
 
+    @Test
+    void updateUserPasswordResponse() throws Exception {
+        // create a new user by doing a post request with the users credentials, expected to return 201 (isCreated)
+        this.mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"username\":\"username\",\"email\":\"email\", \"password\":\"password\" }"))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        // then update user via put request, the header must include the userId
+        this.mockMvc.perform(put("/users/credentials/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("userId", "1")
+                        .content("{\"password\":\"password\" }"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
     }
 
     @Test
