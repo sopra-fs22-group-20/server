@@ -4,7 +4,6 @@ import ch.uzh.ifi.hase.soprafs22.entity.Game;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.GameDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,7 +17,7 @@ class GameServiceTest {
 
     private Game game;
 
-    @InjectMocks
+    @Autowired
     private GameService gameService;
 
     @BeforeEach
