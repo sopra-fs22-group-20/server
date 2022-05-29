@@ -45,7 +45,11 @@ And to start the client you use:
 npm run dev
 ```
 </br>
+
 The frontend is running now on: localhost:3000
+```
+localhost:3000
+```
 </br>
 
 For the server, you have to run the [Application](https://github.com/sopra-fs22-group-20/server/blob/main/src/main/java/ch/uzh/ifi/hase/soprafs22/Application.java) inside IntelliJ.
