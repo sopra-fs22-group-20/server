@@ -1,6 +1,6 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=comfortaa&color=016EEA&size=24&width=500&lines=RateMe!;SoPra+Group+20)](https://git.io/typing-svg)
 
-RateMe! is an online platform, where users can upload and rate each others picture in fast and fun way.
+RateMe! is an online platform, where users can share and rate each others picture in fast and fun way.
 ## Introduction
 This project was done for the course [“Software Engineering Lab” (SoPra)](https://hasel.dev/teachings/fs22-sopra/) at the [University of Zurich](https://www.uzh.ch/en.html). It should teach how to actually develop software in a team by creating our own bigger software project.
 
@@ -10,6 +10,7 @@ We want to create a platform wich is fun and easy to use. Everyone should have t
 ## Built With
 
 * [Springboot](https://spring.io/) - Java framework to create a micro service
+* [Gradle](https://gradle.org/) - Automated building and management tool
 * [H2](https://www.h2database.com/html/main.html) - Database
 * [React](https://reactjs.org/docs/getting-started.html) - Javascript library for the whole frontend
 * [MUI](https://mui.com/) - CSS Component library
@@ -53,8 +54,28 @@ localhost:3000
 </br>
 
 For the server, you have to run the [Application](https://github.com/sopra-fs22-group-20/server/blob/main/src/main/java/ch/uzh/ifi/hase/soprafs22/Application.java) inside IntelliJ.
+
+### Build
+
+```bash
+./gradlew build
+```
+
+### Run
+
+```bash
+./gradlew bootRun
+```
+
+### Test
+
+```bash
+./gradlew test
+```
+
 </br>
-To add some test pictures, you can click on the button "Demo Setup".
+
+To setup the database and add some test pictures, you can click on the button "Demo Setup" once hte application is running.
 
 </br>
 
@@ -66,7 +87,7 @@ And to run the tests, you have to run the [Test](https://github.com/sopra-fs22-g
 
 ## Deployment
 
-To deploy the software to heroku, you only need to push the code to the main branch. Then, it will get automatically deployed.
+To deploy the software to heroku, you only need to push the code to the master branch. The pipeline will  automatically deploy it over Github Actions.
 
 ## High-level components
 ### User
