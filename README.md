@@ -124,8 +124,8 @@ After another player joined the game, you have to click the egg 100 times and be
 The following features could be implemented next to improve RateMe!
 ### Tournament mode in the game
 The game could get a new mode, where the users could earn more trophies by adding several game rounds and be the champion!
-### Sharing directly to social media
-Another improvement would be, that the posters of new images could share their images directly via social media (twitter, fb, etc).
+### Mobile App feature
+Optimize the application, so it is compatible for mobile users (smartphones iOS and Android).
 ### Advanced user profiles
 The user profiles will be getting more settings, so the user could invidualise his profile by adding more credentials and a profile image. New user should get a generated profile image.
 ## Authors
