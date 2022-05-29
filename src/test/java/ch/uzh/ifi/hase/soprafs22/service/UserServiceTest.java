@@ -128,6 +128,19 @@ public class UserServiceTest {
     }
 
     @Test
+    public void updateUserInfo_no_user() {
+        //Setup
+        User userToBeChanged = null;
+
+        User userChanges = new User();
+        userChanges.setMoreInfo("Hi");
+        userChanges.setInstagram("insta");
+
+        // is thrown
+        assertThrows(ResponseStatusException.class, () -> userService.updateUserInfo(userToBeChanged, userChanges));
+    }
+
+    @Test
     public void updateUserPassword() {
         // given -> a first user has already been created
         userService.createUser(testUser);
@@ -138,10 +151,22 @@ public class UserServiceTest {
         // then -> update User
         User userUpdates = new User();
         userUpdates.setPassword("newPassword");
-        userService.updateUserInfo(testUser, userUpdates);
+        userService.updateUserPassword(testUser, userUpdates);
 
         //assert, that the MoreInfo is now updated of testUser
         assertEquals("newPassword", userUpdates.getPassword());
+    }
+
+    @Test
+    public void updateUserPassword_no_user() {
+        //Setup
+        User userToBeChanged = null;
+
+        User userChanges = new User();
+        userChanges.setPassword("newPassword");
+
+        // is thrown
+        assertThrows(ResponseStatusException.class, () -> userService.updateUserPassword(userToBeChanged, userChanges));
     }
 
     @Test
