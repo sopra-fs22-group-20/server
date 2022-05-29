@@ -1,6 +1,7 @@
 package ch.uzh.ifi.hase.soprafs22.entity;
 
 import ch.uzh.ifi.hase.soprafs22.constant.Classification;
+import ch.uzh.ifi.hase.soprafs22.constant.Current_Date;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
@@ -98,6 +99,14 @@ class ImageTest {
         assertEquals(false, image.getReachedHighlights());
     }
 
+    @Test
+    void setGetBoostDate() {
+        //setter
+        Image image = new Image("Image","xy","link");
+        Timestamp tempDate = Current_Date.getSQLDate();
+        image.setBoostDate(tempDate);
 
-
+        //getter
+        assertEquals(image.getBoostDate(), tempDate);
+    }
 }

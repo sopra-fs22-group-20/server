@@ -136,12 +136,12 @@ public class UserServiceTest {
         Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(testUser);
 
         // then -> update User
-        User testUserUpdate = testUser;
-        testUserUpdate.setPassword("newPassword");
-        userService.updateUserInfo(testUser, testUserUpdate);
+        User userUpdates = new User();
+        userUpdates.setPassword("newPassword");
+        userService.updateUserInfo(testUser, userUpdates);
 
         //assert, that the MoreInfo is now updated of testUser
-        assertEquals(testUser.getPassword(), testUserUpdate.getPassword());
+        assertEquals("newPassword", userUpdates.getPassword());
     }
 
     @Test
