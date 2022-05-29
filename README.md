@@ -45,22 +45,20 @@ And to start the client you use:
 npm run dev
 ```
 </br>
-The frontend is running now on: [http://localhost:3000](http://localhost:3000)
+The frontend is running now on: [localhost:3000](http://localhost:3000)
 </br>
 
 For the server, you have to run the [Application](https://github.com/sopra-fs22-group-20/server/blob/main/src/main/java/ch/uzh/ifi/hase/soprafs22/Application.java) inside IntelliJ.
-
-## Running the tests
-
-And to run the tests you use:
-
-```
-npm run test
-```
 </br>
 To add some test pictures, you can click on the button "Demo Setup".
 
 </br>
+
+## Running the tests
+
+And to run the tests, you have to run the [Test](https://github.com/sopra-fs22-group-20/server/tree/main/src/test/java/ch/uzh/ifi/hase/soprafs22) package in your IDE.
+
+
 
 ## Deployment
 
