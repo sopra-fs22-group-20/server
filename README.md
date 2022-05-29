@@ -110,17 +110,29 @@ First of all, the user has to register/login:
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/LoginScreen.png" alt="screenshot" width="500"/>
 
 </br>
+
 Then, the user sees the home screen and can immediately start to rate the shown pictures by clicking on the stars right under the picture (here a bike):
+
 </br>
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Rating_1.png" alt="screenshot" width="500"/>
+
 </br>
+
 After the rating, the user can continue with it as long as the user wants to. Or the user can select a specifc category (here random). The photo to rate is here a cat:
+
 </br>
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Rating_2.png" alt="screenshot" width="500"/>
+
 </br>
+
 If you want to see the best rated pictures of category, for exemple cars, you can go the "Highlights" page and pick your category:
+
 </br>
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Highlights_Cars.png" alt="screenshot" width="500"/>
+
 
 ### Uploading
 To upload a picture, the user has to click on "Upload" in the menu bar. Then, choose the file to upload and add the credentials. You can also add the location by dragging and dropping marker on the map.
