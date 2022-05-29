@@ -5,6 +5,7 @@ import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
 import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -75,11 +76,17 @@ public class Application {
         }
 
         UserPostDTO userPostDTO = new UserPostDTO();
-        userPostDTO.setUsername("SetupUser");
+        userPostDTO.setUsername("");
         userPostDTO.setEmail("email@gmail.com");
         userPostDTO.setPassword("1234");
 
         userController.createUser(userPostDTO);
+
+        UserPutDTO userPutDTO = new UserPutDTO();
+        userPutDTO.setUserId(1L);
+        userPutDTO.setTrophies(99999999);
+
+        userController.updateTrophies(userPutDTO);
 
 
 

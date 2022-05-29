@@ -189,6 +189,7 @@ public class Image implements Serializable {
     public Timestamp getBoostDate() {
         return boostDate;
     }
+
 }
 
 
