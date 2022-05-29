@@ -137,14 +137,23 @@ If you want to see the best rated pictures of category, for exemple cars, you ca
 
 
 ### Uploading
+
 To upload a picture, the user has to click on "Upload" in the menu bar. Then, choose the file to upload and add the credentials. You can also add the location by dragging and dropping marker on the map.
+
 </br>
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Upload.png" alt="screenshot" width="500"/>
+
 </br>
+
 To see how your picture performs, you have to go to "Pictures":
+
 </br>
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Upload2.png" alt="screenshot" width="500"/>
+
 </br>
+
 Here you can see the ratings of your picture.
 ### Playing the game
 Winning the game gives you trophies, you can spend to boost your image on the "Pictures" page. To play the game, you have to click on the egg on the home screen:
