@@ -23,6 +23,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 
@@ -298,7 +299,19 @@ class ImageServiceTest {
 
     @Test
     void updateClassification() {
-        //This function is not used in the final version only helper to make coding easier
+        //Mock
+        given(imageRepository.findImageByImageId(Mockito.anyLong())).willReturn(testImage);
+
+        //Updates for Image
+        Image imageChanges = new Image();
+        imageChanges.setImageId(1L);
+        imageChanges.setClassification(Classification.A);
+
+        //Call to apply
+        Image updatedImage = imageService.updateClassification(imageChanges);
+
+        //assertions
+        assertEquals(updatedImage.getClassification(), Classification.A);
     }
 
     @Test

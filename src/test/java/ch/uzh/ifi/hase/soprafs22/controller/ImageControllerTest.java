@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs22.controller;
 
+import ch.uzh.ifi.hase.soprafs22.constant.Classification;
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
@@ -7,6 +8,7 @@ import ch.uzh.ifi.hase.soprafs22.repository.ImageRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePostDTO;
 import ch.uzh.ifi.hase.soprafs22.rest.dto.ImagePutDTO;
+import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
 import ch.uzh.ifi.hase.soprafs22.service.ImageService;
 import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,7 +40,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
-
 
 
 @SpringBootTest
@@ -148,7 +149,7 @@ class ImageControllerTest {
         image1.setCategory(category);
 
 
-        given(imageService.getRandomNonRatedImageFromCategory(Mockito.anyString(),Mockito.anyLong())).willReturn(image1);
+        given(imageService.getRandomNonRatedImageFromCategory(Mockito.anyString(), Mockito.anyLong())).willReturn(image1);
 
         MockHttpServletRequestBuilder getRequest = get("/images/random/Fish").contentType(MediaType.APPLICATION_JSON);
         getRequest.header("userId", 1);
@@ -322,7 +323,34 @@ class ImageControllerTest {
 
     @Test
     void updateClassification() throws Exception {
-        //Test endpoint was only for development will not be in the final version
+        //Setup
+        User user = new User("username", "password", "email", "moreInfo");
+        Category category = new Category("Fish");
+
+        Image image = new Image();
+        image.setName("oldName");
+        image.setImageId(1L);
+        image.setStorageLink("storageLink1");
+        image.setLocation("location");
+        image.setOwner(user);
+        image.setCategory(category);
+        image.setClassification(Classification.A);
+
+        ImagePutDTO imagePutDTO = new ImagePutDTO();
+        imagePutDTO.setImageId(1L);
+        imagePutDTO.setClassification(Classification.A);
+
+        //Mock
+        given(imageService.updateClassification(Mockito.any())).willReturn(image);
+
+        //apply
+        MockHttpServletRequestBuilder putRequest = put("/classification").contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(imagePutDTO))
+                .header("userId", 1);
+
+        //assertions
+        mockMvc.perform(putRequest).andDo(print()).andExpect(status().isNoContent())
+                .andExpect(jsonPath("$.classification", is("A")));
     }
 
     @Test

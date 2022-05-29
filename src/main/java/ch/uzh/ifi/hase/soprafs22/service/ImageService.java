@@ -147,16 +147,8 @@ public class ImageService {
         checkIfImageExists(image.getImageId());
 
         Image imageTemp = imageRepository.findImageByImageId(image.getImageId());
-        System.out.println("Fuuuuuuuuuuuuuck");
-
-        System.out.println(imageTemp.getClassification());
-
 
         imageTemp.setClassification(image.getClassification());
-
-        System.out.println(imageTemp.getClassification());
-        System.out.println("Fuuuuuuuuuuuuuck");
-
 
         imageRepository.save(imageTemp);
         imageRepository.flush();
