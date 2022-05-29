@@ -106,9 +106,9 @@ Now we want to show you some basic user flows with some screenshots:
 ### Rating
 First of all, the user has to register/login:
 </br>
-```
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/LoginScreen.png" alt="screenshot" width="500"/>
-```
+
 </br>
 Then, the user sees the home screen and can immediately start to rate the shown pictures by clicking on the stars right under the picture (here a bike):
 </br>
