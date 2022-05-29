@@ -155,14 +155,21 @@ To see how your picture performs, you have to go to "Pictures":
 </br>
 
 Here you can see the ratings of your picture.
+
 ### Playing the game
 Winning the game gives you trophies, you can spend to boost your image on the "Pictures" page. To play the game, you have to click on the egg on the home screen:
 </br>
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Rating_1.png" alt="screenshot" width="500"/>
+
 </br>
+
 After another player joined the game, you have to click the egg 100 times and be faster than your oponent. After winning, you will receive your trophies.
+
 </br>
+
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Game.png" alt="screenshot" width="500"/>
+
 </br>
 
 
