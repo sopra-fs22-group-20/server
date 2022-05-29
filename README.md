@@ -133,6 +133,8 @@ If you want to see the best rated pictures of category, for exemple cars, you ca
 
 <img src="https://raw.githubusercontent.com/sopra-fs22-group-20/server/main/readme%20Addons/Highlights_Cars.png" alt="screenshot" width="500"/>
 
+</br>
+
 
 ### Uploading
 To upload a picture, the user has to click on "Upload" in the menu bar. Then, choose the file to upload and add the credentials. You can also add the location by dragging and dropping marker on the map.
