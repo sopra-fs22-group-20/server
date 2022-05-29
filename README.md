@@ -46,7 +46,7 @@ npm run dev
 ```
 </br>
 
-The frontend is running now on: localhost:3000
+The frontend is running now on:
 ```
 localhost:3000
 ```
