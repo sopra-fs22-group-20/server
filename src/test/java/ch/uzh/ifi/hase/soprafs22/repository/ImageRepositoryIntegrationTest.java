@@ -6,14 +6,15 @@ import ch.uzh.ifi.hase.soprafs22.entity.Category;
 import ch.uzh.ifi.hase.soprafs22.entity.Image;
 import ch.uzh.ifi.hase.soprafs22.entity.User;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 @DataJpaTest
 class ImageRepositoryIntegrationTest {

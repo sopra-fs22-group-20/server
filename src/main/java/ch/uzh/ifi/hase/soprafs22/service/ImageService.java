@@ -147,7 +147,16 @@ public class ImageService {
         checkIfImageExists(image.getImageId());
 
         Image imageTemp = imageRepository.findImageByImageId(image.getImageId());
+        System.out.println("Fuuuuuuuuuuuuuck");
+
+        System.out.println(imageTemp.getClassification());
+
+
         imageTemp.setClassification(image.getClassification());
+
+        System.out.println(imageTemp.getClassification());
+        System.out.println("Fuuuuuuuuuuuuuck");
+
 
         imageRepository.save(imageTemp);
         imageRepository.flush();
@@ -258,7 +267,7 @@ public class ImageService {
     public void checkIfImageExists(Long imageId) {
         //Checks if this image exists
         if (imageRepository.findImageByImageId(imageId) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+            throw new ResponseStatusException(HttpStatus.GONE,
                     String.format("The image with this id does not exist!"));
         }
     }
