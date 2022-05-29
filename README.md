@@ -1,6 +1,9 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=comfortaa&color=016EEA&size=24&width=500&lines=RateMe!;SoPra+Group+20)](https://git.io/typing-svg)
 
-[![Coverage](https://sonarcloud.io/component_measures?id=sopra-fs22-group-20_server&metric=coverage)](https://sonarcloud.io/summary/overall?id=sopra-fs22-group-20_server)
+[![Deploy Project](https://github.com/sopra-fs22-group-09/basically-wordle-backend/actions/workflows/deploy.yml/badge.svg)](https://github.com/sopra-fs22-group-09/basically-wordle-backend/actions/workflows/deploy.yml)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sopra-fs22-group-09_basically-wordle-backend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=sopra-fs22-group-09_basically-wordle-backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sopra-fs22-group-09_basically-wordle-backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sopra-fs22-group-09_basically-wordle-backend)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=sopra-fs22-group-09_basically-wordle-backend&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=sopra-fs22-group-09_basically-wordle-backend)
 
 RateMe! is an online platform, where users can share and rate each others picture in fast and fun way.
 ## Introduction
