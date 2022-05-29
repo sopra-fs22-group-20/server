@@ -128,7 +128,6 @@ The user profiles will be getting more settings, so the user could invidualise h
 See also the list of [contributors for the server](https://github.com/sopra-fs22-group-20/server/graphs/contributors) and [contributors for the client](https://github.com/sopra-fs22-group-20/server/graphs/contributors) who participated in this project.
 
 ## License
-
- ????????All rights reserved.
+[Apache license 2.0](https://github.com/sopra-fs22-group-20/server/blob/main/LICENSE)
 ## Acknowledgments
 We changed the screenshots and added photos from [unsplash](https://unsplash.com) to not get in legal trouble with the copyrights of the images.
