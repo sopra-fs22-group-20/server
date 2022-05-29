@@ -131,6 +131,4 @@ See also the list of [contributors for the server](https://github.com/sopra-fs22
 
  ????????All rights reserved.
 ## Acknowledgments
-We want to thank [Melih](https://github.com/melihcatal) for his help as a tutor.
-</br>
 We changed the screenshots and added photos from [unsplash](https://unsplash.com) to not get in legal trouble with the copyrights of the images.
