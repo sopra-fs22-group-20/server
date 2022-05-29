@@ -24,7 +24,7 @@ class GameServiceTest {
     void setUp() {
         game = new Game();
         game.setActive(true);
-        game.setUser1Id(1L);
+        game.setUser1Id(2L);
         game.setUser1Score(1L);
         game.setUser1Joined(true);
     }
@@ -46,7 +46,7 @@ class GameServiceTest {
     void joinGame() {
         try{
             Game response = gameService.createGame(game);
-            response.setUser2Id(2L);
+            response.setUser2Id(3L);
             response.setUser2Joined(TRUE);
             response.setUser2Score(0L);
             Game joinedGameResponse = gameService.joinGame(response);
@@ -62,7 +62,7 @@ class GameServiceTest {
     void quit() {
         try{
             Game response = gameService.createGame(game);
-            response.setUser2Id(2L);
+            response.setUser2Id(3L);
             response.setUser2Joined(TRUE);
             response.setUser2Score(0L);
             Game joinedGameResponse = gameService.joinGame(response);
@@ -81,7 +81,7 @@ class GameServiceTest {
     void findGameByGameCode() {
         try{
             Game response = gameService.createGame(game);
-            response.setUser2Id(2L);
+            response.setUser2Id(3L);
             response.setUser2Joined(TRUE);
             response.setUser2Score(0L);
             Game joinedGame = gameService.joinGame(response);
@@ -96,7 +96,7 @@ class GameServiceTest {
     void updateScore() {
         try{
             Game response = gameService.createGame(game);
-            response.setUser2Id(2L);
+            response.setUser2Id(3L);
             response.setUser2Joined(TRUE);
             response.setUser2Score(0L);
             Game joinedGame = gameService.joinGame(response);
@@ -113,7 +113,7 @@ class GameServiceTest {
     void findAllGames() {
         try{
             Game response = gameService.createGame(game);
-            response.setUser2Id(2L);
+            response.setUser2Id(3L);
             response.setUser2Joined(TRUE);
             response.setUser2Score(0L);
             gameService.joinGame(response);
@@ -129,7 +129,7 @@ class GameServiceTest {
     void findActiveGame() {
         try{
             Game response = gameService.createGame(game);
-            response.setUser2Id(2L);
+            response.setUser2Id(3L);
             response.setUser2Joined(TRUE);
             response.setUser2Score(0L);
             gameService.joinGame(response);
@@ -144,7 +144,7 @@ class GameServiceTest {
     void findGameByUserId() {
         try{
             Game response = gameService.createGame(game);
-            response.setUser2Id(2L);
+            response.setUser2Id(3L);
             response.setUser2Joined(TRUE);
             response.setUser2Score(0L);
             gameService.joinGame(response);
