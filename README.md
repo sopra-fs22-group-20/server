@@ -1,5 +1,7 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=comfortaa&color=016EEA&size=24&width=500&lines=RateMe!;SoPra+Group+20)](https://git.io/typing-svg)
 
+[![Coverage](https://sonarcloud.io/component_measures?id=sopra-fs22-group-20_server&metric=coverage)]
+
 RateMe! is an online platform, where users can share and rate each others picture in fast and fun way.
 ## Introduction
 This project was done for the course [“Software Engineering Lab” (SoPra)](https://hasel.dev/teachings/fs22-sopra/) at the [University of Zurich](https://www.uzh.ch/en.html). It should teach how to actually develop software in a team by creating our own bigger software project.
