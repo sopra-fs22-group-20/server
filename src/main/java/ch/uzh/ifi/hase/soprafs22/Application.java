@@ -1,12 +1,10 @@
 package ch.uzh.ifi.hase.soprafs22;
 
-import ch.uzh.ifi.hase.soprafs22.controller.UserController;
+import ch.uzh.ifi.hase.soprafs22.constant.Current_Date;
 import ch.uzh.ifi.hase.soprafs22.entity.Category;
+import ch.uzh.ifi.hase.soprafs22.entity.User;
 import ch.uzh.ifi.hase.soprafs22.repository.CategoryRepository;
 import ch.uzh.ifi.hase.soprafs22.repository.UserRepository;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPostDTO;
-import ch.uzh.ifi.hase.soprafs22.rest.dto.UserPutDTO;
-import ch.uzh.ifi.hase.soprafs22.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 @RestController
 @SpringBootApplication
 public class Application {
@@ -24,18 +21,12 @@ public class Application {
 
     private final UserRepository userRepository;
 
-    private final UserService userService;
 
-    private final UserController userController;
-
-
-
-    public Application(CategoryRepository categoryRepository, UserRepository userRepository, UserController userController, UserService userService) {
+    public Application(CategoryRepository categoryRepository, UserRepository userRepository) {
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
-        this.userService = userService;
-        this.userController = userController;
     }
+
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -60,8 +51,8 @@ public class Application {
     }
 
     @Bean
-    public void setUpCategory() {
-        Category all [] = new Category[6];
+    public void setupCategory() {
+        Category all[] = new Category[6];
         all[0] = new Category("Fish");
         all[1] = new Category("Car");
         all[2] = new Category("Cat");
@@ -74,21 +65,16 @@ public class Application {
             Category y = this.categoryRepository.save(category);
             this.categoryRepository.flush();
         }
+    }
 
-        UserPostDTO userPostDTO = new UserPostDTO();
-        userPostDTO.setUsername("");
-        userPostDTO.setEmail("email@gmail.com");
-        userPostDTO.setPassword("1234");
+    @Bean
+    public void setupUser() {
+        User user = new User("testUser", "1234", "emailxxx@gmail.com", "Hi");
 
-        userController.createUser(userPostDTO);
+        user.setTrophies(999999);
+        user.setToken("a6s5d4f6asdf");
+        user.setCreationDate(Current_Date.getSQLDate());
 
-        UserPutDTO userPutDTO = new UserPutDTO();
-        userPutDTO.setUserId(1L);
-        userPutDTO.setTrophies(99999999);
-
-        userController.updateTrophies(userPutDTO);
-
-
-
+        this.userRepository.saveAndFlush(user);
     }
 }
