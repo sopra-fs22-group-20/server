@@ -1,6 +1,6 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=comfortaa&color=016EEA&size=24&width=500&lines=RateMe!;SoPra+Group+20)](https://git.io/typing-svg)
 
-[![Coverage](https://sonarcloud.io/component_measures?id=sopra-fs22-group-20_server&metric=coverage)]
+[![Coverage](https://sonarcloud.io/component_measures?id=sopra-fs22-group-20_server&metric=coverage)](https://sonarcloud.io/summary/overall?id=sopra-fs22-group-20_server)
 
 RateMe! is an online platform, where users can share and rate each others picture in fast and fun way.
 ## Introduction
